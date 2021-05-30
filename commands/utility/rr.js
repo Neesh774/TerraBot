@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const { ReactionRole } = require("reaction-role");
-const system = new ReactionRole("ODQ3OTYwMzcwODE1MTcyNjE5.YLFqog.1nEswiLSHLg15EAC8vW9Quy3JQM");
 const config = require("C:/Users/kkanc/Beano/config.json");
+const system = new ReactionRole(config.token);
 const emojis = require("../../emojis.js")
 
 module.exports = {
