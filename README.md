@@ -1,0 +1,2 @@
+# Beano
+Beano is a general purpose discord bot I made for the [Arcade Cafe Server](https://discord.gg/CTfkUtXyTA). It will log most important events, has moderation features, fun commands, a starboard, and an economy.
