@@ -14,7 +14,7 @@ module.exports = {
                 .setDescription(`**Profile Picture changed of ${newUser.toString()}**`)
                 .setColor(config.embedColor)
                 .setFooter(`ID: ${newUser.id}`)
-                .setAuthor(newUser.guild.name, newUser.guild.iconURL())
+                .setAuthor(AC.name, AC.iconURL())
                 .addFields(
                     { name: 'Old:', value: `[Link](${oldUser.avatarURL()})`, inline: true },
                     { name: 'New:', value: `[Link](${newUser.avatarURL()})`, inline: true },

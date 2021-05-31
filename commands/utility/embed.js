@@ -28,11 +28,12 @@ module.exports = {
       let userargs = args.join(" ").split("++");
       let title = userargs[0];
       let desc = userargs.slice(1).join(" ")
-      message.channel.send(new MessageEmbed()
+      message.delete().then(message.channel.send(new MessageEmbed()
         .setColor(config.embedColor)
         .setTitle(title ? title : "")
         .setDescription(desc ? desc : "")
-      )
+      ));
+      
     } catch (e) {
         console.log(e.stack);
         return message.reply("There was an error, please try again.");
