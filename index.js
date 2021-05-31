@@ -4,7 +4,7 @@ const functions = require("./functions.js");
 const config = require("./config.json");
 const fs = require("fs");
 const StarboardsManager = require('discord-starboards');
-
+const badwords = require('./nonowords.json');
 const client = new Client({
 //Stops the bot from mentioning @everyone
 disableEveryone: true
@@ -48,6 +48,14 @@ client.on("message", async message => {
     //Checks if the command is from a server and not a dm
     if (!message.guild) return;
     //Checks if the command starts with a prefix
+    for(var i = 0;i < badwords.badwords.length;i ++){
+        if(message.content.toLowerCase().includes(badwords.badwords[i].toLowerCase())){
+            message.delete().then(msg =>{
+                functions.warn(message.member, message.guild, message.channel, "no no word", client);
+                msg.channel.send("SMH MY HEAD NO NO WORD");
+            })
+        }
+    }
     if (!message.content.startsWith(prefix)) return;
     //Makes sure bot wont respond to other bots including itself
     if (!message.member) message.member = await message.guild.fetchMember(message);

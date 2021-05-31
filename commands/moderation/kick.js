@@ -26,7 +26,7 @@ module.exports = {
             var reason = args.slice(1).join(" ");
             try {
                 const sembed2 = new MessageEmbed()
-                    .setColor("RED")
+                    .setColor(config.embedColor)
                     .setDescription(`**You Have Been Kicked From ${message.guild.name} for - ${reason || "No Reason!"}**`)
                     .setFooter(message.guild.name, message.guild.iconURL())
                 kickMember.send(sembed2).then(() =>
