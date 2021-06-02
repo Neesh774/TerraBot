@@ -104,5 +104,43 @@ module.exports = {
         fs.writeFile("./warnings.json", JSON.stringify(warnings), err => {
             if (err) console.log(err);
          });
+    },
+    isCustomCommand: async function(cmd){
+        const commands = require("C:/Users/kkanc/Beano/customcommands.json");
+        for(var i = 0;i < commands.numberCommands; i++){
+            if(commands[i+1][0].toLowerCase() === cmd.toLowerCase()){
+                return true;
+            }
+        }
+        return false;
+    },
+    sendCustomCommand: async function(message){
+        const commands = require("C:/Users/kkanc/Beano/customcommands.json");
+        let prefix = config.prefix;
+        const args = message.content.slice(prefix.length).trim().split(/ +/g);
+        const cmd = args.shift().toLowerCase();
+        let index;
+        for(var i = 0;i < commands.numberCommands; i++){
+            if(commands[i+1][0].toLowerCase === cmd.toLowerCase){
+                index = i;
+            }
+        }
+        let ranInt = Math.floor(Math.random() * commands[index+1].length) + 1;
+        console.log("Random int = " + ranInt);
+        try{
+            return message.channel.send(commands[index+1][ranInt]);
+        }
+        catch(e){
+            console.log(e.stack);
+            return message.channel.send("There was an error. Please contact staff about it and try again.");
+        }
+    },
+    connectMongoose: async function(mongoose){
+        await mongoose.connect(config.mongoURI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useFindAndModify: false,
+            useCreateIndex: true
+          });
     }
 };

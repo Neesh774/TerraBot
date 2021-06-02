@@ -10,7 +10,7 @@ module.exports = {
         let embed = false;
         if (oldMember.nickname != newMember.nickname) {
             embed = new Discord.MessageEmbed(client, newMember.guild)
-                .setColor(config.embedColor)
+                .setColor("#ffdc40")
                 .setDescription(`**${newMember.toString()} nickname changed**`)
                 .setFooter(`ID: ${newMember.id}`)
                 .setAuthor(newMember.user.tag, newMember.user.displayAvatarURL())

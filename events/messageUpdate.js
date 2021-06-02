@@ -10,7 +10,7 @@ module.exports = {
         if(newMessage.partial) return;
         if(newMessage.author.bot) return;
         if(oldMessage.content == newMessage.content) return;
-
+        
         const embedMessageUpdate = new Discord.MessageEmbed()
             .setTitle("Message Edited")
             .setColor(config.embedColor)

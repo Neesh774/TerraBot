@@ -1,7 +1,7 @@
 const Discord = require("discord.js")
-const suggestions = require("C:/Users/kkanc/Beano/suggestions.json")
 const config = require("C:/Users/kkanc/Beano/config.json");
 const fs = require('fs');
+const sSchema = require('C:/Users/kkanc/Beano/models/suggestschema.js');
 module.exports = {
     name: "suggestmark",
     category: "suggestions",
@@ -9,44 +9,71 @@ module.exports = {
     usage: "suggestmark <suggestion id> <Dead|In_Progress|Done> [reason]",
     run: async (client, message, args) => {
     //command
+    const numSuggest = await sSchema.countDocuments({});
     if(!message.member.hasPermission("MANAGE_MESSAGES")){
         return message.reply("You don't have permissions for that :/");
     }
     if(!args[0]){
         return message.reply("Which suggestion do you want me to mark?");
     }
-    if(args[0] > suggestions.numberSuggest){
+    if(args[0] > numSuggest){
         return message.reply("That suggestion doesn't exist!");
     }
-    if(!args[1] || (args[1] != "Dead" && args[1] != "In_Progress" && args[1] != "Done")){
+    if(!args[1] || (args[1].toLowerCase() != "dead" && args[1].toLowerCase() != "in_progress" && args[1].toLowerCase() != "done")){
         return message.reply("Please make sure you are marking it as either `Dead`, `In_Progress`, or `Done`");
     }
-    let suggestAuthor = message.guild.members.cache.get(suggestions[args[0]][1]);
+    const suggest = await sSchema.findOne({id: args[0]}).exec();
+    let mark = args[1];
+    let suggestAuthor = suggest.createdBy;
     let index = args[0];
-    suggestions[args[0]][3] = args[1];
+    suggest.status = mark;
     if(args[2]){
         args.splice(0, 2);
         let reason = args.join(" ");
-        suggestions[index][4] = reason;
+        suggest.reason = reason;
     }
     else{
-        suggestions[index][4] = "N/A";
+        suggest.reason = "N/A";
     }
-    fs.writeFile("C:/Users/kkanc/Beano/suggestions.json", JSON.stringify(suggestions), err => {
-        if (err) console.log(err);
-    });    
+    suggest.save();
     let embed = new Discord.MessageEmbed()
         .setColor(config.embedColor)
         .setTitle("Suggestion #" + index + " updated successfully!")
-        .setDescription(`${suggestions[index][2]}`)
-        .addField("Status", `${suggestions[index][3]}`)
-        .addField("Reason", `${suggestions[index][4]}`)
-        .setAuthor(suggestAuthor.nickname, suggestAuthor.user.avatarURL());
+        .setDescription(`${suggest.suggestion}`)
+        .addField("Status", `${suggest.status}`)
+        .addField("Reason", `${suggest.reason}`)
+        .setAuthor(suggest.createdBy, suggest.createdByIcon);
+    message.channel.send(embed);
     const AC = await client.guilds.fetch("833805662147837982"); 
-    const suggest = await AC.channels.cache.get("834110251887230976");
+    const suggestChannel = await AC.channels.cache.get("834110251887230976");
 
-    // const sMessage = suggest.messages.get(suggestions[args[0]][0]);
-    
-    return message.channel.send(embed);
+    const sMessage = await suggestChannel.messages.fetch(suggest.messageID);
+    if(mark.toLowerCase() === "dead"){
+        let newSuggest = new Discord.MessageEmbed()
+            .setColor(config.embedColor)
+            .setTitle(`Suggestion #${index} marked as dead`)
+            .setDescription(`${suggest.suggestion}`)
+            .addField("Status", "Dead") 
+            .addField("Reason", `${suggest.reason}`)
+        return sMessage.edit(newSuggest);
+    }
+    else if(mark.toLowerCase() === "in_progress"){
+        let newSuggest = new Discord.MessageEmbed()
+            .setColor(config.embedColor)
+            .setTitle(`Suggestion #${index} marked as In Progress!`)
+            .setDescription(`${suggest.suggestion}`)
+            .addField("Status", "In Progress")
+            .addField("Reason", `${suggest.reason}`)
+        return sMessage.edit(newSuggest);
+    }
+    else if(mark.toLowerCase() === "done"){
+        let newSuggest = new Discord.MessageEmbed()
+            .setColor(config.embedColor)
+            .setTitle(`Suggestion #${index} marked as implemented`)
+            .setDescription(`${suggest.suggestion}`)
+            .addField("Status", "Implemented")
+            .addField("Reason", `${suggest.reason}`)
+        sMessage.edit(newSuggest);
+    }
     }
 };

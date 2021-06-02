@@ -1,7 +1,8 @@
 const Discord = require("discord.js")
-const suggestions = require("C:/Users/kkanc/Beano/suggestions.json")
 const config = require("C:/Users/kkanc/Beano/config.json");
 const fs = require('fs');
+const sSchema = require('C:/Users/kkanc/Beano/models/suggestschema.js');
+
 module.exports = {
     name: "suggestions",
     category: "suggestions",
@@ -9,12 +10,11 @@ module.exports = {
     usage: "suggestions",
     run: async (client, message, args) => {
     //command
-    if(args[0] > suggestions.numberSuggest + 1){
-        return message.reply("That suggestion doesn't exist!");
-    }
     let fields = [];
-    for(var i = 1;i < suggestions.numberSuggest+1;i ++){
-        fields.push({"name": `#${i} ${message.guild.members.cache.get(suggestions[i][1]).nickname}`, "value": `${suggestions[i][2]} | **${suggestions[i][3]}**`});
+    const numSuggest = await sSchema.countDocuments({});
+    for(var i = 1;i < numSuggest + 1;i ++){
+        const suggest = await sSchema.findOne({id: i}).exec();
+        fields.push({"name": `#${i} ${suggest.createdBy}`, "value": `${suggest.suggestion} | **${suggest.status}**`});
     }
     let embed = new Discord.MessageEmbed()
         .setColor(config.embedColor)

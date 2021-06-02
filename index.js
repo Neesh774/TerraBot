@@ -4,6 +4,7 @@ const functions = require("./functions.js");
 const config = require("./config.json");
 const fs = require("fs");
 const StarboardsManager = require('discord-starboards');
+const mongoose = require('mongoose');
 const badwords = require('./nonowords.json');
 const client = new Client({
 //Stops the bot from mentioning @everyone
@@ -15,10 +16,8 @@ client.commands = new Collection();
 client.aliases = new Collection();
 const manager = new StarboardsManager(client);
 client.starboardsManager = manager;
-
 //Command Folder location
 client.categories = fs.readdirSync("./commands/");
-
 ["command"].forEach(handler => {
     require(`./handlers/${handler}`)(client);
 });
@@ -36,8 +35,9 @@ for (const file of eventFiles) {
 
 //Bot Status
 client.on("ready", () => {
-console.log(`Bot User ${client.user.username} has been logged in and is ready to use!`);
-client.user.setActivity('!bhelp', { type: 'WATCHING' });
+    console.log(`Bot User ${client.user.username} has been logged in and is ready to use!`);
+    client.user.setActivity('!bhelp', { type: 'WATCHING' });
+    functions.connectMongoose(mongoose);
 });
 
 client.on("message", async message => {
@@ -47,7 +47,6 @@ client.on("message", async message => {
     if (message.author.bot) return;
     //Checks if the command is from a server and not a dm
     if (!message.guild) return;
-    //Checks if the command starts with a prefix
     for(var i = 0;i < badwords.badwords.length;i ++){
         if(message.content.toLowerCase().includes(badwords.badwords[i].toLowerCase())){
             message.delete().then(msg =>{
@@ -56,6 +55,7 @@ client.on("message", async message => {
             })
         }
     }
+    //Checks if the command starts with a prefix
     if (!message.content.startsWith(prefix)) return;
     //Makes sure bot wont respond to other bots including itself
     if (!message.member) message.member = await message.guild.fetchMember(message);
@@ -64,7 +64,10 @@ client.on("message", async message => {
     const cmd = args.shift().toLowerCase();
     
     if (cmd.length === 0) return;
-    
+    let val = await functions.isCustomCommand(cmd);
+    if(val){
+        return await functions.sendCustomCommand(message, val);
+    }
     let command = client.commands.get(cmd);
     if (!command) command = client.commands.get(client.aliases.get(cmd));
 

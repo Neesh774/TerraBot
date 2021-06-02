@@ -17,7 +17,7 @@ module.exports = {
         .addField("Author", `${message.author} | ${message.author.id}`)
         .addField("Deleted in", `${message.channel}`)
         .addField("Message Content", `${message.content || `[Attachment Link](${imageDelete})`}`)
-        .setColor(config.embedColor)
+        .setColor("#f54542")
         .setThumbnail(message.author.displayAvatarURL({dynamic: true}))
         .setImage(imageDelete)
         .setTimestamp();
