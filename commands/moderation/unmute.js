@@ -18,9 +18,9 @@ module.exports = {
         const logs = await AC.channels.cache.get("848592231391559710");
         let member = await AC.members.fetch(memberID);
         if(!member.roles.cache.has('838076447095914526')){
-            return message.reply("That user is isn't muted.");
+            return message.reply("That user isn't muted.");
         }
         member.roles.remove(message.guild.roles.cache.get(`838076447095914526`));
-        return message.reply(`Muted ${member.user.username}`);
+        return message.reply(`Unmuted ${member.toString()}`);
     }
 };
