@@ -55,6 +55,7 @@ client.on("message", async message => {
             })
         }
     }
+    await functions.sendAutoResponse(message);
     //Checks if the command starts with a prefix
     if (!message.content.startsWith(prefix)) return;
     //Makes sure bot wont respond to other bots including itself
@@ -64,10 +65,7 @@ client.on("message", async message => {
     const cmd = args.shift().toLowerCase();
     
     if (cmd.length === 0) return;
-    let val = await functions.isCustomCommand(cmd);
-    if(val){
-        return await functions.sendCustomCommand(message, val);
-    }
+    await functions.sendCustomCommand(message);
     let command = client.commands.get(cmd);
     if (!command) command = client.commands.get(client.aliases.get(cmd));
 

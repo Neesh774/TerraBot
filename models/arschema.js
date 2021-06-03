@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const ccSchema = mongoose.Schema({
+const arSchema = mongoose.Schema({
     id: Number,
     trigger: String,
     responsesArray: Array,
@@ -8,4 +8,4 @@ const ccSchema = mongoose.Schema({
     createdByID: String
 });
 
-module.exports = mongoose.model("CustomCommand", ccSchema);
+module.exports = mongoose.model("AutoResponse", arSchema);

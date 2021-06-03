@@ -13,7 +13,7 @@ module.exports = {
         
         const embedMessageUpdate = new Discord.MessageEmbed()
             .setTitle("Message Edited")
-            .setColor(config.embedColor)
+            .setColor("#f5c842")
             .addField("Author", `${oldMessage.author} | ${oldMessage.author.id}`)
             .addField("Edited in", `<#${newMessage.channel.id}> | ${newMessage.channel.id}`)
             .addField("Jump!", `[Click here](${newMessage.url})`)

@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const config = require("C:/Users/kkanc/Beano/config.json");
+const ms = require('ms');
 module.exports = {
     name: "mute",
     category: "moderation",

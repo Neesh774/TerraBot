@@ -1,6 +1,6 @@
 const Discord = require("discord.js")
 const config = require("C:/Users/kkanc/Beano/config.json");
-const fs = require('fs');
+const ccSchema = require("C:/Users/kkanc/Beano/models/ccschema.js");
 module.exports = {
     name: "ccget",
     category: "Custom Commands and Auto Reponses",
@@ -8,25 +8,28 @@ module.exports = {
     usage: "ccget [command ID]",
     run: async (client, message, args) => {
     //command
-    const commands = require("C:/Users/kkanc/Beano/customcommands.json")
+    const numCommands = await ccSchema.countDocuments({});
     let fields = [];
     if(args[0]){
-        if(args[0] > commands.numberSuggest){
+        if(args[0] > numCommands){
             return message.reply("That command doesn't exist!");
         }
-        for(var i = 1; i < commands[args[0].length];i ++){
-            fields.push({"name":`Response #${i}`, "value": `${commands[args[0]][i]}`});
+        const command = ccSchema.findOne({id: args[0]});
+        for(var i = 0; i < command.responses.length;i ++){
+            fields.push({"name":`Response #${i+1}`, "value": `${command.responses[i]}`});
         }
         let embed = new Discord.MessageEmbed()
                 .setColor(config.embedColor)
                 .setTitle(`Command #${args[0]}`)
-                .setDescription(commands[args[0]])  
+                .setDescription(command.trigger)  
                 .addFields(fields);
         return message.channel.send(embed);         
     }
     else{
-        for(var i = 1;i < commands.numberSuggest + 1;i ++){
-            fields.push({"name": `#${i}`, "value": `${commands[0]}`});
+        const numCommands = await ccSchema.countDocuments({});
+        for(var i = 1;i < numCommands + 1;i ++){
+            const command = await ccSchema.findOne({id: i}).exec();
+            fields.push({"name": `#${i}`, "value": `Trigger: ${command.trigger}`});
         }
         let embed = new Discord.MessageEmbed()
             .setColor(config.embedColor)

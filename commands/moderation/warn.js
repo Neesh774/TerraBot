@@ -14,10 +14,10 @@ module.exports = {
             return message.reply("You need to give me someone to warn!");
         }
         var reason;
+        let memberID = args.shift().substring(3, 21);
         if(args[1]){
-            reason = args[1];
+            reason = args.join(" ");
         }
-        let memberID = args[0].substring(3, 21);
         const AC = await client.guilds.fetch("833805662147837982"); 
         let member = await AC.members.fetch(memberID);
 
