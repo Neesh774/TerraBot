@@ -6,6 +6,7 @@
   "dependencies": {
     "ascii-table": "^0.0.9",
     "booru": "^2.4.0",
+    "canvacord": "^5.2.1",
     "common-tags": "^1.8.0",
     "cpu-stat": "^2.0.1",
     "discord-economy": "^1.2.2",
