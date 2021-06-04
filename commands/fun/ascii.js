@@ -16,7 +16,6 @@ var maxLen = 100;
   
   figlet(`${args.join(' ')}`, function(err, data) {
       if (err) {
-          console.log('k...');
           console.dir(err);
           return;
       }

@@ -11,9 +11,7 @@ module.exports = {
     if(!starboard) return message.channel.send('No starboard found.');
     
     const lb = await starboard.leaderboard();
-    console.log(lb);
     const content = lb.map((m, i) => `**${i+1}.**     ${m.stars} ⭐  -  ${m.embeds[0].description || `[Image](${m.embeds[0].image.url})`}`);
-    console.log(content);
     const leaderboard = new Discord.MessageEmbed()
         .setTitle(`${message.guild.name}'s starboard`)
         .setDescription(content.join('\n'))
