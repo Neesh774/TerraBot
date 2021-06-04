@@ -19,7 +19,6 @@ module.exports = {
     }
     catch(e){
         const AC = await client.guilds.fetch("833805662147837982");
-        console.log("Got server " + AC.name);
         client.starboardsManager.create(AC.channels.cache.get("837086202603372544"), {
             emoji: '835149950483693648',
             threshold: 5,
