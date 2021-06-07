@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const functions = require("C:/Users/kkanc/Beano/functions.js");
+const functions = require("../../functions.json");
 
 module.exports = {
     name: "warn",
