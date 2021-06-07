@@ -1,9 +1,9 @@
 const { MessageEmbed } = require("discord.js");
-const config = require("C:/Users/kkanc/Beano/config.json");
+const config = require("../../config.json");
 
 module.exports = {
   name: "queue",
-  category: "Music", 
+  category: "music", 
   description: "Beano tells you what's in the queue",
   usage: "queue",
   run: async (client, message) => {
@@ -40,7 +40,7 @@ module.exports = {
   message.channel.send(
     new MessageEmbed()
       .setAuthor(
-        "Music Queue",
+        "music Queue",
         "https://img.icons8.com/color/2x/rhombus-loader.gif"
       )
       .setThumbnail(thumbnail)

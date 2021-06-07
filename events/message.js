@@ -1,9 +1,9 @@
 const Discord = require('discord.js');
-const config = require('C:/Users/kkanc/Beano/config.json');
-const mSchema = require('C:/Users/kkanc/Beano/models/memberschema.js');
-const mcSchema = require('C:/Users/kkanc/Beano/models/mchannelschema.js');
-const lrSchema = require('C:/Users/kkanc/Beano/models/levelroleschema.js');
-const functions = require('C:/Users/kkanc/Beano/functions.js');
+const config = require('../config.json');
+const mSchema = require('../models/memberschema.js');
+const mcSchema = require('../models/mchannelschema.js');
+const lrSchema = require('../models/levelroleschema.js');
+const functions = require('../functions.js');
 module.exports = {
     name: 'message',
     async execute(message, client){

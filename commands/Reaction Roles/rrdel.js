@@ -1,6 +1,6 @@
 const Discord = require("discord.js")
-const config = require("C:/Users/kkanc/Beano/config.json");
-const rrSchema = require("C:/Users/kkanc/Beano/models/rrschema.js");
+const config = require("../../config.json");
+const rrSchema = require('../../models/rrschema.js');
 module.exports = {
     name: "rrdel",
     category: "Reaction Roles",

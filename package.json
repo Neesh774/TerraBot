@@ -2,7 +2,7 @@
   "name": "Beano",
   "version": "2.0.0",
   "description": "A multipurpose Discord bot with fun commands as well as utility, moderation SFW commands and more.",
-  "main": "dorito.js",
+  "main": "index.js",
   "dependencies": {
     "@discordjs/opus": "^0.5.0",
     "ascii-table": "^0.0.9",

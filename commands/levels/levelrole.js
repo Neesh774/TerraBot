@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
-const config = require("C:/Users/kkanc/Beano/config.json");
-const lSchema = require('C:/Users/kkanc/Beano/models/levelroleschema.js');
+const config = require("../../config.json");
+const lSchema = require('../../models/levelroleschema.js');
 module.exports = {
     name: "levelrole",
     category: "levels",

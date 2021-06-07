@@ -1,25 +1,25 @@
 const Discord = require("discord.js")
-const config = require("C:/Users/kkanc/Beano/config.json");
-const ccSchema = require("C:/Users/kkanc/Beano/models/ccschema.js");
+const config = require("../../config.json");
+const arSchema = require("../../models/arschema.js");
 module.exports = {
-    name: "ccclearall",
+    name: "arclearall",
     category: "Custom Commands and Auto Reponses",
-    description: "Clears all custom commands",
-    usage: "ccclearall",
+    description: "Clears all auto responders",
+    usage: "arclearall",
     run: async (client, message, args) => {
         if(!message.member.hasPermission("MANAGE_MESSAGES")){
             return message.reply("You don't have permissions for that :/");
         }
-        await ccSchema.deleteMany();
+        await arSchema.deleteMany();
         const AC = await client.guilds.fetch(config.AC); 
         const logs = await AC.channels.cache.get(config.logs);
         let embed = new Discord.MessageEmbed()
             .setColor(config.embedColor)
-            .setTitle("Commands were cleared")
+            .setTitle("Responders were cleared")
             .setTimestamp()
-            .setDescription("Commands were cleared by user " + message.author.tag);
+            .setDescription("Responders were cleared by user " + message.author.tag);
         logs.send(embed);
-        return message.reply("Successfully cleared the commands list!");
+        return message.reply("Successfully cleared the responders list!");
         
     }
 };

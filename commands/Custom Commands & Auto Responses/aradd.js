@@ -1,14 +1,14 @@
 const Discord = require("discord.js")
-const config = require("C:/Users/kkanc/Beano/config.json");
-const ccSchema = require("C:/Users/kkanc/Beano/models/ccschema.js");
+const config = require("../../config.json");
+const arSchema = require("../../models/arschema.js");
 module.exports = {
-    name: "ccadd",
+    name: "aradd",
     category: "Custom Commands and Auto Reponses",
-    description: "Creates a new custom command",
-    usage: "ccadd <trigger> <response URL> [another response URL] [another response URL]...",
+    description: "Creates a new auto responder",
+    usage: "aradd <trigger> <response> [another response] [another response]...",
     run: async (client, message, args) => {
     //command
-        const numCommands = await ccSchema.countDocuments({});
+        const numResponders = await arSchema.countDocuments({});
         if(!message.member.hasPermission("MANAGE_MESSAGES")){
             return message.reply("You don't have permissions for that :/");
         }
@@ -21,14 +21,14 @@ module.exports = {
         let trigger = args[0];
         args.splice(0, 1);
         let responses = args;
-        const cc = new ccSchema({
-            id: numCommands + 1,
+        const ar = new arSchema({
+            id: numResponders + 1,
             trigger: trigger,
             responsesArray: responses,
             created: message.createdAt.toUTCString(),
             createdByID: message.author.id
         });
-        cc.save().catch(err => console.log(err));
+        ar.save().catch(err => console.log(err));
         let fields = [];
         for(var i = 0;i < responses.length;i ++){
             fields.push({"name":`Response #${i +1}`, "value": responses[i]});
@@ -36,8 +36,8 @@ module.exports = {
         let embed = new Discord.MessageEmbed()
             .setColor(config.embedColor)
             .setTimestamp()
-            .setTitle("Custom Command Created")
-            .setDescription(`A custom command was created by ${message.author.tag}`)
+            .setTitle("Auto Response Created")
+            .setDescription(`An auto responder was created by ${message.author.tag}`)
             .addField("Trigger", trigger)
             .addFields(fields);
         const AC = await client.guilds.fetch(config.AC); 

@@ -1,4 +1,3 @@
-const warnings = require('./warnings.json');
 const config = require('./config.json');
 const { MessageEmbed } = require('discord.js');
 const ms = require('ms');
@@ -128,7 +127,7 @@ module.exports = {
         let prefix = config.prefix;
         const args = message.content.slice(prefix.length).trim().split(/ +/g);
         const cmd = args.shift().toLowerCase();
-        const ccSchema = require("C:/Users/kkanc/Beano/models/ccschema.js");
+        const ccSchema = require("./models/ccschema");
         const schema = await ccSchema.findOne({trigger: cmd});
         if(!schema){
             return false;
@@ -152,7 +151,7 @@ module.exports = {
           });
     },
     sendAutoResponse: async function(message){
-        const arSchema = require("C:/Users/kkanc/Beano/models/arschema.js");
+        const arSchema = require("./models/arschema");
         const schema = await arSchema.findOne({trigger: message});
         if(!schema){
             return false;

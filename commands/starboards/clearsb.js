@@ -1,6 +1,6 @@
 const Discord = require("discord.js")
-const sbSchema = require("C:/Users/kkanc/Beano/models/starboard.js");
-const config = require("C:/Users/kkanc/Beano/config.json");
+const sbSchema = require("../../models/starboard.js");
+const config = require("../../config.json");
 
 module.exports = {
   name: "clearsb",

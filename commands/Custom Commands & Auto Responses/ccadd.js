@@ -1,14 +1,14 @@
 const Discord = require("discord.js")
-const config = require("C:/Users/kkanc/Beano/config.json");
-const arSchema = require("C:/Users/kkanc/Beano/models/arschema.js");
+const config = require("../../config.json");
+const ccSchema = require("../../models/ccschema.js");
 module.exports = {
-    name: "aradd",
+    name: "ccadd",
     category: "Custom Commands and Auto Reponses",
-    description: "Creates a new auto responder",
-    usage: "aradd <trigger> <response> [another response] [another response]...",
+    description: "Creates a new custom command",
+    usage: "ccadd <trigger> <response URL> [another response URL] [another response URL]...",
     run: async (client, message, args) => {
     //command
-        const numResponders = await arSchema.countDocuments({});
+        const numCommands = await ccSchema.countDocuments({});
         if(!message.member.hasPermission("MANAGE_MESSAGES")){
             return message.reply("You don't have permissions for that :/");
         }
@@ -21,14 +21,14 @@ module.exports = {
         let trigger = args[0];
         args.splice(0, 1);
         let responses = args;
-        const ar = new arSchema({
-            id: numResponders + 1,
+        const cc = new ccSchema({
+            id: numCommands + 1,
             trigger: trigger,
             responsesArray: responses,
             created: message.createdAt.toUTCString(),
             createdByID: message.author.id
         });
-        ar.save().catch(err => console.log(err));
+        cc.save().catch(err => console.log(err));
         let fields = [];
         for(var i = 0;i < responses.length;i ++){
             fields.push({"name":`Response #${i +1}`, "value": responses[i]});
@@ -36,8 +36,8 @@ module.exports = {
         let embed = new Discord.MessageEmbed()
             .setColor(config.embedColor)
             .setTimestamp()
-            .setTitle("Auto Response Created")
-            .setDescription(`An auto responder was created by ${message.author.tag}`)
+            .setTitle("Custom Command Created")
+            .setDescription(`A custom command was created by ${message.author.tag}`)
             .addField("Trigger", trigger)
             .addFields(fields);
         const AC = await client.guilds.fetch(config.AC); 

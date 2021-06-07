@@ -1,5 +1,5 @@
 const ms = require('ms');
-const functions = require('C:/Users/kkanc/Beano/functions.js')
+const functions = require("../../functions.js");
 module.exports = {
    name: 'remindme',
    description: 'Set a reminder',

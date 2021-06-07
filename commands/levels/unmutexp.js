@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
-const config = require("C:/Users/kkanc/Beano/config.json");
-const mcSchema = require('C:/Users/kkanc/Beano/models/mchannelschema.js');
+const config = require("../../config.json");
+const mcSchema = require('../../models/mchannelschema.js');
 module.exports = {
     name: "unmutexp",
     category: "levels",

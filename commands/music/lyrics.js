@@ -1,10 +1,10 @@
 const { MessageEmbed } = require("discord.js");
 const lyricsFinder = require("lyrics-finder");
-const config = require("C:/Users/kkanc/Beano/config.json");
+const config = require("../../config.json");
 
 module.exports ={
   name: "lyrics",
-  category: "Music", 
+  category: "music", 
   description: "Beano finds the lyrics for the currently playing song",
   usage: "lyrics",
   run: async (client, message, args) => {

@@ -1,6 +1,6 @@
 const Discord = require("discord.js")
-const config = require("C:/Users/kkanc/Beano/config.json");
-const ccSchema = require("C:/Users/kkanc/Beano/models/ccschema.js");
+const config = require("../../config.json");
+const ccSchema = require("../../models/ccschema.js");
 module.exports = {
     name: "ccget",
     category: "Custom Commands and Auto Reponses",

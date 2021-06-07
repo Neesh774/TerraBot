@@ -1,6 +1,6 @@
 const Discord = require("discord.js")
-const config = require("C:/Users/kkanc/Beano/config.json");
-const sSchema = require('C:/Users/kkanc/Beano/models/suggestschema.js');
+const config = require("../../config.json");
+const sSchema = require("../../models/suggestschema");
 module.exports = {
     name: "suggestget",
     category: "suggestions",
@@ -8,7 +8,6 @@ module.exports = {
     usage: "suggestget <suggestion id>",
     run: async (client, message, args) => {
     //command
-    const suggestions = require("C:/Users/kkanc/Beano/suggestions.json");
     const numSuggest = await sSchema.countDocuments({});
     if(!args[0]){
         return message.reply("Which suggestion do you want me to get?");

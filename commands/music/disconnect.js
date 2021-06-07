@@ -1,9 +1,9 @@
 const { MessageEmbed } = require("discord.js");
-const config = require("C:/Users/kkanc/Beano/config.json");
+const config = require("../../config.json");
 
 module.exports = {
   name: "disconnect",
-  category: "Music", 
+  category: "music", 
   description: "Beano will disconnect from your voice channel",
   usage: "connect",
   run: async (client, message) => {

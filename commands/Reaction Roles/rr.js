@@ -1,11 +1,11 @@
 const Discord = require("discord.js");
 const { ReactionRole } = require("reaction-role");
-const config = require("C:/Users/kkanc/Beano/config.json");
+const config = require("../../config.json");
 const emojis = require("../../emojis.js")
-const rrSchema = require('C:/Users/kkanc/Beano/models/rrschema.js');
+const rrSchema = require('../../models/rrschema.js');
 module.exports = {
     name: "rr",
-    category: "utility",
+    category: "Reaction Roles",
     description: "Creates a reaction role on the given message with the given emote",
     usage: "rr <Channel ID> <Message ID> <Role ID> <Reaction Emote>",
     run: async(client, message, args) => {

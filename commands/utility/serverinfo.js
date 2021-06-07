@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const config = require("C:/Users/kkanc/Beano/config.json");
+const config = require("../../config.json");
 module.exports = {
   name: "serverinfo",
   category: "utility",

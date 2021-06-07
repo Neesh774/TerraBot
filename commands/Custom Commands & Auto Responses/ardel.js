@@ -1,6 +1,6 @@
 const Discord = require("discord.js")
-const config = require("C:/Users/kkanc/Beano/config.json");
-const arSchema = require("C:/Users/kkanc/Beano/models/arschema.js");
+const config = require("../../config.json");
+const arSchema = require("../../models/arschema.js");
 module.exports = {
     name: "ardel",
     category: "Custom Commands and Auto Reponses",

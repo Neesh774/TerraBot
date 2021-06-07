@@ -1,6 +1,6 @@
 const Discord = require("discord.js")
-const config = require("C:/Users/kkanc/Beano/config.json");
-const sSchema = require('C:/Users/kkanc/Beano/models/suggestschema.js');
+const config = require("../../config.json");
+const sSchema = require('../../models/suggestschema');
 module.exports = {
     name: "suggest",
     category: "suggestions",

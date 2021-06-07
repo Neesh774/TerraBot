@@ -1,8 +1,8 @@
 const Discord = require('discord.js');
-const config = require('C:/Users/kkanc/Beano/config.json');
-const rrSchema = require('C:/Users/kkanc/Beano/models/rrschema.js');
-const sbSchema = require('C:/Users/kkanc/Beano/models/starboard.js');
-const mSchema = require("C:/Users/kkanc/Beano/models/memberschema.js");
+const config = require('../config.json');
+const rrSchema = require('../models/rrschema.js');
+const sbSchema = require('../models/starboard.js');
+const mSchema = require("../models/memberschema.js");
 
 module.exports = {
     name: 'messageReactionAdd',
@@ -46,7 +46,7 @@ module.exports = {
             const member = await mSchema.findOne({userID: message.author.id});
             member.starboards ++;
             await member.save();
-            
+
             const emb = new Discord.MessageEmbed()
               .setAuthor(message.member.nickname, message.author.avatarURL())
               .addField('Channel', messageReaction.message.channel.toString(), false)

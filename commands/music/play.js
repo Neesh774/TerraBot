@@ -2,12 +2,12 @@ const ytdl = require("discord-ytdl-core");
 const youtubeScraper = require("yt-search");
 const yt = require("ytdl-core");
 const { MessageEmbed, Util } = require("discord.js");
-const forHumans = require("../utils/forhumans.js");
-const config = require("C:/Users/kkanc/Beano/config.json");
+const forHumans = require("../../forhumans.js");
+const config = require("../../config.json");
 
 module.exports= {
   name: "play",
-  category: "Music", 
+  category: "music", 
   description: "Beano will play a song",
   usage: "connect <song>",
   run: async (client, message, args) => {
