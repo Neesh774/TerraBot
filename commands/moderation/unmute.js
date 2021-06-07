@@ -14,8 +14,8 @@ module.exports = {
             return message.reply("You need to give me someone to unmute!");
         }
         let memberID = args[0].substring(3, 21);
-        const AC = await client.guilds.fetch("833805662147837982"); 
-        const logs = await AC.channels.cache.get("848592231391559710");
+        const AC = await client.guilds.fetch(config.AC); 
+        const logs = await AC.channels.cache.get(config.logs);
         let member = await AC.members.fetch(memberID);
         if(!member.roles.cache.has('838076447095914526')){
             return message.reply("That user isn't muted.");

@@ -13,8 +13,8 @@ module.exports = {
         }
         await mSchema.deleteMany();
         message.reply("Successfully cleared all of the levels!");
-        const AC = await client.guilds.fetch("833805662147837982"); 
-        const logs = await AC.channels.cache.get("848592231391559710");
+        const AC = await client.guilds.fetch(config.AC); 
+        const logs = await AC.channels.cache.get(config.logs);
         let embed = new Discord.MessageEmbed()
             .setColor(config.embedColor)
             .setTitle("Levels were cleared")

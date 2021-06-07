@@ -3,7 +3,6 @@ const { Client, Collection } = require("discord.js");
 const functions = require("./functions.js");
 const config = require("./config.json");
 const fs = require("fs");
-const StarboardsManager = require('discord-starboards');
 const mongoose = require('mongoose');
 const badwords = require('./nonowords.json');
 const client = new Client({
@@ -14,8 +13,7 @@ disableEveryone: true
 //Command Handler
 client.commands = new Collection();
 client.aliases = new Collection();
-const manager = new StarboardsManager(client);
-client.starboardsManager = manager;
+client.queue = new Map();
 //Command Folder location
 client.categories = fs.readdirSync("./commands/");
 ["command"].forEach(handler => {

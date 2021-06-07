@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const config = require("C:/Users/kkanc/Beano/config.json");
 const mSchema = require('C:/Users/kkanc/Beano/models/memberschema.js');
+const functions = require('C:/Users/kkanc/Beano/functions.js');
 module.exports = {
     name: "setlevel",
     category: "levels",
@@ -26,9 +27,10 @@ module.exports = {
         }
         try{
             member.level = args[1];
-            let newxp = Math.floor(Math.log10(((args[1]) * 1.3) + 1) * 100)
+            let newxp = await functions.getXP(args[1]);
             member.xp = newxp;
-            member.toNextLevel = Math.floor(Math.log10(((args[1]+1) * 1.3) + 1) * 100) - newxp;
+            member.levelxp = 0;
+            member.toNextLevel = await functions.getXP(args[1]+1) - newxp;
             await member.save();
             message.reply(`Successfully set them to level ${args[1]}!`);
         }

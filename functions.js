@@ -57,8 +57,8 @@ module.exports = {
             });
             await wModel.save();
         }
-        const AC = await client.guilds.fetch("833805662147837982"); 
-        const logs = await AC.channels.cache.get("848592231391559710");
+        const AC = await client.guilds.fetch(config.AC); 
+        const logs = await AC.channels.cache.get(config.logs);
 
         wModel.numberWarns ++;
         await wModel.save();
@@ -180,5 +180,11 @@ module.exports = {
     setCoolDown: async function(profile){
         profile.coolDown = false;
         await profile.save();
+    },
+    getXP: async function(level){
+        return Math.floor(Math.log(level**2 + 1)*100);
+    },
+    getLevel: async function(xp){
+        return Math.floor(Math.cbrt((10**xp - 1)));
     }
 };

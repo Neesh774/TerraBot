@@ -13,7 +13,7 @@ module.exports = {
             .setColor(config.embedColor)
             .setTitle(`Suggestion #${numSuggest + 1}`)
             .setDescription(args.join(" "));
-        const AC = await client.guilds.fetch("833805662147837982"); 
+        const AC = await client.guilds.fetch(config.AC); 
         const suggest = await AC.channels.cache.get("834110251887230976");
         message.delete().then(msg =>{
             suggest.send(embed).then(msgtwo =>{

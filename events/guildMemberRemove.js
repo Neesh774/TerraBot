@@ -6,8 +6,8 @@ module.exports = {
     async execute(member, client){
 
         const userProfile = await mSchema.deleteOne({memberID: member.id});
-        const AC = await client.guilds.fetch("833805662147837982"); 
-        const logs = await AC.channels.cache.get("848592231391559710");
+        const AC = await client.guilds.fetch(config.AC); 
+        const logs = await AC.channels.cache.get(config.logs);
         const embed = new Discord.MessageEmbed()
             .setColor(config.embedColor)
             .setTitle(`${member.user.username} has left the server`)

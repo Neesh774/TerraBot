@@ -25,8 +25,8 @@ module.exports = {
                     await nextRR.save();
                 }
                 message.reply(`Reaction role successfully deleted!`);
-                const AC = await client.guilds.fetch("833805662147837982"); 
-                const logs = await AC.channels.cache.get("848592231391559710");
+                const AC = await client.guilds.fetch(config.AC); 
+                const logs = await AC.channels.cache.get(config.logs);
                 let embed = new Discord.MessageEmbed()
                     .setColor(config.embedColor)
                     .setTitle("Reaction Role Deleted")
@@ -40,8 +40,8 @@ module.exports = {
             }
             rrSchema.deleteMany({});
             message.reply(`Reaction roles successfully cleared!`);
-                const AC = await client.guilds.fetch("833805662147837982"); 
-                const logs = await AC.channels.cache.get("848592231391559710");
+                const AC = await client.guilds.fetch(config.AC); 
+                const logs = await AC.channels.cache.get(config.logs);
                 let embed = new Discord.MessageEmbed()
                     .setColor(config.embedColor)
                     .setTitle("Reaction Roles Cleared")

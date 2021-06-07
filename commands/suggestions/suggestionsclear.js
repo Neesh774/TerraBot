@@ -11,8 +11,8 @@ module.exports = {
             return message.reply("You don't have permissions for that :/");
         }
         await sSchema.deleteMany();
-        const AC = await client.guilds.fetch("833805662147837982"); 
-        const logs = await AC.channels.cache.get("848592231391559710");
+        const AC = await client.guilds.fetch(config.AC); 
+        const logs = await AC.channels.cache.get(config.logs);
         let embed = new Discord.MessageEmbed()
             .setColor(config.embedColor)
             .setTitle("Suggestions were cleared")

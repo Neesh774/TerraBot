@@ -4,8 +4,8 @@ const config = require('C:/Users/kkanc/Beano/config.json');
 module.exports = {
     name: 'userUpdate',
     async execute(oldUser, newUser, client){
-        const AC = await client.guilds.fetch("833805662147837982"); 
-        const logs = await AC.channels.cache.get("848592231391559710");
+        const AC = await client.guilds.fetch(config.AC); 
+        const logs = await AC.channels.cache.get(config.logs);
         let updated = false;
         let embed = false;
         if(oldUser.avatar != newUser.avatar){

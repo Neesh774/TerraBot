@@ -43,7 +43,7 @@ module.exports = {
         .addField("Reason", `${suggest.reason}`)
         .setAuthor(suggest.createdBy, suggest.createdByIcon);
     message.channel.send(embed);
-    const AC = await client.guilds.fetch("833805662147837982"); 
+    const AC = await client.guilds.fetch(config.AC); 
     const suggestChannel = await AC.channels.cache.get("834110251887230976");
 
     const sMessage = await suggestChannel.messages.fetch(suggest.messageID);

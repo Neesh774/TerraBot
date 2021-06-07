@@ -1,0 +1,28 @@
+const Discord = require("discord.js")
+const sbSchema = require("C:/Users/kkanc/Beano/models/starboard.js");
+const config = require("C:/Users/kkanc/Beano/config.json");
+
+module.exports = {
+  name: "clearsb",
+  category: "Starboards",
+  description: "Clears all of the starboards, or deletes a specific one.",
+  usage: "clearsb [original message id] [original message channel id]",
+  run: async (client, message, args) => {
+    if(args[0]){
+        if(!message.member.hasPermission("MANAGE_MESSAGES")){
+            return message.reply("You don't have permissions for that :/");
+        }
+        if(!args[1]){
+            return message.reply("You didn't tell me which message I should be looking for!");
+        }
+        const msg = await sbSchema.findOne({messageID: args[1], channelID: args[0]});
+        if(!msg){
+            return message.reply("Sorry, I don't think that message is a starboard");
+        }
+        await sbSchema.deleteOne({messageID: args[0], channelID: args[1]});
+        return message.reply("Successfully deleted that starboard.");
+    }
+    await sbSchema.deleteMany({});
+    return message.reply("Successfully deleted all of the starboards.");
+  }
+};

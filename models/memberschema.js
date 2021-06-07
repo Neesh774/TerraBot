@@ -7,7 +7,9 @@ const mSchema = mongoose.Schema({
     coolDown: Boolean,
     toNextLevel: Number,
     xp: Number,
-    muted: Boolean
+    levelxp: Number,
+    muted: Boolean,
+    starboards: Number
 });
 
 module.exports = mongoose.model("Levels", mSchema);

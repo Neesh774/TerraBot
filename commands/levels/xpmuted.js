@@ -11,7 +11,7 @@ module.exports = {
         let numMuted = await mcSchema.countDocuments();
         let fields = [];
         let list = await mcSchema.find({});
-        const AC = await client.guilds.fetch("833805662147837982");
+        const AC = await client.guilds.fetch(config.AC);
         for(var i = 0;i < numMuted; i ++){
             let channel = await AC.channels.cache.get(list[i].channel);
             fields.push({"name": `#${i+1}`, "value": `${channel.toString()}`})

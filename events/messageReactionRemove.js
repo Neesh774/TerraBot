@@ -12,8 +12,8 @@ module.exports = {
             if(member.roles.cache.has(schema.roleID)){
             member.roles.remove(schema.roleID);
             member.send(`Removed your ${message.guild.roles.cache.get(schema.roleID).name} role in Arcade Cafe!`);
-            const AC = await client.guilds.fetch("833805662147837982"); 
-            const logs = await AC.channels.cache.get("848592231391559710");
+            const AC = await client.guilds.fetch(config.AC); 
+            const logs = await AC.channels.cache.get(config.logs);
             const embed = new Discord.MessageEmbed()
                 .setColor(config.embedColor)
                 .setTitle("Reaction role removed")

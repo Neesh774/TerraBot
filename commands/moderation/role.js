@@ -21,8 +21,8 @@ module.exports = {
             return message.reply(`Couldn't find role ${args[1]} >_<`);
         }
         let memberID = args[0].substring(3, 21);
-        const AC = await client.guilds.fetch("833805662147837982"); 
-        const logs = await AC.channels.cache.get("848592231391559710");
+        const AC = await client.guilds.fetch(config.AC); 
+        const logs = await AC.channels.cache.get(config.logs);
         let member = await AC.members.fetch(memberID);
         if(member.roles.cache.has(role.id)){
             member.roles.remove(role.id);

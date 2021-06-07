@@ -18,7 +18,7 @@ module.exports = {
         if(args[1]){
             reason = args.join(" ");
         }
-        const AC = await client.guilds.fetch("833805662147837982"); 
+        const AC = await client.guilds.fetch(config.AC); 
         let member = await AC.members.fetch(memberID);
 
         functions.warn(member, message.guild, message.channel, reason, client);

@@ -40,8 +40,8 @@ module.exports = {
             .setDescription(`A custom command was created by ${message.author.tag}`)
             .addField("Trigger", trigger)
             .addFields(fields);
-        const AC = await client.guilds.fetch("833805662147837982"); 
-        const logs = await AC.channels.cache.get("848592231391559710");
+        const AC = await client.guilds.fetch(config.AC); 
+        const logs = await AC.channels.cache.get(config.logs);
         logs.send(embed);
         return message.channel.send(embed);
     }

@@ -23,13 +23,6 @@ exports.formatNumber = (number) => {
     return `${input},${out.reverse().join(',')}`;
 };
 
-const randomFooter = () => {
-    return exports.randomSelection([
-        '420 weed',
-        'hi',
-    ]);
-};
-
 exports.embed = (title, description = '', fields = [], options = {}) => {
     let url = options.url || '';
     let color = options.color || this.randomColor();

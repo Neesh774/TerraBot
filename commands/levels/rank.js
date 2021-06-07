@@ -8,16 +8,12 @@ module.exports = {
     description: "Beano tells you what level you're at",
     usage: "rank [user]",
     run: async (client, message, args) => {
-        let member;
-        let user;
+        let member = await mSchema.findOne({userID: message.author.id});
+        let user = message.author;
         if(args[0]){
             user = message.mentions.members.first().user || message.guild.members.cache.fetch(args[0]);
             if (!user) return message.channel.send(`:x: | **User Not Found**`);
             member = await mSchema.findOne({userID: user.id});
-        }
-        else{
-            user = message.author;
-            member = await mSchema.findOne({userID: message.author.id});
         }
         const list = await mSchema.find();
         let mRank = list.sort((a, b) => {
@@ -31,8 +27,8 @@ module.exports = {
         }
         const rank = new canvacord.Rank()
             .setAvatar(user.displayAvatarURL({dynamic: true}))
-            .setCurrentXP(member.xp)
-            .setRequiredXP(member.xp + member.toNextLevel)
+            .setCurrentXP(member.levelxp)
+            .setRequiredXP(member.levelxp + member.toNextLevel)
             .setStatus(user.presence.status)
             .renderEmojis(true)
             .setProgressBar("#3eafa7", "COLOR")
