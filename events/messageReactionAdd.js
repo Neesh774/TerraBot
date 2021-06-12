@@ -25,7 +25,7 @@ module.exports = {
                 return logs.send(embed);
             }
         }
-        if(message.reactions.cache.size == 1 && message.reactions.cache.every(reaction => reaction.emoji.id == config.starboardEmote)){
+        if(message.reactions.cache.size == 5 && message.reactions.cache.every(reaction => reaction.emoji.id == config.starboardEmote)){
             const starboardChannel = await AC.channels.cache.get(config.starboardChannel);
             const parsedLinks = message.content.match(/^https?:\/\/(\w+\.)?imgur.com\/(\w*\d\w*)+(\.[a-zA-Z]{3})?$/);
             const attachments = message.attachments && message.attachments.first() ? message.attachments.first() : undefined;
@@ -48,7 +48,7 @@ module.exports = {
             await member.save();
 
             const emb = new Discord.MessageEmbed()
-              .setAuthor(message.member.nickname, message.author.avatarURL())
+              .setAuthor(message.author.username, message.author.avatarURL())
               .addField('Channel', messageReaction.message.channel.toString(), false)
               // eslint-disable-next-line quotes
               .setColor(config.embedColor)

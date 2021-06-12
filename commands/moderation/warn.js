@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const functions = require("../../functions.json");
+const functions = require("../../functions.js");
 
 module.exports = {
     name: "warn",

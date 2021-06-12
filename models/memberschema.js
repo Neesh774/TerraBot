@@ -9,7 +9,7 @@ const mSchema = mongoose.Schema({
     xp: Number,
     levelxp: Number,
     muted: Boolean,
-    starboards: Number
+    starboards: Number,
 });
 
 module.exports = mongoose.model("Levels", mSchema);

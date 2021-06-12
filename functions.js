@@ -181,9 +181,30 @@ module.exports = {
         await profile.save();
     },
     getXP: async function(level){
-        return Math.floor(Math.log(level**2 + 1)*100);
+        return Math.floor(Math.log10(level**2)*100);
     },
     getLevel: async function(xp){
-        return Math.floor(Math.cbrt((10**xp - 1)));
+        return Math.floor(Math.sqrt(10**xp));
+    },  
+    getTime: function(time, hoffset, moffset){
+        let hour = parseInt(time.substring(0, 2));
+        let minute = parseInt(time.substring(3));
+        hour += hoffset;
+        minute += moffset;
+        if(minute > 60) {
+            hour ++;
+            minute -= 60;
+        }
+        if(minute < 10){
+            minute = `0${minute}`;
+        }
+        if(hour > 12){
+            hour -= 12;
+            time = `${hour}:${minute} PM`
+        }
+        else{
+            time = `${hour}:${minute} AM`
+        }
+        return time;
     }
 };

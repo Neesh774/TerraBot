@@ -8,4 +8,4 @@ const arSchema = mongoose.Schema({
     createdByID: String
 });
 
-module.exports = mongoose.model("AutoResponse", arSchema);
+module.exports = mongoose.model("Auto Responses", arSchema);

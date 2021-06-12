@@ -29,7 +29,9 @@ module.exports = {
             member.xp = args[1];
             let newlevel = await functions.getLevel(args[1]/100);
             member.level = newlevel;
-            member.levelxp = 0;
+            let xp = await functions.getXP(newlevel);
+            member.levelxp = args[1] - xp;
+            member.toNextLevel = await functions.getXP(newlevel + 1) - args[1];
             await member.save();
             message.reply(`Successfully set them to xp ${args[1]} at level ${member.level}!`);
         }

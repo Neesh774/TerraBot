@@ -14,8 +14,9 @@ module.exports = {
             return message.reply("How much xp should I count?");
         }
         try{
-            const xp = await functions.getXP(args[0]/100);
-            const xpNext = await functions.getXP((args[0]+1)/100) - 1;
+            const level = parseInt(args[0]);
+            const xp = await functions.getXP(level);
+            const xpNext = await functions.getXP(level+1);
             return message.reply(`The range of level ${args[0]} is ${xp}-${xpNext}`);
         }
         catch(e){

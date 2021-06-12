@@ -33,7 +33,7 @@ module.exports = {
             if(ranXp >= profile.toNextLevel){ //moving to next level
                 profile.xp += ranXp;
                 ranXp -= profile.toNextLevel;
-                profile.levelxp += ranXp;
+                profile.levelxp = ranXp;
                 let level = profile.level + 1;
 
                 let lr = await lrSchema.findOne({level: level});
@@ -43,15 +43,16 @@ module.exports = {
                     field = {"name": "Awarded Roles", "value": `<@${lr.roleID}>`};
                 }
                 profile.level ++;
-                profile.toNextLevel =  await functions.getXP(level) - profile.levelxp;
+                const nextlevel = await functions.getXP(level);
+                profile.toNextLevel =  nextlevel - profile.levelxp;
                 await profile.save();
-                let embed;
+                let embed;  
                 if(field){
                     embed = new Discord.MessageEmbed()
                     .setColor(config.embedColor)
                     .setTitle("YOOO!")
                     .setDescription(`Epic! ${message.author.toString()} just leveled up to ${profile.level}!!! The Coffee Gods approve of your ascension`)
-                    .setAuthor(message.author.tag, message.author.avatarURL())
+                     .setAuthor(message.author.tag, message.author.avatarURL())
                     .addField(field)
                     .setImage("https://octoperf.com/img/blog/minor-version-major-features/level-up.gif");
                 }
@@ -66,7 +67,7 @@ module.exports = {
                 return message.channel.send(embed);
             }
             else{
-                profile.levelxp+= ranXp;
+                profile.levelxp += ranXp;
                 profile.xp += ranXp;    
                 profile.toNextLevel -= ranXp;
                 await profile.save();
