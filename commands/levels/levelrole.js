@@ -5,7 +5,7 @@ module.exports = {
     name: "levelrole",
     category: "levels",
     description: "Beano will automatically give users a role when they get to a certain level",
-    usage: "levelrole <roleID> <level>",
+    usage: `${config.prefix}levelrole <roleID> <level>`,
     run: async (client, message, args) => {
     //command
         let role = message.mentions.roles.first() || message.guild.roles.cache.get(args[0]);

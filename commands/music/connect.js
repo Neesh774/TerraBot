@@ -5,7 +5,7 @@ module.exports = {
   name: "connect",
   category: "music", 
   description: "Beano will connect to your voice channel",
-  usage: "connect",
+  usage: `${config.prefix}connect`,
   run: async (client, message) => {
     const channel = message.member.voice.channel;
     if (!channel)

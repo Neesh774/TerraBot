@@ -1,13 +1,15 @@
 const { MessageEmbed } = require("discord.js");
 const { stripIndents } = require("common-tags");
 const utils = require('../../utils');
+const config = require("../../config.json");
+
 
 module.exports = {
     name: "help",
     aliases: ["h"],
     category: "info",
     description: "Returns all commands, or one specific command info",
-    usage: "[command | alias]",
+    usage: `${config.prefix}help [command]`,
     run: async (client, message, args) => {
         // If there's an args found
         // Send the info of that command found

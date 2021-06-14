@@ -7,7 +7,7 @@ module.exports = {
     name: "rr",
     category: "Reaction Roles",
     description: "Creates a reaction role on the given message with the given emote",
-    usage: "rr <Channel ID> <Message ID> <Role ID> <Reaction Emote>",
+    usage: `${config.prefix}rr <Channel ID> <Message ID> <Role ID> <Reaction Emote>`,
     run: async(client, message, args) => {
 
         //command
@@ -52,11 +52,7 @@ module.exports = {
         }
         catch (e){
             console.log(e.stack);
-            let embed = new Discord.MessageEmbed()
-                .setTitle("There was an error")
-                .setDescription("Please make sure you are using the proper arguments.")
-                .setColor(config.embedColor);
-            return message.channel.send(embed);
+            return message.channel.send(":x: There was an error. Please make sure you're using the proper arguments and try again.");
         }
     }
 }; 

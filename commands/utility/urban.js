@@ -1,11 +1,13 @@
-const Discord = require('discord.js')
-const urban = require('urban.js')
+const Discord = require('discord.js');
+const urban = require('urban.js');
+const config = require("../../config.json");
+
 
 module.exports = {
     name: "urban",
     category: "utility",
   description: "Shows you a deffinition from urban dictionary",
-  usage: "COMMAND [your word]",
+  usage: `${config.prefix}urban <word>`,
   run: async (client, message, args) => {
   //command
   const bargs =  message.content.split(' ');

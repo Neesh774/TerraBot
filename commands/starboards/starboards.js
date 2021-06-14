@@ -6,7 +6,7 @@ module.exports = {
   name: "starboards",
   category: "Starboards",
   description: "Gives you a list of all the server's starboards",
-  usage: "starboards [page]",
+  usage: `${config.prefix}starboards [page]`,
   run: async (client, message, args) => {
   //command
     const sbs = await sbSchema.find();

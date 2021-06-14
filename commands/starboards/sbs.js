@@ -7,7 +7,7 @@ module.exports = {
   name: "sbs",
   category: "Starboards",
   description: "Tells you how many starboards you have, or how many someone else has",
-  usage: "sbs [user]",
+  usage: `${config.prefix}sbs [user]`,
   run: async (client, message, args) => {
     let member = await mSchema.findOne({userID: message.author.id});
     let user = message.author;

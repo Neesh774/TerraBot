@@ -7,7 +7,7 @@ module.exports = {
     name: "rrall",
     category: "Reaction Roles",
     description: "Displays all current reaction roles",
-    usage: "rrall",
+    usage: `${config.prefix}rrall`,
     run: async(client, message, args) => {
         const numRRs = await rrSchema.countDocuments();
         let fields = [];
@@ -19,8 +19,7 @@ module.exports = {
         }
         let embed = new Discord.MessageEmbed()
             .setColor(config.embedColor)
-            .setTitle("Reaction Roles")
-            .setDescription("Here are all of the reaction roles for Arcade Cafe")
+            .setTitle("Reaction Roles for " + message.guild.name)
             .addFields(fields);
         return message.channel.send(embed);
     }

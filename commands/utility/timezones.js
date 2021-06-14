@@ -5,7 +5,7 @@ module.exports = {
     name: "timezones",
     category: "utility",
     description: "Beano will give you a collection of all of the timezones",
-    usage: "[command]",
+    usage: `${config.prefix}timezones`,
     run: async (client, message, args) => {
     //command
         const start = new Date();

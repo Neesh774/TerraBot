@@ -5,7 +5,7 @@ module.exports = {
     name: "mute",
     category: "moderation",
     description: "Beano exiles the user to the land of the rats",
-    usage: "mute <user> [time]",
+    usage: `${config.prefix}mute <user> [time]`,
     run: async (client, message, args) => {
     //command
         if(!message.member.hasPermission("MANAGE_MESSAGES")){
@@ -23,7 +23,7 @@ module.exports = {
         }
         if(!args[1]){
             member.roles.add(message.guild.roles.cache.get(`838076447095914526`));
-            member.send("You were muted in Arcade Cafe.");
+            member.send(`You were muted in ${message.guild.name}`);
             return message.reply(`Muted ${member.toString()}`);
         }
         else{
@@ -31,11 +31,11 @@ module.exports = {
             try{
                 time = ms(args[1]);
             }
-            catch(e){return message.reply("There was an error. Please try that again.")}
+            catch(e){return message.channel.send(":x: There was an error. Please make sure you're using the proper arguments and try again.");}
             member.roles.add(message.guild.roles.cache.get(`838076447095914526`));
-            member.send("You were muted in Arcade Cafe for " + args[1]);
+            member.send(`You were muted in ${message.guild.name} for ${args[1]}`);
             setTimeout(() => {
-                member.send("You were unmuted in Arcade Cafe");
+                member.send("You were unmuted in " + message.guild.name);
                 member.roles.remove(message.guild.roles.cache.get(`838076447095914526`));
             }, time);
             return message.reply(`Muted ${member.toString()}`);

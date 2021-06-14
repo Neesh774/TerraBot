@@ -6,7 +6,7 @@ module.exports = {
     name: "setxp",
     category: "levels",
     description: "Beano will change the xp a user is at",
-    usage: "setxp <user> <xp>",
+    usage: `${config.prefix}setxp <user> <xp>`,
     run: async (client, message, args) => {
         //command
         if(!message.member.hasPermission("MANAGE_MESSAGES")){

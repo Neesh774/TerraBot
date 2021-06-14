@@ -2,13 +2,15 @@ const utils = require('../../utils');
 
 const math = require('math-expression-evaluator');
 const stripIndents = require('common-tags').stripIndents;
+const config = require("../../config.json");
+
 
 module.exports = {
   name: "calc",
   aliases: ["calculate"],
   category: "utility",
   description: "Calculates a math equation",
-  usage: "[command | input]",
+  usage: `${config.prefix}calc <equation>`,
   run: async (client, message, args) => {
   //command
   

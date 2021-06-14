@@ -5,7 +5,7 @@ module.exports = {
     name: "suggestmark",
     category: "suggestions",
     description: "Marks the given suggestion with the given status",
-    usage: "suggestmark <suggestion id> <Dead|In_Progress|Done> [reason]",
+    usage: `${config.prefix}suggestmark <suggestion id> <Dead|In_Progress|Done> [reason]`,
     run: async (client, message, args) => {
     //command
     const numSuggest = await sSchema.countDocuments({});

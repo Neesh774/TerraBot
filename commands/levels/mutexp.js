@@ -5,7 +5,7 @@ module.exports = {
     name: "mutexp",
     category: "levels",
     description: "Beano will ignore this channel when counting xp",
-    usage: "mutexp <channel>",
+    usage: `${config.prefix}mutexp <channel>`,
     run: async (client, message, args) => {
     //command
         if(!message.member.hasPermission("MANAGE_MESSAGES")){

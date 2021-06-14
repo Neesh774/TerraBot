@@ -7,7 +7,7 @@ module.exports = {
     name: "birthdays",
     category: "birthdays",
     description: "Beano tells you how old everyone is :)",
-    usage: "birthdays",
+    usage: `${config.prefix}birthdays`,
     run: async (client, message, args) => {
     //command
         const birthdays = await bSchema.find();
@@ -20,7 +20,7 @@ module.exports = {
         }
         let embed = new Discord.MessageEmbed()
             .setColor(config.embedColor)
-            .setTitle("Birthdays of Arcade Cafe")
+            .setTitle("Birthdays of " + message.guild.name)
             .addFields(fields);
         return message.channel.send(embed);
     }

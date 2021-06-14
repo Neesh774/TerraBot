@@ -5,7 +5,7 @@ module.exports = {
     name: "mutexpuser",
     category: "levels",
     description: "Beano will ignore a certain user when counting xp",
-    usage: "mutexpuser <user>",
+    usage: `${config.prefix}mutexpuser <user>`,
     run: async (client, message, args) => {
         //command
         if(!message.member.hasPermission("MANAGE_MESSAGES")){

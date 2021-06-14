@@ -1,10 +1,12 @@
 const Discord = require("discord.js")
 const sSchema = require("../../models/suggestschema");
+const config = require("../../config.json");
+
 module.exports = {
     name: "suggestionsclear",
     category: "suggestions",
     description: "Clears all pending suggestions",
-    usage: "suggestionsclear",
+    usage: `${config.prefix}suggestionsclear`,
     run: async (client, message, args) => {
     //command
         if(!message.member.hasPermission("MANAGE_MESSAGES")){

@@ -5,7 +5,7 @@ module.exports ={
   name: "resume",
   category: "music", 
   description: "Beano resumes the music",
-  usage: "resume",
+  usage: `${config.prefix}resume`,
   run: async (client, message) => {
   const channel = message.member.voice.channel;
   if (!channel)

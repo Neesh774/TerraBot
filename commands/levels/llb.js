@@ -5,7 +5,7 @@ module.exports = {
     name: "llb",
     category: "levels",
     description: "Beano will get you a leaderboard of all of the levels",
-    usage: "llb",
+    usage: `${config.prefix}llb`,
     run: async (client, message, args) => {
     //command
         let list = await mSchema.find({});
@@ -18,8 +18,7 @@ module.exports = {
         }
         let embed = new Discord.MessageEmbed()
             .setColor(config.embedColor)
-            .setTitle("Leaderboard")
-            .setDescription("Here's the leaderboard for Arcade Cafe!")
+            .setTitle(`Leaderboard for ${message.guild.name}`)
             .addFields(fields);
         return message.channel.send(embed);
     }

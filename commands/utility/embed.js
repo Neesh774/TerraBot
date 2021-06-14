@@ -5,7 +5,7 @@ module.exports = {
     category: "Administration",
     aliases: ["embed"],
     cooldown: 2,
-    usage: "embed <TITLE> ++ <DESCRIPTION>",
+    usage: `${config.prefix}embed <TITLE> ++ <DESCRIPTION>`,
     description: "Resends a message from you as an Embed",
     memberpermissions: "MANAGE_MESSAGES",
     run: async (client, message, args, user, text, prefix) => {
@@ -35,7 +35,7 @@ module.exports = {
       )
     } catch (e) {
         console.log(e.stack);
-        return message.reply("There was an error, please try again.");
+        return message.channel.send(":x: There was an error. Please make sure you're using the proper arguments and try again.");
     }
   }
 }

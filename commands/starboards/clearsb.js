@@ -6,7 +6,7 @@ module.exports = {
   name: "clearsb",
   category: "Starboards",
   description: "Clears all of the starboards, or deletes a specific one.",
-  usage: "clearsb [original message id] [original message channel id]",
+  usage: `${config.prefix}clearsb [original message id] [original message channel id]`,
   run: async (client, message, args) => {
     if(args[0]){
         if(!message.member.hasPermission("MANAGE_MESSAGES")){

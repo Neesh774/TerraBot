@@ -4,7 +4,7 @@ module.exports = {
     name: "prefix",
     category: "moderation",
     description: "Beano changes it's own prefix!",
-    usage: "prefix <prefix>",
+    usage: `${config.prefix}prefix <prefix>`,
     run: async (client, message, args) => {
     //command
         if(!message.member.hasPermission("MANAGE_MESSAGES")){

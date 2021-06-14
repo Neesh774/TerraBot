@@ -4,7 +4,7 @@ module.exports = {
     name: "say",
     category: "utility",
     description: "Beano will repeat you.",
-    usage: "[command]",
+    usage: `${config.prefix}say <text>`,
     run: async (client, message, args) => {
     //command
         if(!message.member.hasPermission("MANAGE_MESSAGES")){

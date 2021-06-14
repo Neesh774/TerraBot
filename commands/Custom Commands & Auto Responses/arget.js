@@ -5,7 +5,7 @@ module.exports = {
     name: "arget",
     category: "Custom Commands and Auto Reponses",
     description: "Lists all auto responses",
-    usage: "arget [command ID]",
+    usage: `${config.prefix}arget [command ID]`,
     run: async (client, message, args) => {
     //command
     const numResponses = await arSchema.countDocuments({});
@@ -34,7 +34,6 @@ module.exports = {
         let embed = new Discord.MessageEmbed()
             .setColor(config.embedColor)
             .setTitle("Automatic Responder")
-            .setDescription(`Here are all of the automatic responses for Arcade Cafe`)
             .addFields(fields);
         return message.channel.send(embed);
         }

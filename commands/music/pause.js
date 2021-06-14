@@ -5,7 +5,7 @@ module.exports = {
   name: "pause",
   category: "music", 
   description: "Beano pauses the music",
-  usage: "pause",
+  usage: `${config.prefix}pause`,
   run: async (client, message) => {
   const channel = message.member.voice.channel;
   if (!channel)

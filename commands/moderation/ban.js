@@ -4,7 +4,7 @@ module.exports = {
     name: "ban",
     category: "moderation",
     description: "bans a mentioned user",
-    usage: "ban <user>",
+    usage: `${config.prefix}ban <user>`,
     run: async (client, message, args) => {
         const AC = await client.guilds.fetch(config.AC); 
         const logs = await AC.channels.cache.get(config.logs);

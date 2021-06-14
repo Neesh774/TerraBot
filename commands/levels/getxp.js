@@ -7,7 +7,7 @@ module.exports = {
     name: "getxp",
     category: "levels",
     description: "Beano tells you the range of a certain level",
-    usage: "getxp <level>",
+    usage: `${config.prefix}getxp <level>`,
     run: async (client, message, args) => {
     //command
         if(!args[0]){
@@ -21,7 +21,7 @@ module.exports = {
         }
         catch(e){
             console.log(e.stack);
-            return message.reply("There was an error. Please try that again, making sure you're giving me a number");
+            return message.channel.send(":x: There was an error. Please make sure you're using the proper arguments and try again.");
         }
     }
 };

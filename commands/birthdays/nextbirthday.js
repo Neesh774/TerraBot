@@ -8,7 +8,7 @@ module.exports = {
     name: "nextbirthday",
     category: "birthdays",
     description: "Beano tells you when the next birthday is!",
-    usage: "nextbirthday",
+    usage: `${config.prefix}nextbirthday`,
     run: async (client, message, args) => {
     //command
         const birthdays = await bSchema.find();

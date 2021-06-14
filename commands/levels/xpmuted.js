@@ -5,7 +5,7 @@ module.exports = {
     name: "xpmuted",
     category: "levels",
     description: "Beano lists all the channels that are xp muted",
-    usage: "xpmuted",
+    usage: `${config.prefix}xpmuted`,
     run: async (client, message, args) => {
     //command
         let numMuted = await mcSchema.countDocuments();
@@ -19,7 +19,6 @@ module.exports = {
         let embed = new Discord.MessageEmbed()
             .setColor(config.embedColor)
             .setTitle("XP Muted Channels")
-            .setDescription("Here are all of the xp muted channels in Arcade Cafe")
             .addFields(fields);
         return message.channel.send(embed);
     }

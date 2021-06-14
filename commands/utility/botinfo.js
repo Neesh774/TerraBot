@@ -8,14 +8,11 @@ let os = require('os')
 let cpuStat = require("cpu-stat")
 const ms = require("ms")
 
-
-
-
 module.exports = {
     name: "botinfo",
     category: "utility",
   description: "Sends detailed info about the client",
-  usage: "[command]",
+  usage: `${config.prefix}botinfo`,
   run: async (client, message, args) => {
   //command
   let cpuLol;

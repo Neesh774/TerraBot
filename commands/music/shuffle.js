@@ -5,7 +5,7 @@ module.exports = {
   name: "shuffle",
   category: "music", 
   description: "Beano shuffles the music",
-  usage: "shuffle",
+  usage: `${config.prefix}shuffle`,
   run: async (client, message, args) => {
   const channel = message.member.voice.channel;
   if (!channel)

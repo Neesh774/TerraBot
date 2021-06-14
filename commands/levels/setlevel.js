@@ -6,7 +6,7 @@ module.exports = {
     name: "setlevel",
     category: "levels",
     description: "Beano will change the level a user is at",
-    usage: "setlevel <user> <level>",
+    usage: `${config.prefix}setlevel <user> <level>`,
     run: async (client, message, args) => {
         //command
         if(!message.member.hasPermission("MANAGE_MESSAGES")){

@@ -5,7 +5,7 @@ module.exports = {
     name: "clearxp",
     category: "levels",
     description: "Beano will clear all of the xp",
-    usage: "clearxp",
+    usage: `${config.prefix}clearxp`,
     run: async (client, message, args) => {
     //command
         if(!message.member.hasPermission("MANAGE_MESSAGES")){
@@ -19,7 +19,7 @@ module.exports = {
             .setColor(config.embedColor)
             .setTitle("Levels were cleared")
             .setTimestamp()
-            .setDescription("All levels were cleared by user " + message.author.tag);
+            .setDescription("All levels were cleared by user " + message.author.toString());
         return logs.send(embed);
     }
 };

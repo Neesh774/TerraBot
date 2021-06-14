@@ -7,7 +7,7 @@ module.exports = {
     name: "setbday",
     category: "birthdays",
     description: "Beano sets your birthday!",
-    usage: "setbday <mm> <dd> <yyyy>",
+    usage: `${config.prefix}setbday <mm> <dd> <yyyy>`,
     run: async (client, message, args) => {
     //command
     

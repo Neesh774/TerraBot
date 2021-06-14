@@ -7,7 +7,7 @@ module.exports = {
     name: "birthday",
     category: "birthdays",
     description: "Beano tells you when your birthday is. It's ok, we can all forget sometimes.",
-    usage: "birthday",
+    usage: `${config.prefix}birthday`,
     run: async (client, message, args) => {
     //command
         const hasbday = await bSchema.findOne({userID: message.author.id});

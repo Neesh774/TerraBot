@@ -6,6 +6,7 @@ module.exports = {
     name: "meme",
     category: "fun",
     description: "Sends a random meme from Reddit",
+    usage: `${config.prefix}meme`,
     run: async (client, message, args) => {
         const subReddits = ["dankmemes"];
         const random = subReddits[Math.floor(Math.random() * subReddits.length)];

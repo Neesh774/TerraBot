@@ -4,16 +4,17 @@ module.exports = {
   name: "serverinfo",
   category: "utility",
 description: "Shows info about a server",
-usage: "[command]",
+usage: `${config.prefix}serverinfo`,
 run: async (client, message, args) => {
 //command
 let servericon = message.guild.iconURL;
+let owner = await message.guild.members.fetch(message.guild.ownerID);
 let serverembed = new Discord.MessageEmbed()
 .setTitle("Server Information")
 .setColor(config.embedColor)
 .setThumbnail(servericon)
 .addField("Server Name", message.guild.name)
-.addField("Owner", `moni#0420`, true)
+.addField("Owner", message.guild.owner.user.toString(), true)
 .addField("Channels", message.guild.channels.cache.size, true)
 .addField("Roles", message.guild.roles.cache.size, true)
 .addField("Created On", message.guild.createdAt)

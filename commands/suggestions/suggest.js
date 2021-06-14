@@ -5,7 +5,7 @@ module.exports = {
     name: "suggest",
     category: "suggestions",
     description: "Suggest something in <#837385962183065650>!",
-    usage: "suggest",
+    usage: `${config.prefix}suggest`,
     run: async (client, message, args) => {
     //command
     const numSuggest = await sSchema.countDocuments({});

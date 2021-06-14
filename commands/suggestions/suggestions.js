@@ -6,7 +6,7 @@ module.exports = {
     name: "suggestions",
     category: "suggestions",
     description: "Lists all suggestions",
-    usage: "suggestions",
+    usage: `${config.prefix}suggestions`,
     run: async (client, message, args) => {
     //command
     let fields = [];
@@ -17,8 +17,7 @@ module.exports = {
     }
     let embed = new Discord.MessageEmbed()
         .setColor(config.embedColor)
-        .setTitle("Suggestions")
-        .setDescription(`Here are all of the suggestions for Arcade Cafe`)
+        .setTitle("Suggestions for " + message.guild.name)
         .addFields(fields);
     return message.channel.send(embed);
     }

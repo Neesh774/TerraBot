@@ -5,7 +5,7 @@ module.exports= {
   name: "np",
   category: "music", 
   description: "Beano tells you what's currently playing",
-  usage: "np",
+  usage: `${config.prefix}np`,
   run: async (client, message) => {
   const channel = message.member.voice.channel;
   if (!channel)

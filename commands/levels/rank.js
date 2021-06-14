@@ -6,7 +6,7 @@ module.exports = {
     name: "rank",
     category: "levels",
     description: "Beano tells you what level you're at",
-    usage: "rank [user]",
+    usage: `${config.prefix}rank [user]`,
     run: async (client, message, args) => {
         let member = await mSchema.findOne({userID: message.author.id});
         let user = message.author;

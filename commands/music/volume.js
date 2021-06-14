@@ -5,7 +5,7 @@ module.exports = {
   name: "volume",
   category: "music", 
   description: "Beano lets you change the volume",
-  usage: "volume <amount>",
+  usage: `${config.prefix}volume <amount>`,
   run: async (client, message, args) => {
   const channel = message.member.voice.channel;
   if (!channel)

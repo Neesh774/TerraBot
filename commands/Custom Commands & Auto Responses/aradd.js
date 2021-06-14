@@ -5,7 +5,7 @@ module.exports = {
     name: "aradd",
     category: "Custom Commands and Auto Reponses",
     description: "Creates a new auto responder",
-    usage: "aradd <trigger> <response> [another response] [another response]...",
+    usage: `${config.prefix}aradd <trigger> <response> [another response] [another response]...`,
     run: async (client, message, args) => {
     //command
         const numResponders = await arSchema.countDocuments({});

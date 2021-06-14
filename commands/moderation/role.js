@@ -4,7 +4,7 @@ module.exports = {
     name: "role",
     category: "moderation",
     description: "Beano gives the user whatever role you tell it to",
-    usage: "role <user> <role name>",
+    usage: `${config.prefix}role <user> <role name>`,
     run: async (client, message, args) => {
     //command
         if(!message.member.hasPermission("MANAGE_MESSAGES")){

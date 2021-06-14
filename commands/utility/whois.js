@@ -6,7 +6,7 @@
 	aliases: ["info"],
     category: "utility",
     description: "Get information about a user",
-    usage: "[command | user] or [command]",
+    usage: `${config.prefix}whois <user>`,
     run: async (client, message, args) => {
     //command
     

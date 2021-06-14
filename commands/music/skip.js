@@ -5,7 +5,7 @@ module.exports = {
   name: "skip",
   category: "music", 
   description: "Beano skips the currently playing song",
-  usage: "skip",
+  usage: `${config.prefix}skip`,
   run: async (client, message) => {
   const channel = message.member.voice.channel;
   if (!channel)

@@ -9,11 +9,11 @@ module.exports= {
   name: "play",
   category: "music", 
   description: "Beano will play a song",
-  usage: "connect <song>",
+  usage: `${config.prefix}connect <song>`,
   run: async (client, message, args) => {
   const channel = message.member.voice.channel;
 
-  const error = (err) => message.channel.send(err);
+  const error = (err) => message.channel.send(":x: There was an error. Please make sure you're using the proper arguments and try again.");;
   const send = (content) => message.channel.send(content);
   const setqueue = (id, obj) => message.client.queue.set(id, obj);
   const deletequeue = (id) => message.client.queue.delete(id);
@@ -47,7 +47,7 @@ module.exports= {
       };
     } catch (e) {
       console.log(e);
-      return error("Error occured, please check console");
+      return message.channel.send(":x: There was an error. Please make sure you're using the proper arguments and try again.");
     }
   } else {
     try {
@@ -149,6 +149,7 @@ module.exports= {
       );
     } catch (e) {
       console.error(e);
+      return message.channel.send(":x: There was an error. Please make sure you're using the proper arguments and try again.");
     }
   }
 }

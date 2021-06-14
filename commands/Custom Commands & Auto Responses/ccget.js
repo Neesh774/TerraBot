@@ -5,7 +5,7 @@ module.exports = {
     name: "ccget",
     category: "Custom Commands and Auto Reponses",
     description: "Lists all custom commands",
-    usage: "ccget [command ID]",
+    usage: `${config.prefix}ccget [command ID]`,
     run: async (client, message, args) => {
     //command
     const numCommands = await ccSchema.countDocuments({});
@@ -34,7 +34,6 @@ module.exports = {
         let embed = new Discord.MessageEmbed()
             .setColor(config.embedColor)
             .setTitle("Custom Commands")
-            .setDescription(`Here are all of the custom commands for Arcade Cafe`)
             .addFields(fields);
         return message.channel.send(embed);
         }

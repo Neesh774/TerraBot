@@ -11,7 +11,7 @@ module.exports = {
             const member = message.guild.members.cache.get(user.id);
             if(member.roles.cache.has(schema.roleID)){
             member.roles.remove(schema.roleID);
-            member.send(`Removed your ${message.guild.roles.cache.get(schema.roleID).name} role in Arcade Cafe!`);
+            member.send(`Removed your ${message.guild.roles.cache.get(schema.roleID).name} role in ${message.guild.name}!`);
             const AC = await client.guilds.fetch(config.AC); 
             const logs = await AC.channels.cache.get(config.logs);
             const embed = new Discord.MessageEmbed()

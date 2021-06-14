@@ -67,17 +67,17 @@ module.exports = {
         wModel.reasons.push(reason);
         await wModel.save();
         if(wModel.numberWarns == 1){
-            member.send(`You have been warned for the first time in Arcade Cafe for ${reason || "N/A"}. If you get warned again you will be muted for 2 hours.`)
+            member.send(`You have been warned for the first time in **${guild.name}** for ${reason || "N/A"}. If you get warned again you will be muted for 2 hours.`)
             let embed = new MessageEmbed()
                 .setColor(config.embedColor)
                 .setThumbnail(member.user.avatarURL())
                 .setTitle(`${member.username} was warned`)
-                .setDescription(`${member.user.username} was warned in ${channel.name} for reason ${reason}. They now have 1 warning.`)
+                .setDescription(`**${member.user.username}** was warned in ${channel.name} for reason ${reason}. They now have 1 warning.`)
             logs.send(embed);
-            channel.send(`${member.user.username} was warned for the first time for reason: ${reason}.`)
+            channel.send(`**${member.user.username}** was warned for the first time for reason: ${reason}.`)
         }
         if(wModel.numberWarns == 2){
-            member.send(`You have been warned for the second time in Arcade Cafe for ${reason || "N/A"}. You were muted for 2 hours.`)
+            member.send(`You have been warned for the second time in **${guild.name}** for ${reason || "N/A"}. You were muted for 2 hours.`)
             let mute= member.guild.roles.cache.find(role => role.name === config.mutedRole);
             member.roles.add(mute);
             setTimeout(function(){
@@ -87,29 +87,29 @@ module.exports = {
                 .setColor(config.embedColor)
                 .setThumbnail(member.user.avatarURL())
                 .setTitle(`${member.user.username} was warned`)
-                .setDescription(`${member.user.username} was warned for the second time in ${channel.name} for reason ${reason}.`)
+                .setDescription(`**${member.user.username}** was warned for the second time in ${channel.name} for reason ${reason}.`)
             logs.send(embed);
-            channel.send(`${member.user.username} was warned for the second time for reason: ${reason}. They were muted for 2 hours.`)
+            channel.send(`**${member.user.username}** was warned for the second time for reason: ${reason}. They were muted for 2 hours.`)
         }
         else if(wModel.numberWarns == 3){
-            member.send(`You have been warned in Arcade Cafe for ${reason || "N/A"}. If you get warned again you will be kicked.`);
+            member.send(`You have been warned in **${guild.name}** for ${reason}. If you get warned again you will be kicked.`);
             let embed = new MessageEmbed()
                 .setColor(config.embedColor)
                 .setThumbnail(member.user.avatarURL())
                 .setTitle(`${member.username} was warned`)
-                .setDescription(`${member.user.username} was warned in ${channel.name} for reason ${reason}. They now have 3 warnings.`)
+                .setDescription(`**${member.user.username}** was warned in ${channel.name} for reason ${reason}. They now have 3 warnings.`)
             logs.send(embed);
-            channel.send(`${member.user.username} was warned for the third time for reason: ${reason}.`)
+            channel.send(`**${member.user.username}** was warned for the third time for reason: ${reason}.`)
         }
         else if(wModel.numberWarns == 4){
             const sembed2 = new MessageEmbed()
                     .setColor(config.embedColor)
-                    .setDescription(`**You Have Been Kicked From ${message.guild.name} for - ${reason || "N/A"}**`)
+                    .setDescription(`You Have Been Kicked From **${guild.name}** for - ${reason || "N/A"}`)
                     .setFooter(message.guild.name, message.guild.iconURL())
                 member.send(sembed2).then(() =>{
                     if(member.kickable()){
                         member.kick().catch(() => null);
-                        channel.send(`${member.user.username} was warned for the fourth time for reason: ${reason}. They were kicked.`)
+                        channel.send(`**${member.user.username}** was warned for the fourth time for reason: ${reason}. They were kicked.`)
                     }
                     else{
                         channel.send("Couldn't kick that user, they were still warned.");
@@ -119,7 +119,7 @@ module.exports = {
                 .setColor(config.embedColor)
                 .setThumbnail(member.user.avatarURL())
                 .setTitle(`${member.username} was warned`)
-                .setDescription(`${member.user.username} was warned in ${channel.name} for reason ${reason}. They now have 4 warnings. They were kicked.`)
+                .setDescription(`**${member.user.username}** was warned in ${channel.name} for reason ${reason}. They now have 4 warnings. They were kicked.`)
                 logs.send(embed);
         }
     },
@@ -139,7 +139,7 @@ module.exports = {
         }
         catch(e){
             console.log(e.stack);
-            return message.channel.send("There was an error. Please contact staff about it and try again.");
+            return message.channel.send(":x: There was an error. Please make sure you're using the proper arguments and try again.");
         }
     },
     connectMongoose: async function(mongoose){
@@ -163,7 +163,7 @@ module.exports = {
         }
         catch(e){
             console.log(e.stack);
-            return message.channel.send("There was an error. Please contact staff about it and try again.");
+            return message.channel.send(":x: There was an error. Please make sure you're using the proper arguments and try again.");
         }
     },
     setReminder: async function(message, time, content){
@@ -200,6 +200,10 @@ module.exports = {
         }
         if(hour > 12){
             hour -= 12;
+            time = `${hour}:${minute} PM`
+        }
+        else if(hour < 1){
+            hour += 12;
             time = `${hour}:${minute} PM`
         }
         else{

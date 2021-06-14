@@ -6,7 +6,7 @@ module.exports = {
     name: "purge",
     category: "moderation",
     description: "Deletes messages in a text channel or specified number of messages in a text channel.",
-    usage: "purge <number of messages>",
+    usage: `${config.prefix}purge <number of messages>`,
     run: async (client, message, args) => {
         const AC = await client.guilds.fetch(config.AC); 
         const logs = await AC.channels.cache.get(config.logs);

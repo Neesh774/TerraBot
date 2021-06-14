@@ -1,11 +1,12 @@
 const Discord = require("discord.js");
 const functions = require("../../functions.js");
+const config = require("../../config.json");
 
 module.exports = {
     name: "warn",
     category: "moderation",
     description: "Warns the given user. 2 Warns = 2 Hour Mute, 4 Warns = Kick",
-    usage: "warn <user> [reason]",
+    usage: `${config.prefix}warn <user> [reason]`,
     run: async (client, message, args) => {
         if(!message.member.hasPermission("KICK_MEMBERS")){
             return message.reply("You don't have permissions for that :/");

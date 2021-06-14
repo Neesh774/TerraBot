@@ -5,7 +5,7 @@ module.exports = {
   name: "queue",
   category: "music", 
   description: "Beano tells you what's in the queue",
-  usage: "queue",
+  usage: `${config.prefix}queue`,
   run: async (client, message) => {
   const channel = message.member.voice.channel;
   if (!channel)

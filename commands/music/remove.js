@@ -5,7 +5,7 @@ module.exports ={
   name: "remove",
   category: "music", 
   description: "Beano removes a song from the queue",
-  usage: "remove <id>",
+  usage: `${config.prefix}remove <id>`,
   run: async (client, message, args) => {
   const channel = message.member.voice.channel;
   if (!channel)

@@ -6,7 +6,7 @@ module.exports = {
   name: "sblb",
   category: "Starboards",
   description: "Gives you a list of who has the most starboards",
-  usage: "sblb [page]",
+  usage: `${config.prefix}sblb [page]`,
   run: async (client, message, args) => {
     let list = await mSchema.find({});
     list.sort(function(a,b){

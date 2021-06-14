@@ -4,7 +4,7 @@ module.exports = {
     name: "unmute",
     category: "moderation",
     description: "Beano brings the user back from the land of the rats",
-    usage: "mute <user>",
+    usage: `${config.prefix}mute <user>`,
     run: async (client, message, args) => {
     //command
         if(!message.member.hasPermission("MANAGE_MESSAGES")){
