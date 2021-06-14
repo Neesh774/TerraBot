@@ -4,7 +4,7 @@ module.exports = {
     name: "unmute",
     category: "moderation",
     description: "Beano brings the user back from the land of the rats",
-    usage: `${config.prefix}mute <user>`,
+    usage: `${config.prefix}unmute <user>`,
     run: async (client, message, args) => {
     //command
         if(!message.member.hasPermission("MANAGE_MESSAGES")){
@@ -17,10 +17,10 @@ module.exports = {
         const AC = await client.guilds.fetch(config.AC); 
         const logs = await AC.channels.cache.get(config.logs);
         let member = await AC.members.fetch(memberID);
-        if(!member.roles.cache.has('838076447095914526')){
+        if(!member.roles.cache.has(config.mutedRole)){
             return message.reply("That user isn't muted.");
         }
-        member.roles.remove(message.guild.roles.cache.get(`838076447095914526`));
+        member.roles.remove(message.guild.roles.cache.get(config.mutedRole));
         return message.reply(`Unmuted ${member.toString()}`);
     }
 };

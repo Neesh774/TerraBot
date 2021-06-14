@@ -8,6 +8,12 @@ module.exports = {
    args: true,
    usage: `${config.prefix}remindme <time> <reminder>`,
    run: async (client, message, args) => {
+      if(!args[0]){
+         return message.reply("When should I remind you?");
+      }
+      if(!args[1]){
+         return message.reply("What should I remind you with?");
+      }
       const timeArg = args.shift();
       functions.setReminder(message, timeArg, args.join(' '));
    }

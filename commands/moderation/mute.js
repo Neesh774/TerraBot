@@ -22,7 +22,7 @@ module.exports = {
             return message.reply("That user is already muted.");
         }
         if(!args[1]){
-            member.roles.add(message.guild.roles.cache.get(`838076447095914526`));
+            member.roles.add(message.guild.roles.cache.get(config.mutedRole));
             member.send(`You were muted in ${message.guild.name}`);
             return message.reply(`Muted ${member.toString()}`);
         }
@@ -32,11 +32,11 @@ module.exports = {
                 time = ms(args[1]);
             }
             catch(e){return message.channel.send(":x: There was an error. Please make sure you're using the proper arguments and try again.");}
-            member.roles.add(message.guild.roles.cache.get(`838076447095914526`));
+            member.roles.add(message.guild.roles.cache.get(config.mutedRole));
             member.send(`You were muted in ${message.guild.name} for ${args[1]}`);
             setTimeout(() => {
                 member.send("You were unmuted in " + message.guild.name);
-                member.roles.remove(message.guild.roles.cache.get(`838076447095914526`));
+                member.roles.remove(message.guild.roles.cache.get(config.mutedRole));
             }, time);
             return message.reply(`Muted ${member.toString()}`);
         }

@@ -4,7 +4,7 @@ module.exports = {
     name: "kick",
     category: "moderation",
     description: "kicks a mentioned user",
-    usage: `${config.prefix}kick <user>`,
+    usage: `${config.prefix}kick <user> [reason]`,
     run: async (client, message, args) => {
         const AC = await client.guilds.fetch(config.AC); 
         const logs = await AC.channels.cache.get(config.logs);

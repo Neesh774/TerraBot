@@ -12,7 +12,7 @@ module.exports = {
   //command
   const bargs =  message.content.split(' ');
   const searchString = bargs.slice(1).join(' ')
-  if(!searchString)return message.channel.send(`You have to type in word`)
+  if(!searchString)return message.channel.send(`You have to tell me what word to search up.`)
   
   
   

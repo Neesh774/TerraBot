@@ -5,7 +5,7 @@ module.exports= {
   name: "loop",
   category: "music", 
   description: "Beano will loop the current song",
-  usage: `${config.prefix}connect`,
+  usage: `${config.prefix}loop`,
   run:async (client, message) => {
   const queue = message.client.queue.get(message.guild.id);
 

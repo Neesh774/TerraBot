@@ -9,7 +9,7 @@ module.exports= {
   name: "play",
   category: "music", 
   description: "Beano will play a song",
-  usage: `${config.prefix}connect <song>`,
+  usage: `${config.prefix}play <song>`,
   run: async (client, message, args) => {
   const channel = message.member.voice.channel;
 

@@ -13,7 +13,7 @@ module.exports = {
             return message.reply("You don't have permissions for that :/");
         }
         if(!args[1]){
-            return message.reply("You didn't tell me which message I should be looking for!");
+            return message.reply("You didn't tell me which channel I should be looking in!");
         }
         const msg = await sbSchema.findOne({messageID: args[1], channelID: args[0]});
         if(!msg){

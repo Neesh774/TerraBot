@@ -9,7 +9,7 @@ module.exports = {
   name: "fact",
   category: "fun",
   description: "sends a random fact",
-  usage: "[command]",
+  usage: `${config.prefix}fact`,
   run: async (client, message, args) => {
     //command
 

@@ -5,13 +5,16 @@ module.exports = {
     name: "ardel",
     category: "Custom Commands and Auto Reponses",
     description: "Delete a certain auto responder",
-    usage: `${config.prefix}ardel [responder ID]`,
+    usage: `${config.prefix}ardel <responder ID>`,
     run: async (client, message, args) => {
     //responder
     const numResponders = await arSchema.countDocuments({});
     let fields = [];
         if(!message.member.hasPermission("MANAGE_MESSAGES")){
             return message.reply("You don't have permissions for that :/");
+        }
+        if(!args[0]){
+            return message.reply("Which responder should I delete?");
         }
         if(args[0] > numResponders){
             return message.reply("That responder doesn't exist!");

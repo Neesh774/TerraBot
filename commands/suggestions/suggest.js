@@ -4,8 +4,8 @@ const sSchema = require('../../models/suggestschema');
 module.exports = {
     name: "suggest",
     category: "suggestions",
-    description: "Suggest something in <#837385962183065650>!",
-    usage: `${config.prefix}suggest`,
+    description: "Suggest something in the suggestions channel!",
+    usage: `${config.prefix}suggest <suggestion>`,
     run: async (client, message, args) => {
     //command
     const numSuggest = await sSchema.countDocuments({});
@@ -14,7 +14,7 @@ module.exports = {
             .setTitle(`Suggestion #${numSuggest + 1}`)
             .setDescription(args.join(" "));
         const AC = await client.guilds.fetch(config.AC); 
-        const suggest = await AC.channels.cache.get("834110251887230976");
+        const suggest = await AC.channels.cache.get(config.suggestions);
         message.delete().then(msg =>{
             suggest.send(embed).then(msgtwo =>{
                 const sSuggest = new sSchema({

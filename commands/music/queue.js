@@ -40,7 +40,7 @@ module.exports = {
   message.channel.send(
     new MessageEmbed()
       .setAuthor(
-        "music Queue",
+        "Beano Music",
         "https://img.icons8.com/color/2x/rhombus-loader.gif"
       )
       .setThumbnail(thumbnail)

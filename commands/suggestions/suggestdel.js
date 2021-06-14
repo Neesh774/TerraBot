@@ -5,13 +5,16 @@ module.exports = {
     name: "suggestdel",
     category: "Custom Commands and Auto Reponses",
     description: "Deletes a certain suggestion",
-    usage: `${config.prefix}suggestdel [suggestion ID]`,
+    usage: `${config.prefix}suggestdel <suggestion ID>`,
     run: async (client, message, args) => {
     //command
     const numSuggests = await sSchema.countDocuments({});
     let fields = [];
         if(!message.member.hasPermission("MANAGE_MESSAGES")){
             return message.reply("You don't have permissions for that :/");
+        }
+        if(!args[0]){
+            return message.reply("Which suggestion am I deleting?");
         }
         if(args[0] > numSuggests){
             return message.reply("That command doesn't exist!");
