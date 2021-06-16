@@ -6,8 +6,8 @@ module.exports = {
     description: "kicks a mentioned user",
     usage: `${config.prefix}kick <user> [reason]`,
     run: async (client, message, args) => {
-        const AC = await client.guilds.fetch(config.AC); 
-        const logs = await AC.channels.cache.get(config.logs);
+        const PS = await client.guilds.fetch(config.PS); 
+        const logs = await PS.channels.cache.get(config.logs);
 
         try {
             if (!message.member.hasPermission("KICK_MEMBERS")) return message.channel.send("**You Do Not Have Permissions To Kick Members! - [KICK_MEMBERS]**");

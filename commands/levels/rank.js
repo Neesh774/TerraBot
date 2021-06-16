@@ -5,7 +5,7 @@ const canvacord = require('canvacord');
 module.exports = {
     name: "rank",
     category: "levels",
-    description: "Beano tells you what level you're at",
+    description: "TerraBot tells you what level you're at",
     usage: `${config.prefix}rank [user]`,
     run: async (client, message, args) => {
         let member = await mSchema.findOne({userID: message.author.id});

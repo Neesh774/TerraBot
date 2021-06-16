@@ -4,7 +4,7 @@ const config = require("../../config.json");
 module.exports= {
   name: "np",
   category: "music", 
-  description: "Beano tells you what's currently playing",
+  description: "TerraBot tells you what's currently playing",
   usage: `${config.prefix}np`,
   run: async (client, message) => {
   const channel = message.member.voice.channel;

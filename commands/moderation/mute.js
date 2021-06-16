@@ -4,7 +4,7 @@ const ms = require('ms');
 module.exports = {
     name: "mute",
     category: "moderation",
-    description: "Beano exiles the user to the land of the rats",
+    description: "TerraBot exiles the user to the land of the rats",
     usage: `${config.prefix}mute <user> [time]`,
     run: async (client, message, args) => {
     //command
@@ -15,9 +15,9 @@ module.exports = {
             return message.reply("You need to give me someone to mute!");
         }
         let memberID = args[0].substring(3, 21);
-        const AC = await client.guilds.fetch(config.AC); 
-        const logs = await AC.channels.cache.get(config.logs);
-        let member = await AC.members.fetch(memberID);
+        const PS = await client.guilds.fetch(config.PS); 
+        const logs = await PS.channels.cache.get(config.logs);
+        let member = await PS.members.fetch(memberID);
         if(member.roles.cache.has('838076447095914526')){
             return message.reply("That user is already muted.");
         }

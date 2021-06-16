@@ -1,6 +1,6 @@
 const client = require('nekos.life');
 const Discord = require('discord.js')
-const beano = new client();
+const tb = new client();
 const utils = require('../../utils');
 const config = require("../../config.json");
 
@@ -15,7 +15,7 @@ module.exports = {
 
     async function work() {
 
-    let bean = (await beano.sfw.fact());
+    let bean = (await tb.sfw.fact());
     message.channel.send(bean.fact).catch(error => {
       console.error(error);
       return message.channel.send(":x: There was an error. Please make sure you're using the proper arguments and try again.");

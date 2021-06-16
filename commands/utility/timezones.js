@@ -4,7 +4,7 @@ const functions = require("../../functions.js");
 module.exports = {
     name: "timezones",
     category: "utility",
-    description: "Beano will give you a collection of all of the timezones",
+    description: "TerraBot will give you a collection of all of the timezones",
     usage: `${config.prefix}timezones`,
     run: async (client, message, args) => {
     //command

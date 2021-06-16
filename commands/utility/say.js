@@ -3,7 +3,7 @@ const config = require("../../config.json");
 module.exports = {
     name: "say",
     category: "utility",
-    description: "Beano will repeat you.",
+    description: "TerraBot will repeat you.",
     usage: `${config.prefix}say <text>`,
     run: async (client, message, args) => {
     //command

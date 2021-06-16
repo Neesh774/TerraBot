@@ -4,7 +4,7 @@ const config = require("../../config.json");
 module.exports = {
   name: "skip",
   category: "music", 
-  description: "Beano skips the currently playing song",
+  description: "TerraBot skips the currently playing song",
   usage: `${config.prefix}skip`,
   run: async (client, message) => {
   const channel = message.member.voice.channel;

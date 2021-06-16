@@ -1,9 +1,10 @@
 {
-  "name": "Beano",
+  "name": "TerraBot",
   "version": "2.0.0",
   "description": "A multipurpose Discord bot with fun commands as well as utility, moderation SFW commands and more.",
   "main": "index.js",
   "dependencies": {
+    "@cxllm/reddit": "^1.0.1-10",
     "@dacoto/timezone.js": "^1.1.1",
     "@discordjs/opus": "^0.5.0",
     "ascii-table": "^0.0.9",
@@ -38,6 +39,7 @@
     "random-puppy": "^1.1.0",
     "reaction-role": "^4.1.0",
     "request-promise-native": "^1.0.9",
+    "spdl-core": "^2.0.2",
     "sqlite3": "^5.0.2",
     "urban.js": "^2.4.3",
     "ws": "^7.4.5",

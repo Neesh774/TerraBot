@@ -4,8 +4,8 @@ const config = require('../config.json');
 module.exports = {
     name: 'messageUpdate',
     async execute(oldMessage, newMessage, client){
-        const AC = await client.guilds.fetch(config.AC); 
-        const logs = await AC.channels.cache.get(config.logs);
+        const PS = await client.guilds.fetch(config.PS); 
+        const logs = await PS.channels.cache.get(config.logs);
 
         if(newMessage.partial) return;
         if(newMessage.author.bot) return;

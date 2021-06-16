@@ -11,7 +11,7 @@ module.exports = {
   //command
     const sbs = await sbSchema.find();
     let numPages = Math.ceil(sbs.length / 10);
-    const AC = await client.guilds.fetch(config.AC); 
+    const PS = await client.guilds.fetch(config.PS); 
     let fields = [];
     let start = 0;
     let end = 10;
@@ -31,14 +31,14 @@ module.exports = {
       end = numEntries + start;
       page = args[0];
       for(var i = start; i < end; i ++){
-        const channel = await AC.channels.cache.get(sbs[i].channelID);
+        const channel = await PS.channels.cache.get(sbs[i].channelID);
         const message = await channel.messages.fetch(sbs[i].messageID);
         fields.push({"name": `#${i+1} | ${sbs[i].author}`, "value": `[Jump!](${message.url})`})
       }
     }
     else{
       for(var i = start; i < end; i ++){
-        const channel = await AC.channels.cache.get(sbs[i].channelID);
+        const channel = await PS.channels.cache.get(sbs[i].channelID);
         const message = await channel.messages.fetch(sbs[i].messageID);
         fields.push({"name": `#${i+1} | ${sbs[i].author}`, "value": `[Jump!](${message.url})`})
       }
@@ -47,7 +47,7 @@ module.exports = {
       .setColor(config.embedColor)
       .setTitle(`Starboards [${page}/${numPages}]`)
       .addFields(fields)
-      .setAuthor("Beano Starboard Leaderboard", AC.iconURL());
+      .setAuthor("TerraBot Starboard Leaderboard", PS.iconURL());
     return message.channel.send(embed);
   }
 };

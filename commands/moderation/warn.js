@@ -19,8 +19,8 @@ module.exports = {
         if(args[1]){
             reason = args.join(" ");
         }
-        const AC = await client.guilds.fetch(config.AC); 
-        let member = await AC.members.fetch(memberID);
+        const PS = await client.guilds.fetch(config.PS); 
+        let member = await PS.members.fetch(memberID);
 
         functions.warn(member, message.guild, message.channel, reason, client);
     }

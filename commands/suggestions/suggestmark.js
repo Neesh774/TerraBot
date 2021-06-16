@@ -43,8 +43,8 @@ module.exports = {
         .addField("Reason", `${suggest.reason}`)
         .setAuthor(suggest.createdBy, suggest.createdByIcon);
     message.channel.send(embed);
-    const AC = await client.guilds.fetch(config.AC); 
-    const suggestChannel = await AC.channels.cache.get("834110251887230976");
+    const PS = await client.guilds.fetch(config.PS); 
+    const suggestChannel = await PS.channels.cache.get("834110251887230976");
 
     const sMessage = await suggestChannel.messages.fetch(suggest.messageID);
     if(mark.toLowerCase() === "dead"){

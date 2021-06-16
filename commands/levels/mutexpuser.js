@@ -4,7 +4,7 @@ const mSchema = require('../../models/memberschema.js');
 module.exports = {
     name: "mutexpuser",
     category: "levels",
-    description: "Beano will ignore a certain user when counting xp",
+    description: "TerraBot will ignore a certain user when counting xp",
     usage: `${config.prefix}mutexpuser <user>`,
     run: async (client, message, args) => {
         //command

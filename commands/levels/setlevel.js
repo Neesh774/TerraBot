@@ -5,7 +5,7 @@ const functions = require('../../functions.js');
 module.exports = {
     name: "setlevel",
     category: "levels",
-    description: "Beano will change the level a user is at",
+    description: "TerraBot will change the level a user is at",
     usage: `${config.prefix}setlevel <user> <level>`,
     run: async (client, message, args) => {
         //command

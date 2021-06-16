@@ -3,7 +3,7 @@ const config = require("../../config.json");
 module.exports = {
     name: "prefix",
     category: "moderation",
-    description: "Beano changes it's own prefix!",
+    description: "TerraBot changes it's own prefix!",
     usage: `${config.prefix}prefix <prefix>`,
     run: async (client, message, args) => {
     //command

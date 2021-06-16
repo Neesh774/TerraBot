@@ -4,7 +4,7 @@ const mSchema = require('../../models/memberschema.js');
 module.exports = {
     name: "llb",
     category: "levels",
-    description: "Beano will get you a leaderboard of all of the levels",
+    description: "TerraBot will get you a leaderboard of all of the levels",
     usage: `${config.prefix}llb`,
     run: async (client, message, args) => {
     //command

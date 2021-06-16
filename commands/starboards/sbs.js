@@ -19,13 +19,13 @@ module.exports = {
     let embed = new Discord.MessageEmbed() 
         .setColor(config.embedColor)
         .setTitle(`${message.author.username}'s starboards`)
-        .setAuthor("Beano Starboards", message.author.avatarURL());
+        .setAuthor("TerraBot Starboards", message.author.avatarURL());
     if(member.starboards > 0){
         let fields = [];
         const starboards = await sbSchema.find({authorID: user.id});
-        const AC = await client.guilds.fetch(config.AC); 
+        const PS = await client.guilds.fetch(config.PS); 
         for(var i = 0; i < starboards.length; i ++){
-            const channel = await AC.channels.cache.get(starboards[i].channelID);
+            const channel = await PS.channels.cache.get(starboards[i].channelID);
             const msg = await channel.messages.fetch(starboards[i].messageID);
             fields.push({"name": `#${i +1}`, "value": `[Jump!](${msg.url})`})
         }

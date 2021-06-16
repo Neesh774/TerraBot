@@ -8,8 +8,8 @@ module.exports = {
     description: "Deletes messages in a text channel or specified number of messages in a text channel.",
     usage: `${config.prefix}purge <number of messages>`,
     run: async (client, message, args) => {
-        const AC = await client.guilds.fetch(config.AC); 
-        const logs = await AC.channels.cache.get(config.logs);
+        const PS = await client.guilds.fetch(config.PS); 
+        const logs = await PS.channels.cache.get(config.logs);
 
         if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("You Don't Have Sufficient Permissions!- [MANAGE_MESSAGES]")
         if (isNaN(args[0]))

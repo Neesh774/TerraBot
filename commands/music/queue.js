@@ -4,7 +4,7 @@ const config = require("../../config.json");
 module.exports = {
   name: "queue",
   category: "music", 
-  description: "Beano tells you what's in the queue",
+  description: "TerraBot tells you what's in the queue",
   usage: `${config.prefix}queue`,
   run: async (client, message) => {
   const channel = message.member.voice.channel;
@@ -40,7 +40,7 @@ module.exports = {
   message.channel.send(
     new MessageEmbed()
       .setAuthor(
-        "Beano Music",
+        "TerraBot Music",
         "https://img.icons8.com/color/2x/rhombus-loader.gif"
       )
       .setThumbnail(thumbnail)

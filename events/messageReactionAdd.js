@@ -3,19 +3,20 @@ const config = require('../config.json');
 const rrSchema = require('../models/rrschema.js');
 const sbSchema = require('../models/starboard.js');
 const mSchema = require("../models/memberschema.js");
+const sSchema = require("../models/suggestschema.js");
 
 module.exports = {
     name: 'messageReactionAdd',
     async execute(messageReaction, user, client){
         const message = messageReaction.message;
         const schema = await rrSchema.findOne({channelID: message.channel.id, messageID: message.id, reactionID: messageReaction.emoji.id});
-        const AC = await client.guilds.fetch(config.AC); 
+        const PS = await client.guilds.fetch(config.PS); 
         if(schema){
             const member = message.guild.members.cache.get(user.id);
             if(!member.roles.cache.has(schema.roleID)){
                 member.roles.add(schema.roleID);
                 member.send(`Gave you the ${message.guild.roles.cache.get(schema.roleID).name} role in ${message.guild.name}!`);
-                const logs = await AC.channels.cache.get(config.logs);
+                const logs = await PS.channels.cache.get(config.logs);
                 const embed = new Discord.MessageEmbed()
                     .setColor(config.embedColor)
                     .setTitle("Reaction role used")
@@ -26,7 +27,7 @@ module.exports = {
             }
         }
         if(message.reactions.cache.size == 5 && message.reactions.cache.every(reaction => reaction.emoji.id == config.starboardEmote)){
-            const starboardChannel = await AC.channels.cache.get(config.starboardChannel);
+            const starboardChannel = await PS.channels.cache.get(config.starboardChannel);
             const parsedLinks = message.content.match(/^https?:\/\/(\w+\.)?imgur.com\/(\w*\d\w*)+(\.[a-zA-Z]{3})?$/);
             const attachments = message.attachments && message.attachments.first() ? message.attachments.first() : undefined;
             if (parsedLinks && parsedLinks.length > 0) {
@@ -57,6 +58,18 @@ module.exports = {
             emb.addField('Source', `[Jump!](https://discordapp.com/channels/${message.guild.id}/${message.channel.id}/${message.id})`);
             if (attachments || (parsedLinks && parsedLinks.length > 0)) emb.setImage(attachments ? attachments.url : parsedLinks.length > 0 ? parsedLinks[0] : '');
             return starboardChannel.send(emb);
+        }
+        const suggest = await sSchema.findOne({messageID: message.id})
+        if(suggest && !user.bot){
+            switch(messageReaction.emoji.id){
+                case(config.upvote):
+                    suggest.upvotes ++;
+                    break;
+                case(config.downvote):
+                    suggest.downvotes ++;
+                    break;
+            }
+            await suggest.save();
         }
     }
 }

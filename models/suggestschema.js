@@ -9,7 +9,9 @@ const sSchema = mongoose.Schema({
     createdAt: String,
     messageID: String,
     status: String,
-    reason: String
+    reason: String,
+    upvotes: Number,
+    downvotes: Number
 });
 
 module.exports = mongoose.model("Suggestion", sSchema);

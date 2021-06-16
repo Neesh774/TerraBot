@@ -4,7 +4,7 @@ const mSchema = require('../../models/memberschema.js');
 module.exports = {
     name: "clearxp",
     category: "levels",
-    description: "Beano will clear all of the xp",
+    description: "TerraBot will clear all of the xp",
     usage: `${config.prefix}clearxp`,
     run: async (client, message, args) => {
     //command
@@ -13,8 +13,8 @@ module.exports = {
         }
         await mSchema.deleteMany();
         message.reply("Successfully cleared all of the levels!");
-        const AC = await client.guilds.fetch(config.AC); 
-        const logs = await AC.channels.cache.get(config.logs);
+        const PS = await client.guilds.fetch(config.PS); 
+        const logs = await PS.channels.cache.get(config.logs);
         let embed = new Discord.MessageEmbed()
             .setColor(config.embedColor)
             .setTitle("Levels were cleared")

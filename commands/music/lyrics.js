@@ -5,7 +5,7 @@ const config = require("../../config.json");
 module.exports ={
   name: "lyrics",
   category: "music", 
-  description: "Beano finds the lyrics for the currently playing song",
+  description: "TerraBot finds the lyrics for the currently playing song",
   usage: `${config.prefix}lyrics`,
   run: async (client, message, args) => {
   const queue = message.client.queue.get(message.guild.id);

@@ -13,7 +13,7 @@ module.exports = {
     const numSuggest = await sSchema.countDocuments({});
     for(var i = 1;i < numSuggest + 1;i ++){
         const suggest = await sSchema.findOne({id: i}).exec();
-        fields.push({"name": `#${i} ${suggest.createdBy}`, "value": `${suggest.suggestion} | **${suggest.status}**`});
+        fields.push({"name": `#${i} ${suggest.createdBy} | ${suggest.status}`, "value": `${suggest.suggestion} | 👍 ${suggest.upvotes} 👎 ${suggest.downvotes}`});
     }
     let embed = new Discord.MessageEmbed()
         .setColor(config.embedColor)

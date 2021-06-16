@@ -4,7 +4,7 @@ const mcSchema = require('../../models/mchannelschema.js');
 module.exports = {
     name: "unmutexp",
     category: "levels",
-    description: "Beano will stop ignoring this channel when counting xp",
+    description: "TerraBot will stop ignoring this channel when counting xp",
     usage: `${config.prefix}unmutexp <channel>`,
     run: async (client, message, args) => {
     //command

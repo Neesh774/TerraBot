@@ -22,6 +22,7 @@ module.exports = {
         .setDescription(`${suggest.suggestion}`)
         .addField("Status", suggest.status)
         .addField("Reason", suggest.reason)
+        .addField(`Votes`, `👍 ${suggest.upvotes}, 👎 ${suggest.downvotes}`)
         .setFooter(suggest.createdAt)
         .setAuthor(suggest.createdBy, suggest.createdByIcon);
     return message.channel.send(embed);

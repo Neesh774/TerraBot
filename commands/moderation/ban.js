@@ -1,13 +1,14 @@
 const Discord = require("discord.js");
 const config = require("../../config.json");
+const { MessageEmbed } = require("discord.js");
 module.exports = {
     name: "ban",
     category: "moderation",
     description: "bans a mentioned user",
     usage: `${config.prefix}ban <user> [reason]`,
     run: async (client, message, args) => {
-        const AC = await client.guilds.fetch(config.AC); 
-        const logs = await AC.channels.cache.get(config.logs);
+        const PS = await client.guilds.fetch(config.PS); 
+        const logs = await PS.channels.cache.get(config.logs);
 
         try {
             if (!message.member.hasPermission("BAN_MEMBERS") && !ownerID .includes(message.author.id)) return message.channel.send("**You Dont Have The Permissions To Ban Users! - [BAN_MEMBERS]**");

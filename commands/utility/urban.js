@@ -6,7 +6,7 @@ const config = require("../../config.json");
 module.exports = {
     name: "urban",
     category: "utility",
-  description: "Shows you a deffinition from urban dictionary",
+  description: "Shows you a definition from the Urban dictionary",
   usage: `${config.prefix}urban <word>`,
   run: async (client, message, args) => {
   //command
@@ -32,7 +32,7 @@ urban(searchString).then(urbans=>{
   
   }
 })
-})
+}).catch("There was an error. Try rephrasing your query or searching something else up.")
 
   }
   };

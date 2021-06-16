@@ -1,5 +1,5 @@
-# Beano
-Beano is a general purpose discord bot I made for the [Arcade Cafe Server](https://discord.gg/CTfkUtXyTA). It will log most important events, has moderation features, fun commands, and a starboard.
+# TerraBot
+TerraBot is a general purpose discord bot I made for the [Arcade Cafe Server](https://discord.gg/CTfkUtXyTA). It will log most important events, has moderation features, fun commands, and a starboard.
 ## Commands
 ### Birthdays
 - ``birthday`` tells you what your birthday is. It's ok, we all forget sometimes.
@@ -23,8 +23,8 @@ Beano is a general purpose discord bot I made for the [Arcade Cafe Server](https
 - ``meme`` will give you a random meme from the r/dankmemes subreddit.
 - ``mock <text>`` wiLl mOck tHe TeXt lIkE thIs.
 ### Info
-- ``help [command]`` will DM you with a list of all Beano's commands, or give you information about any one command.
-- ``ping``will give you information about Beano's latency.
+- ``help [command]`` will DM you with a list of all TerraBot's commands, or give you information about any one command.
+- ``ping``will give you information about TerraBot's latency.
 ### Levels
 - ``clearxp`` will clear everybody's xp.
 - ``getlevel <xp>`` will tell you how many levels a certain amount of xp is.
@@ -42,7 +42,7 @@ Beano is a general purpose discord bot I made for the [Arcade Cafe Server](https
 - ``ban <user> [reason]`` bans a user with an optional reason
 - ``kick <user> [reason]`` kicks a user with an optional reason.
 - ``mute <user> [time]`` will mute a user, optionally unmuting them after a certain amount of time.
-- ``prefix <prefix>`` will change Beano's prefix.
+- ``prefix <prefix>`` will change TerraBot's prefix.
 - ``purge <number>`` will purge a certain amount of a channel's messages.
 - ``role <user> <role name>`` will give or remove a role from a user
 - ``unmute <user>`` will unmute a user.
@@ -69,15 +69,15 @@ Beano is a general purpose discord bot I made for the [Arcade Cafe Server](https
 - ``calc <equation>`` will calculate an equation.
 - ``embed <title> ++ <description>`` will create an embed.
 - ``setreminder <time> <reminder>`` will create a reminder.
-- ``say <text>`` will make Beano repeat you.
+- ``say <text>`` will make TerraBot repeat you.
 - ``serverinfo`` will give you information about a server.
 - ``study <time>`` will isolate you so you can study in peace.
 - ``timezones`` will give you information about the most popular timezones.
 - ``urban <word>`` will define a word from Urban Dictionary.
 - ``whois <user>`` will give you information about a certain user.
 ### Music
-- ``connect`` will connect Beano to your voice channel.
-- ``disconnect`` will make Beano leave the voice channel.
+- ``connect`` will connect TerraBot to your voice channel.
+- ``disconnect`` will make TerraBot leave the voice channel.
 - ``loop`` will turn on loop mode for the current song.
 - ``lyrics`` will try to find lyrics for the current song.
 - ``np`` will tell you what's currently playing.

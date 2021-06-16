@@ -6,15 +6,15 @@ const functions = require('../../functions.js');
 module.exports = {
     name: "birthday",
     category: "birthdays",
-    description: "Beano tells you when your birthday is. It's ok, we can all forget sometimes.",
-    usage: `${config.prefix}birthday`,
+    description: "TerraBot tells you when your birthday is. It's ok, we can all forget sometimes.",
+    usage: `${config.prefix}birthday [page]`,
     run: async (client, message, args) => {
     //command
         const hasbday = await bSchema.findOne({userID: message.author.id});
         if(!hasbday){
-            return message.reply("You don't have a birthday! Set one using the `setbday <mm> <dd> <yyyy>` command!");
+            return message.reply("You don't have a birthday! Set one using the `setbday <mm> <dd>` command!");
         }
-        const formattedDate = hasbday.birthday.toString().slice(0,15);
+        const formattedDate = hasbday.birthday.toString().slice(4, 10);
         let embed = new Discord.MessageEmbed()
             .setColor(config.embedColor)
             .setDescription(`Your birthday is set to ${formattedDate}`);

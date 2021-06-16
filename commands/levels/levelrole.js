@@ -4,7 +4,7 @@ const lSchema = require('../../models/levelroleschema.js');
 module.exports = {
     name: "levelrole",
     category: "levels",
-    description: "Beano will automatically give users a role when they get to a certain level",
+    description: "TerraBot will automatically give users a role when they get to a certain level",
     usage: `${config.prefix}levelrole <roleID> <level>`,
     run: async (client, message, args) => {
     //command

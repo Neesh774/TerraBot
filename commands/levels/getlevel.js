@@ -6,7 +6,7 @@ const functions = require('../../functions.js');
 module.exports = {
     name: "getlevel",
     category: "levels",
-    description: "Beano tells you what level you would be at with a certain amount of xp",
+    description: "TerraBot tells you what level you would be at with a certain amount of xp",
     usage: `${config.prefix}getlevel <xp>`,
     run: async (client, message, args) => {
     //command

@@ -4,7 +4,7 @@ const config = require("../../config.json");
 module.exports = {
   name: "pause",
   category: "music", 
-  description: "Beano pauses the music",
+  description: "TerraBot pauses the music",
   usage: `${config.prefix}pause`,
   run: async (client, message) => {
   const channel = message.member.voice.channel;

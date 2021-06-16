@@ -4,11 +4,12 @@ const yt = require("ytdl-core");
 const { MessageEmbed, Util } = require("discord.js");
 const forHumans = require("../../forhumans.js");
 const config = require("../../config.json");
+const spdl = require('spdl-core');
 
 module.exports= {
   name: "play",
   category: "music", 
-  description: "Beano will play a song",
+  description: "TerraBot will play a song",
   usage: `${config.prefix}play <song>`,
   run: async (client, message, args) => {
   const channel = message.member.voice.channel;
@@ -49,7 +50,28 @@ module.exports= {
       console.log(e);
       return message.channel.send(":x: There was an error. Please make sure you're using the proper arguments and try again.");
     }
-  } else {
+  }
+  else if(spdl.validateURL(query)){
+    try {
+      const connection = await channel.join();
+      connection
+        .play(await spdl(url))
+        .on('error', e => console.error(e));
+      const infos = await spdl.getInfo(url);
+      const embed = new MessageEmbed()
+        .setTitle(`Now playing: ${infos.title}`)
+        .setURL(infos.url)
+        .setColor('#1DB954')
+        .addField('Artist', infos.artist, true)
+        .addField('Duration', formatDuration(infos.duration), true)
+        .setThumbnail(infos.thumbnail);
+      msg.channel.send(embed);
+    } catch (err) {
+      console.error(err);
+      msg.channel.send(`An error occurred: ${err.message}`);
+    } 
+  } 
+  else {
     try {
       const fetched = await (await youtubeScraper(query)).videos;
       if (fetched.length === 0 || !fetched)

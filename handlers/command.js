@@ -5,7 +5,7 @@ const ascii = require("ascii-table");
 let table = new ascii("Commands");
 table.setHeading("Command", "Load status");
 
-console.log("Welcome to [ Beano ] // Discord: 🧀♅ツNeeshツ♅🧀#7740")
+console.log("Welcome to [ TerraBot ] // Discord: 🧀♅ツNeeshツ♅🧀#7740")
 
    //Loads Discord economy module
     
@@ -28,7 +28,7 @@ module.exports = (client) => {
         }
     });
     console.log(table.toString());
-    console.log("Welcome to [ BeanoBot ] // Discord: 🧀♅ツNeeshツ♅🧀#7740")
+    console.log("Welcome to [ TerraBotBot ] // Discord: 🧀♅ツNeeshツ♅🧀#7740")
 
 	console.log("Logging into Bot User...");
 

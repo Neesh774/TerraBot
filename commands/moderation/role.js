@@ -3,7 +3,7 @@ const config = require("../../config.json");
 module.exports = {
     name: "role",
     category: "moderation",
-    description: "Beano gives the user whatever role you tell it to",
+    description: "TerraBot gives the user whatever role you tell it to",
     usage: `${config.prefix}role <user> <role name>`,
     run: async (client, message, args) => {
     //command
@@ -21,9 +21,9 @@ module.exports = {
             return message.reply(`Couldn't find role ${args[1]} >_<`);
         }
         let memberID = args[0].substring(3, 21);
-        const AC = await client.guilds.fetch(config.AC); 
-        const logs = await AC.channels.cache.get(config.logs);
-        let member = await AC.members.fetch(memberID);
+        const PS = await client.guilds.fetch(config.PS); 
+        const logs = await PS.channels.cache.get(config.logs);
+        let member = await PS.members.fetch(memberID);
         if(member.roles.cache.has(role.id)){
             member.roles.remove(role.id);
             return message.reply(`Removed the role ${role.name} from ${member.nickname}`);

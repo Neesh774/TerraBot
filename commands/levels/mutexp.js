@@ -4,7 +4,7 @@ const mcSchema = require('../../models/mchannelschema.js');
 module.exports = {
     name: "mutexp",
     category: "levels",
-    description: "Beano will ignore this channel when counting xp",
+    description: "TerraBot will ignore this channel when counting xp",
     usage: `${config.prefix}mutexp <channel>`,
     run: async (client, message, args) => {
     //command

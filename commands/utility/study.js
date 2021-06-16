@@ -4,7 +4,7 @@ const config = require("../../config.json");
 const functions = require("../../functions.js");
 module.exports = {
    name: 'study',
-   description: 'Beano will isolate you so you can study in peace.',
+   description: 'TerraBot will isolate you so you can study in peace.',
    args: true,
    usage: `${config.prefix}study <time>`,
    run: async (client, message, args) => {

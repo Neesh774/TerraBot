@@ -4,7 +4,7 @@ const config = require("../../config.json");
 module.exports ={
   name: "remove",
   category: "music", 
-  description: "Beano removes a song from the queue",
+  description: "TerraBot removes a song from the queue",
   usage: `${config.prefix}remove <id>`,
   run: async (client, message, args) => {
   const channel = message.member.voice.channel;

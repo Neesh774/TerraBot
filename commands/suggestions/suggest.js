@@ -13,8 +13,8 @@ module.exports = {
             .setColor(config.embedColor)
             .setTitle(`Suggestion #${numSuggest + 1}`)
             .setDescription(args.join(" "));
-        const AC = await client.guilds.fetch(config.AC); 
-        const suggest = await AC.channels.cache.get(config.suggestions);
+        const PS = await client.guilds.fetch(config.PS); 
+        const suggest = await PS.channels.cache.get(config.suggestions);
         message.delete().then(msg =>{
             suggest.send(embed).then(msgtwo =>{
                 const sSuggest = new sSchema({
@@ -26,7 +26,9 @@ module.exports = {
                     createdAt: message.createdAt.toUTCString(),
                     messageID: msgtwo.id,
                     status: "Unread",
-                    reason: "N/A"
+                    reason: "N/A",
+                    upvotes: 0,
+                    downvotes: 0
                 })
                 sSuggest.save().catch(err => console.log(err));
                 msgtwo.react(config.upvote);
