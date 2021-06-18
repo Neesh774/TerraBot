@@ -1,5 +1,5 @@
 # TerraBot
-TerraBot is a general purpose discord bot I made for the [Arcade Cafe Server](https://discord.gg/CTfkUtXyTA). It will log most important events, has moderation features, fun commands, and a starboard.
+TerraBot is a general purpose discord bot I made for the [Project Solaris Server](https://discord.gg/ss9Wtzb). It will log most important events, has moderation features, fun commands, and a starboard.
 ## Commands
 ### Birthdays
 - ``birthday`` tells you what your birthday is. It's ok, we all forget sometimes.
