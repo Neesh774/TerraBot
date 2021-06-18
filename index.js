@@ -34,7 +34,7 @@ for (const file of eventFiles) {
 //Bot Status
 client.on("ready", () => {
     console.log(`Bot User ${client.user.username} has been logged in and is ready to use!`);
-    client.user.setActivity('!bhelp', { type: 'WATCHING' });
+    client.user.setActivity('thelp', { type: 'WATCHING' });
     functions.connectMongoose(mongoose);
 });
 

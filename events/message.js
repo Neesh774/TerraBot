@@ -64,7 +64,7 @@ module.exports = {
                     .setAuthor(message.author.tag, message.author.avatarURL())
                     .setImage("https://octoperf.com/img/blog/minor-version-major-features/level-up.gif")
                 }
-                return message.channel.send(embed);
+                // return message.channel.send(embed);
             }
             else{
                 profile.levelxp += ranXp;

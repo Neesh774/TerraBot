@@ -9,7 +9,7 @@ module.exports = {
 	usage: `${config.prefix}8ball <question>`,
 	run: async (client, message, args) => {
 		//command
-		var rand = ['Yes', 'No', 'Why are you even trying?', 'What do you think? NO', 'Maybe', 'Never', 'Yep'];
+		var rand = ['Yes', 'No', 'Why are you even trying?', 'What do you think? NO', 'Maybe', 'Never', 'Yep', 'Go for it!', "Nah", "Why not?"];
 		var ranInt = Math.floor(Math.random()*(rand.length-1));
 		
 		let embed =  new MessageEmbed()

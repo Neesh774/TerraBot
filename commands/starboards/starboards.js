@@ -43,6 +43,9 @@ module.exports = {
         fields.push({"name": `#${i+1} | ${sbs[i].author}`, "value": `[Jump!](${message.url})`})
       }
     }
+    if(numPages == 0){
+      numPages = 1;
+    }
     let embed = new Discord.MessageEmbed()
       .setColor(config.embedColor)
       .setTitle(`Starboards [${page}/${numPages}]`)

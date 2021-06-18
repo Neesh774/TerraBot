@@ -6,7 +6,6 @@ module.exports = {
     name: 'messageReactionRemove',
     async execute(messageReaction, user, client){
         const message = messageReaction.message;
-        console.log("Detected reaction't");
         const schema = await rrSchema.findOne({channelID: message.channel.id, messageID: message.id, reactionID: messageReaction.emoji.id})
         if(schema){
             const member = message.guild.members.cache.get(user.id);

@@ -20,13 +20,13 @@ module.exports = {
 
         if (args[0] < 1)
             return message.channel.send("**Please Supply A Number More Than 1!**");
-
-        message.channel.bulkDelete(args[0] + 1)
-            .then(messages => message.channel.send(`**Succesfully deleted \`${messages.size}/${args[0]}\` messages**`).then(msg => msg.delete({ timeout: 5000 }))).catch(() => null);
+        let num = parseInt(args[0]);
+        message.channel.bulkDelete(num + 1)
+            .then(messages => message.channel.send(`**Succesfully deleted \`${messages.size}/${num + 1}\` messages**`).then(msg => msg.delete({ timeout: 5000 }))).catch(() => null);
         const embed = new MessageEmbed()
             .setColor(config.embedColor)
             .setTitle(`Purged Messages`)
-            .setDescription(`${message.author.username} purged ${args[0]} messages in <#${message.channel.id}>`);
+            .setDescription(`${message.author.username} purged ${num} messages in <#${message.channel.id}>`);
 
         logs.send(embed);
     }

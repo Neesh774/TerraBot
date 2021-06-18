@@ -78,7 +78,7 @@ module.exports = {
         }
         if(wModel.numberWarns == 2){
             member.send(`You have been warned for the second time in **${guild.name}** for ${reason || "N/A"}. You were muted for 2 hours.`)
-            let mute= member.guild.roles.cache.find(role => role.name === config.mutedRole);
+            let mute= await member.guild.roles.fetch(role => role.id === config.mutedRole);
             member.roles.add(mute);
             setTimeout(function(){
                 member.roles.remove(mute);
