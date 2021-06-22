@@ -186,9 +186,6 @@ module.exports = {
     getXP: async function(level){ 
         return Math.floor(50*level); 
     },
-    getLevel: async function(xp){
-        return Math.floor(xp/50);
-    },  
     getTime: function(time, hoffset, moffset){
         let hour = parseInt(time.substring(0, 2));
         let minute = parseInt(time.substring(3));

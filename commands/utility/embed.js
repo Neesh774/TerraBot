@@ -12,19 +12,18 @@ module.exports = {
     try{
       if(!message.member.hasPermission("MANAGE_MESSAGES")){
         return message.channel.send(new MessageEmbed()
-            .setColor(ee.wrongcolor)
-            .setFooter(ee.footertext, ee.footericon)
+            .setColor(config.embedColor)
             .setTitle(`❌ ERROR | You don't have permission for that.`)
             .setDescription(`Usage: \`${prefix}${this.usage}\``)
       );
       }
       if(!args[0])
         return message.channel.send(new MessageEmbed()
-            .setColor(ee.wrongcolor)
-            .setFooter(ee.footertext, ee.footericon)
+            .setColor(config.embedColor)
             .setTitle(`❌ ERROR | You didn't provide a Title, nor a Description`)
             .setDescription(`Usage: \`${prefix}${this.usage}\``)
         );
+        message.delete();
       let userargs = args.join(" ").split("++");
       let title = userargs[0];
       let desc = userargs.slice(1).join(" ")
