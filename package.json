@@ -1,5 +1,5 @@
 {
-  "name": "TerraBot",
+  "name": "terrabot",
   "version": "2.0.0",
   "description": "A multipurpose Discord bot with fun commands as well as utility, moderation SFW commands and more.",
   "main": "index.js",

@@ -20,15 +20,6 @@ module.exports = {
 
         if (args[0] < 1)
             return message.channel.send("**Please Supply A Number More Than 1!**");
-<<<<<<< HEAD
-
-        message.channel.bulkDelete(args[0] + 1)
-            .then(messages => message.channel.send(`**Succesfully deleted \`${messages.size}/${args[0]}\` messages**`).then(msg => msg.delete({ timeout: 5000 }))).catch(() => null);
-        const embed = new MessageEmbed()
-            .setColor(config.embedColor)
-            .setTitle(`Purged Messages`)
-            .setDescription(`${message.author.username} purged ${args[0]} messages in <#${message.channel.id}>`);
-=======
         let num = parseInt(args[0]);
         message.channel.bulkDelete(num + 1)
             .then(messages => message.channel.send(`**Succesfully deleted \`${messages.size}/${num + 1}\` messages**`).then(msg => msg.delete({ timeout: 5000 }))).catch(() => null);
@@ -36,7 +27,6 @@ module.exports = {
             .setColor(config.embedColor)
             .setTitle(`Purged Messages`)
             .setDescription(`${message.author.username} purged ${num} messages in <#${message.channel.id}>`);
->>>>>>> 9d7e8c43e83a116f7ae2d039c0ed30117ac7181d
 
         logs.send(embed);
     }

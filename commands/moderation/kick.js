@@ -1,9 +1,5 @@
 const Discord = require("discord.js");
 const config = require("../../config.json");
-<<<<<<< HEAD
-=======
-const { MessageEmbed } = require("discord.js")
->>>>>>> 9d7e8c43e83a116f7ae2d039c0ed30117ac7181d
 module.exports = {
     name: "kick",
     category: "moderation",

@@ -4,10 +4,6 @@ const yt = require("ytdl-core");
 const { MessageEmbed, Util } = require("discord.js");
 const forHumans = require("../../forhumans.js");
 const config = require("../../config.json");
-<<<<<<< HEAD
-const spdl = require('spdl-core');
-=======
->>>>>>> 9d7e8c43e83a116f7ae2d039c0ed30117ac7181d
 
 module.exports= {
   name: "play",
@@ -54,29 +50,6 @@ module.exports= {
       return message.channel.send(":x: There was an error. Please make sure you're using the proper arguments and try again.");
     }
   }
-<<<<<<< HEAD
-  else if(spdl.validateURL(query)){
-    try {
-      const connection = await channel.join();
-      connection
-        .play(await spdl(url))
-        .on('error', e => console.error(e));
-      const infos = await spdl.getInfo(url);
-      const embed = new MessageEmbed()
-        .setTitle(`Now playing: ${infos.title}`)
-        .setURL(infos.url)
-        .setColor('#1DB954')
-        .addField('Artist', infos.artist, true)
-        .addField('Duration', formatDuration(infos.duration), true)
-        .setThumbnail(infos.thumbnail);
-      msg.channel.send(embed);
-    } catch (err) {
-      console.error(err);
-      msg.channel.send(`An error occurred: ${err.message}`);
-    } 
-  } 
-=======
->>>>>>> 9d7e8c43e83a116f7ae2d039c0ed30117ac7181d
   else {
     try {
       const fetched = await (await youtubeScraper(query)).videos;

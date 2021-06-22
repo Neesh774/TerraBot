@@ -5,7 +5,7 @@ TerraBot is a general purpose discord bot I made for the [Project Solaris Server
 - ``birthday`` tells you what your birthday is. It's ok, we all forget sometimes.
 - ``birthdays`` gives you a nice list of everyone's birthdays
 - ``nextbirthday`` tells you who the next person to have their birthday is.
-- ``setbday <mm> <dd> <yyyy>`` lets you set your birthday(make sure it's an actual birthday).
+- ``setbday <mm> <dd>`` lets you set your birthday(make sure it's an actual birthday).
 ### Custom Commands & Auto Responders
 - ``aradd <trigger> <response> [another response] [another response]...`` will let you create an auto responder, which will respond immediately with a random response out of your list when somebody sends that trigger.
 - ``arclearall`` will clear the list of auto responses in the guild.
@@ -73,7 +73,6 @@ TerraBot is a general purpose discord bot I made for the [Project Solaris Server
 - ``serverinfo`` will give you information about a server.
 - ``study <time>`` will isolate you so you can study in peace.
 - ``timezones`` will give you information about the most popular timezones.
-- ``urban <word>`` will define a word from Urban Dictionary.
 - ``whois <user>`` will give you information about a certain user.
 ### Music
 - ``connect`` will connect TerraBot to your voice channel.

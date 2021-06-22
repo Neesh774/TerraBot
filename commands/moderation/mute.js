@@ -14,18 +14,11 @@ module.exports = {
         if(!args[0]){
             return message.reply("You need to give me someone to mute!");
         }
-<<<<<<< HEAD
-        let memberID = args[0].substring(3, 21);
-        const PS = await client.guilds.fetch(config.PS); 
-        const logs = await PS.channels.cache.get(config.logs);
-        let member = await PS.members.fetch(memberID);
-=======
         let member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase());
         if (!member) return message.channel.send("**User Is Not In The Guild**");
         if (member === message.member) return message.channel.send("**You Cannot Mute Yourself**")
         const PS = await client.guilds.fetch(config.PS); 
         const logs = await PS.channels.cache.get(config.logs);
->>>>>>> 9d7e8c43e83a116f7ae2d039c0ed30117ac7181d
         if(member.roles.cache.has('838076447095914526')){
             return message.reply("That user is already muted.");
         }
@@ -46,11 +39,7 @@ module.exports = {
                 member.send("You were unmuted in " + message.guild.name);
                 member.roles.remove(message.guild.roles.cache.get(config.mutedRole));
             }, time);
-<<<<<<< HEAD
             return message.reply(`Muted ${member.toString()}`);
-=======
-            return message.reply(`Muted ${member.toString()} for ${args[1]}`);
->>>>>>> 9d7e8c43e83a116f7ae2d039c0ed30117ac7181d
         }
     }
 };

@@ -26,7 +26,7 @@ module.exports = {
 
 function getAll(client, message) {
     const embed = new MessageEmbed()
-        .setColor("#FFDFD3")
+        .setColor(config.embedColor)
         .setThumbnail("https://cdn.discordapp.com/avatars/546100087579738133/ea87b6e238044da37381c2277987fd3e.webp")
         .setTitle('Help Menu')
         .setURL('https://www.youtube.com/watch?v=X1JRoP0xCqs')
@@ -64,7 +64,7 @@ function getCMD(client, message, input) {
 
     // If no cmd is found, send not found embed
     if (!cmd) {
-        return message.channel.send(embed.setColor("RED").setDescription(info));
+        return message.channel.send(embed.setColor(config.embedColor).setDescription(info));
     }
 
     // Add all cmd info to the embed
@@ -76,5 +76,5 @@ function getCMD(client, message, input) {
         embed.setFooter(`Syntax: <> = required, [] = optional`);
     }
 
-    return message.channel.send(embed.setColor("GREEN").setDescription(info));
+    return message.channel.send(embed.setColor(config.embedColor).setDescription(info));
 }
