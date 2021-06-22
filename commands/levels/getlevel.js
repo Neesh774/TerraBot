@@ -14,7 +14,11 @@ module.exports = {
             return message.reply("How much xp should I count?");
         }
         try{
+<<<<<<< HEAD
             const level = await functions.getLevel(args[0]);
+=======
+            const level = await functions.getLevel(args[0]/100);
+>>>>>>> 9d7e8c43e83a116f7ae2d039c0ed30117ac7181d
             return message.reply(`If you had ${args[0]} xp, that would put you at level ${level}`);
         }
         catch(e){

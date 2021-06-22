@@ -36,6 +36,13 @@ module.exports = {
     start = 10 * (arg - 1);
     end = numEntries + start;
     page = arg;
+<<<<<<< HEAD
+=======
+    console.log(list);
+    if(!list[i]){
+      return message.reply("Looks like we don't have any starboards yet :/");
+    }
+>>>>>>> 9d7e8c43e83a116f7ae2d039c0ed30117ac7181d
     for(var i = start; i < end; i ++){
       fields.push({"name": `#${i+1} | ${list[i].name}`, "value": `${list[i].starboards}`})
     }
