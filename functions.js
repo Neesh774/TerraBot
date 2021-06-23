@@ -186,31 +186,6 @@ module.exports = {
     getXP: async function(level){ 
         return Math.floor(50*level); 
     },
-    getTime: function(time, hoffset, moffset){
-        let hour = parseInt(time.substring(0, 2));
-        let minute = parseInt(time.substring(3));
-        hour += hoffset;
-        minute += moffset;
-        if(minute > 60) {
-            hour ++;
-            minute -= 60;
-        }
-        if(minute < 10){
-            minute = `0${minute}`;
-        }
-        if(hour > 12){
-            hour -= 12;
-            time = `${hour}:${minute} PM`
-        }
-        else if(hour < 1){
-            hour += 12;
-            time = `${hour}:${minute} PM`
-        }
-        else{
-            time = `${hour}:${minute} AM`
-        }
-        return time;
-    },
     levelUser: async function(message, client){
         const mc = await mcSchema.findOne({channel: message.channel.id});
         let og = await mSchema.exists({userID: message.author.id});
