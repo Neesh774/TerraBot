@@ -32,7 +32,7 @@ module.exports = {
                     .setTitle("Reaction Role Deleted")
                     .setTimestamp()
                     .setDescription(`Reaction role was cleared by user ` + message.author.tag);
-                return logs.send(embed);
+                return logs.send({embeds: [embed]});
         }
         else{
             if(!message.member.hasPermission("MANAGE_MESSAGES")){
@@ -47,7 +47,7 @@ module.exports = {
                     .setTitle("Reaction Roles Cleared")
                     .setTimestamp()
                     .setDescription(`Reaction roles were cleared by user ` + message.author.tag);
-                return logs.send(embed);
+                return logs.send({embeds: [embed]});
         }
     }  
 };

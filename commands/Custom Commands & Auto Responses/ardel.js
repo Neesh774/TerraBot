@@ -34,6 +34,6 @@ module.exports = {
             .setTitle("Responder Deleted")
             .setTimestamp()
             .setDescription(`Responder with trigger ${responder.trigger} was cleared by user ` + message.author.tag);
-        return logs.send(embed);
+        return logs.send({embeds: [embed]});
     }
 };

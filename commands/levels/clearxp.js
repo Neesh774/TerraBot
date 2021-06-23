@@ -20,6 +20,6 @@ module.exports = {
             .setTitle("Levels were cleared")
             .setTimestamp()
             .setDescription("All levels were cleared by user " + message.author.toString());
-        return logs.send(embed);
+        return logs.send({embeds: [embed]});
     }
 };

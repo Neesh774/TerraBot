@@ -11,30 +11,30 @@ module.exports = {
     run: async (client, message, args, user, text, prefix) => {
     try{
       if(!message.member.hasPermission("MANAGE_MESSAGES")){
-        return message.channel.send(new MessageEmbed()
+        return message.channel.send({embeds: [new MessageEmbed()
             .setColor(config.embedColor)
             .setTitle(`❌ ERROR | You don't have permission for that.`)
-            .setDescription(`Usage: \`${prefix}${this.usage}\``)
+            .setDescription(`Usage: \`${prefix}${this.usage}\``)]}
       );
       }
       if(!args[0])
-        return message.channel.send(new MessageEmbed()
+        return message.channel.send({embeds: [new MessageEmbed()
             .setColor(config.embedColor)
             .setTitle(`❌ ERROR | You didn't provide a Title, nor a Description`)
-            .setDescription(`Usage: \`${prefix}${this.usage}\``)
+            .setDescription(`Usage: \`${prefix}${this.usage}\``)]}
         );
         message.delete();
       let userargs = args.join(" ").split("++");
       let title = userargs[0];
       let desc = userargs.slice(1).join(" ")
-      message.channel.send(new MessageEmbed()
+      message.channel.send({embeds: [new MessageEmbed()
         .setColor(config.embedColor)
         .setTitle(title ? title : "")
-        .setDescription(desc ? desc : "")
+        .setDescription(desc ? desc : "")]}
       )
     } catch (e) {
         console.log(e.stack);
-        return message.channel.send(":x: There was an error. Please make sure you're using the proper arguments and try again.");
+        return message.channel.send({content: ":x: There was an error. Please make sure you're using the proper arguments and try again."});
     }
   }
 }

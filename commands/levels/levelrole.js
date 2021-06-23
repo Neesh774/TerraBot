@@ -9,11 +9,11 @@ module.exports = {
     run: async (client, message, args) => {
     //command
         let role = message.mentions.roles.first() || message.guild.roles.cache.get(args[0]);
-        if (!role) return message.channel.send(`:x: | **Role Not Found**`);
+        if (!role) return message.channel.send({content: `:x: | **Role Not Found**`});
 
         let levelNum = args[1];
         if(!levelNum || levelNum < 0){
-            return message.channel.send(":X | **Couldn't set that level");
+            return message.channel.send({content: ":X | **Couldn't set that level"});
         }
 
         const lr = new lSchema({
@@ -21,6 +21,6 @@ module.exports = {
             level: levelNum
         });
         lr.save();
-        return message.channel.send(`Successfully set to give users the role ${role.name} when they get to level ${levelNum}`);
+        return message.channel.send({content: `Successfully set to give users the role ${role.name} when they get to level ${levelNum}`});
     }
 };

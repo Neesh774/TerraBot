@@ -23,6 +23,6 @@ let serverembed = new Discord.MessageEmbed()
 .setThumbnail(message.guild.iconURL({dynamic: true}))
 .setTimestamp()
 .setFooter(message.author.username, message.author.avatarURL);
-message.channel.send(serverembed);
+message.channel.send({embeds: [serverembed]});
 }
 };

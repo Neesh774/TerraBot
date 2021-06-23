@@ -21,7 +21,7 @@ module.exports = {
         }
         catch(e){
             console.log(e.stack);
-            return message.channel.send(":x: There was an error. Please make sure you're using the proper arguments and try again.");
+            return message.channel.send({content: ":x: There was an error. Please make sure you're using the proper arguments and try again."});
         }
     }
 };

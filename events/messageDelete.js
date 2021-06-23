@@ -21,6 +21,6 @@ module.exports = {
         .setThumbnail(message.author.displayAvatarURL({dynamic: true}))
         .setImage(imageDelete)
         .setTimestamp();
-        logs.send(embedMessageDelete);
+        logs.send({embeds: [embedMessageDelete]});
     }
 }

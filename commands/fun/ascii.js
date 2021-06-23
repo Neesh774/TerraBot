@@ -1,5 +1,4 @@
 var figlet = require('figlet');
-const utils = require('../../utils');
 const config = require("../../config.json");
 
 module.exports = {
@@ -11,9 +10,9 @@ module.exports = {
     //command
     var maxLen = 100;
 
-    if(args.join(' ').length > maxLen) return message.channel.send(`The max length is ${maxLen}!`) 
+    if(args.join(' ').length > maxLen) return message.channel.send({content: `The max length is ${maxLen}!`}) 
 
-    if(!args[0]) return message.channel.send('Please enter some text.');
+    if(!args[0]) return message.channel.send({content: 'Please enter some text.'});
 
     figlet(`${args.join(' ')}`, function(err, data) {
         if (err) {
@@ -21,7 +20,7 @@ module.exports = {
             return;
         }
 
-        message.channel.send(`${data}`, {code: 'AsciiArt'});
+        message.channel.send({content: `${data}`});
     });
   }
 };

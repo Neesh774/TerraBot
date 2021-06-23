@@ -34,6 +34,6 @@ module.exports = {
             .setColor(config.embedColor)
             .setTitle("Birthday set successfully")
             .setDescription(`I set your birthday to ${new Date(datestring).toString().slice(4, 10)}`);
-        return message.channel.send(embed);
+        return message.channel.send({embeds: [embed]});
     }
 };

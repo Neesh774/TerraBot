@@ -17,7 +17,7 @@
     
     var playing = ("[ " + user.presence.activities + " ]")
     
-    const whothefuq = new Discord.MessageEmbed()
+    const person = new Discord.MessageEmbed()
           .setTitle("User Info:")
           .addField("Full Username", `${user.tag}`)
           .addField("ID", user.id)
@@ -27,7 +27,7 @@
           .setColor(config.embedColor)
           .setTimestamp()
           .setThumbnail(user.avatarURL())  
-      message.channel.send(whothefuq)
+      message.channel.send({embeds: [person]})
 
     };
     }

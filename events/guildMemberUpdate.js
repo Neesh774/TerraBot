@@ -85,7 +85,7 @@ module.exports = {
                 .setImage("attachment://boost-image.png")
                 .attachFiles(attachment);
             const welcome = PS.channels.cache.get(config.welcome);
-            welcome.send(welcomeembed);
+            welcome.send({embeds: [welcomeembed]});
             updated = true;
             embed = new Discord.MessageEmbed()
                 .setColor(config.embedColor)
@@ -94,6 +94,6 @@ module.exports = {
                 .setThumbnail(member.user.avatarURL());
         }
 
-        if(updated) logs.send(embed);
+        if(updated) logs.send({embeds: [embed]});
     }
 }

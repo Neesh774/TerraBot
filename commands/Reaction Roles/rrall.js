@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const { ReactionRole } = require("reaction-role");
 const config = require("../../config.json");
 const emojis = require("../../emojis.js")
 const rrSchema = require('../../models/rrschema.js');
@@ -21,6 +20,6 @@ module.exports = {
             .setColor(config.embedColor)
             .setTitle("Reaction Roles for " + message.guild.name)
             .addFields(fields);
-        return message.channel.send(embed);
+        return message.channel.send({embeds: [embed]});
     }
 }; 

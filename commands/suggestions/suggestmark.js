@@ -42,7 +42,7 @@ module.exports = {
         .addField("Status", `${suggest.status}`)
         .addField("Reason", `${suggest.reason}`)
         .setAuthor(suggest.createdBy, suggest.createdByIcon);
-    message.channel.send(embed);
+    message.channel.send({embeds: [embed]});
     const PS = await client.guilds.fetch(config.PS); 
     const suggestChannel = await PS.channels.cache.get(config.suggestions);
 

@@ -1,4 +1,3 @@
-const utils = require('../../utils');
 const config = require("../../config.json");
 const { MessageEmbed } = require('discord.js');
 
@@ -16,6 +15,6 @@ module.exports = {
 			.setColor(config.embedColor)
 			.setDescription(rand[ranInt])
 			.setThumbnail("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/8_ball_icon.svg/1024px-8_ball_icon.svg.png");
-		return message.channel.send(embed);
+		return message.channel.send({embeds: [embed]});
 	}
 };

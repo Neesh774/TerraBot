@@ -16,7 +16,7 @@ module.exports = {
         }
         let channelID = args[0].substring(2, 20);
         let channel = message.mentions.channels.first() || await message.guild.channels.cache.get(channelID);
-        if (!channel) return message.channel.send(`:x: | **Channel Not Found**`);
+        if (!channel) return message.channel.send({content: `:x: | **Channel Not Found**`});
         let mc = await mcSchema.findOne({channel: channelID});
         if(!mc){
             mc = new mcSchema({

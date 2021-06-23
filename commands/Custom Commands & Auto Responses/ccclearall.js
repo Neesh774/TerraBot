@@ -18,7 +18,7 @@ module.exports = {
             .setTitle("Commands were cleared")
             .setTimestamp()
             .setDescription("Commands were cleared by user " + message.author.tag);
-        logs.send(embed);
+        logs.send({embeds: [embed]});
         return message.reply("Successfully cleared the commands list!");
         
     }

@@ -13,7 +13,7 @@ module.exports = {
         let user = message.author;
         if(args[0]){
             user = message.mentions.members.first().user || message.guild.members.cache.fetch(args[0]);
-            if (!user) return message.channel.send(`:x: | **User Not Found**`);
+            if (!user) return message.channel.send({content: `:x: | **User Not Found**`});
             member = await mSchema.findOne({userID: user.id});
         }
         const list = await mSchema.find();
@@ -43,7 +43,7 @@ module.exports = {
     rank.build()
         .then(data => {
             const attachment = new Discord.MessageAttachment(data, "RankCard.png");
-            message.channel.send(attachment);
+            message.channel.send({files: [attachment]});
         });
     }
 };

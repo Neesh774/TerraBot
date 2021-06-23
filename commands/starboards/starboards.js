@@ -51,6 +51,6 @@ module.exports = {
       .setTitle(`Starboards [${page}/${numPages}]`)
       .addFields(fields)
       .setAuthor("TerraBot Starboard Leaderboard", PS.iconURL());
-    return message.channel.send(embed);
+    return message.channel.send({embeds: [embed]});
   }
 };

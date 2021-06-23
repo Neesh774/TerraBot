@@ -13,7 +13,7 @@ module.exports = {
     let user = message.author;
     if(args[0]){
         user = message.mentions.members.first().user || message.guild.members.cache.fetch(args[0]);
-        if (!user) return message.channel.send(`:x: | **User Not Found**`);
+        if (!user) return message.channel.send({content: `:x: | **User Not Found**`});
         member = await mSchema.findOne({userID: user.id});
     }
     let embed = new Discord.MessageEmbed() 
@@ -31,6 +31,6 @@ module.exports = {
         }
         embed.addFields(fields);
     }
-    return message.channel.send(embed);
+    return message.channel.send({embeds: [embed]});
   }
 };

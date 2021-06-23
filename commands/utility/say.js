@@ -14,7 +14,7 @@ module.exports = {
             return message.reply("You need to give me something to say!");
         }
         message.delete().then(msg =>{
-            return msg.channel.send(args.join(" "));
+            return msg.channel.send({content: args.join(" ")});
         })
     }
 };

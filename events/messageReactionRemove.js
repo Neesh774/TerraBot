@@ -11,7 +11,7 @@ module.exports = {
             const member = message.guild.members.cache.get(user.id);
             if(member.roles.cache.has(schema.roleID)){
                 member.roles.remove(schema.roleID);
-                member.send(`Removed your ${message.guild.roles.cache.get(schema.roleID).name} role in ${message.guild.name}!`);
+                member.send({content: `Removed your ${message.guild.roles.cache.get(schema.roleID).name} role in ${message.guild.name}!`});
                 const PS = await client.guilds.fetch(config.PS); 
                 const logs = await PS.channels.cache.get(config.logs);
                 const embed = new Discord.MessageEmbed()
@@ -20,7 +20,7 @@ module.exports = {
                     .setDescription(`${user.tag} was removed from the ${message.guild.roles.cache.get(schema.roleID).name} role.`)
                     .setTimestamp()
                     .setAuthor(user.tag, user.avatarURL());
-                return logs.send(embed);
+                return logs.send({embeds: [embed]});
             }
         }
         const suggest = await sSchema.findOne({messageID: message.id});

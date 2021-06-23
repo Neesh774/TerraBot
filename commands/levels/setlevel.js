@@ -19,7 +19,7 @@ module.exports = {
             return message.reply("What level should I set them to?");
         }
         let user = message.mentions.members.first() || message.guild.members.cache.fetch(args[0]);
-        if (!user) return message.channel.send(`:x: | **User Not Found**`);
+        if (!user) return message.channel.send({content: `:x: | **User Not Found**`});
         
         let member = await mSchema.findOne({userID: user.id});
         if(args[1] < 0){

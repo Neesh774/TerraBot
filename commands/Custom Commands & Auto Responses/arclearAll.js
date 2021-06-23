@@ -18,7 +18,7 @@ module.exports = {
             .setTitle("Responders were cleared")
             .setTimestamp()
             .setDescription("Responders were cleared by user " + message.author.tag);
-        logs.send(embed);
+        logs.send({embeds: [embed]});
         return message.reply("Successfully cleared the responders list!");
         
     }

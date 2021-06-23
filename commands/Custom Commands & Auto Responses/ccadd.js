@@ -42,7 +42,7 @@ module.exports = {
             .addFields(fields);
         const PS = await client.guilds.fetch(config.PS); 
         const logs = await PS.channels.cache.get(config.logs);
-        logs.send(embed);
-        return message.channel.send(embed);
+        logs.send({embeds: [embed]});
+        return message.channel.send({embeds: [embed]});
     }
 };

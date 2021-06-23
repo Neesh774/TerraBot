@@ -60,7 +60,7 @@ module.exports = {
           .attachFiles(attachment);
         //define the welcome channel
         //send the welcome embed to there
-        channel.send(welcomeembed);
+        channel.send({embeds: [welcomeembed]});
 
         const logs = await PS.channels.cache.get(config.logs);
         const embed = new Discord.MessageEmbed()
@@ -68,6 +68,6 @@ module.exports = {
             .setTitle(`${member.user.username} has joined the server!`)
             .setThumbnail(member.user.avatarURL())
             .setTimestamp();
-        return logs.send(embed);
+        return logs.send({embeds: [embed]});
     }
 }

@@ -1,4 +1,3 @@
-const utils = require('../../utils');
 const config = require("../../config.json");
 const { MessageEmbed } = require('discord.js');
 
@@ -20,6 +19,6 @@ module.exports = {
             .setColor(config.embedColor)
             .setDescription(`You got a ${string}!`)
             .setThumbnail("https://cdn.onlinewebfonts.com/svg/img_441781.png");
-        return message.channel.send(embed);
+        return message.channel.send({embeds: [embed]});
     }
 };

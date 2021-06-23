@@ -10,7 +10,7 @@ module.exports = {
     const channel = message.member.voice.channel;
     if (!channel)
       return message.channel.send(
-        "You must Join a voice channel before using this command!"
+       {content: "You must Join a voice channel before using this command!"}
       );
 
     if (!channel.permissionsFor(message.client.user).has("CONNECT"))

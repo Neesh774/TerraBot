@@ -15,7 +15,7 @@ module.exports = {
             const member = message.guild.members.cache.get(user.id);
             if(!member.roles.cache.has(schema.roleID)){
                 member.roles.add(schema.roleID);
-                member.send(`Gave you the ${message.guild.roles.cache.get(schema.roleID).name} role in ${message.guild.name}!`);
+                member.send({content: `Gave you the ${message.guild.roles.cache.get(schema.roleID).name} role in ${message.guild.name}!`});
                 const logs = await PS.channels.cache.get(config.logs);
                 const embed = new Discord.MessageEmbed()
                     .setColor(config.embedColor)
@@ -23,7 +23,7 @@ module.exports = {
                     .setDescription(`${user.tag} was given the ${message.guild.roles.cache.get(schema.roleID).name} role.`)
                     .setTimestamp()
                     .setAuthor(user.tag, user.avatarURL());
-                return logs.send(embed);
+                return logs.send({embeds: [embed]});
             }
         }
         if(message.reactions.cache.size == 5 && message.reactions.cache.every(reaction => reaction.emoji.id == config.starboardEmote)){
@@ -57,7 +57,7 @@ module.exports = {
             if (parsedLinks) emb.addField('Links', parsedLinks.join('\n'), true);
             emb.addField('Source', `[Jump!](https://discordapp.com/channels/${message.guild.id}/${message.channel.id}/${message.id})`);
             if (attachments || (parsedLinks && parsedLinks.length > 0)) emb.setImage(attachments ? attachments.url : parsedLinks.length > 0 ? parsedLinks[0] : '');
-            return starboardChannel.send(emb);
+            return starboardChannel.send({embeds: [emb]});
         }
         const suggest = await sSchema.findOne({messageID: message.id})
         if(suggest && !user.bot){

@@ -31,6 +31,6 @@ module.exports = {
             .setTitle("Command Deleted")
             .setTimestamp()
             .setDescription(`Command with trigger ${command.trigger} was cleared by user ` + message.author.tag);
-        return logs.send(embed);
+        return logs.send({embeds: [embed]});
     }
 };

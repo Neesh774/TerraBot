@@ -18,6 +18,6 @@ module.exports = {
         let embed = new Discord.MessageEmbed()
             .setColor(config.embedColor)
             .setDescription(`Your birthday is set to ${formattedDate}`);
-        return message.channel.send(embed);
+        return message.channel.send({embeds: [embed]});
     }
 };

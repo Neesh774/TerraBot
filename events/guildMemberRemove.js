@@ -13,6 +13,6 @@ module.exports = {
             .setTitle(`${member.user.username} has left the server`)
             .setThumbnail(member.user.avatarURL())
             .setTimestamp();
-        return logs.send(embed);
+        return logs.send({embeds: [embed]});
     }
 }

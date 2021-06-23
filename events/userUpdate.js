@@ -37,7 +37,7 @@ module.exports = {
             updated = true;
         } 
         if(updated){
-            return logs.send(embed);
+            return logs.send({embeds: [embed]});
         }
     }
 }

@@ -19,6 +19,6 @@ module.exports = {
         .setColor(config.embedColor)
         .setTitle("Suggestions for " + message.guild.name)
         .addFields(fields);
-    return message.channel.send(embed);
+    return message.channel.send({embeds: [embed]});
     }
 };

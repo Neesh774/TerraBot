@@ -20,6 +20,6 @@ module.exports = {
             .setColor(config.embedColor)
             .setTitle("XP Muted Channels")
             .addFields(fields);
-        return message.channel.send(embed);
+        return message.channel.send({embeds: [embed]});
     }
 };

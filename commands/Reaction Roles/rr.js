@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const { ReactionRole } = require("reaction-role");
 const config = require("../../config.json");
 const emojis = require("../../emojis.js")
 const rrSchema = require('../../models/rrschema.js');
@@ -11,13 +10,13 @@ module.exports = {
     run: async(client, message, args) => {
 
         //command
-        if (!args[0]) return message.channel.send(`:x: | **Specify The ChannelID or mention The Channel**`);
-        if (!args[1]) return message.channel.send(`:x: | **Specify The messageID**`);
-        if (!args[2]) return message.channel.send(`:x: | **Specify The roleID or mention The Role**`);
-        if (!args[3]) return message.channel.send(`:x: | **Specify The emoji**`);
+        if (!args[0]) return message.channel.send({content: `:x: | **Specify The ChannelID or mention The Channel**`});
+        if (!args[1]) return message.channel.send({content: `:x: | **Specify The messageID**`});
+        if (!args[2]) return message.channel.send({content: `:x: | **Specify The roleID or mention The Role**`});
+        if (!args[3]) return message.channel.send({content: `:x: | **Specify The emoji**`});
         try{
             let channel = message.mentions.channels.first() || await message.guild.channels.cache.get(args[0]);
-            if (!channel) return message.channel.send(`:x: | **Channel Not Found**`);
+            if (!channel) return message.channel.send({content: `:x: | **Channel Not Found**`});
             let channelid = channel.id;
 
             let msg = await channel.messages.fetch(args[1]);
@@ -25,14 +24,14 @@ module.exports = {
             let mes = msg.id;
 
             let role = message.mentions.roles.first() || message.guild.roles.cache.get(args[2]);
-            if (!role) return message.channel.send(`:x: | **Role Not Found**`);
+            if (!role) return message.channel.send({content: `:x: | **Role Not Found**`});
             role = role.id;
 
             let emoji = await Discord.Util.parseEmoji(args[3]);
-            if (!emoji && !emojis.includes(args[3])) return message.channel.send(":x: | **Specify a valid emoji**");
+            if (!emoji && !emojis.includes(args[3])) return message.channel.send({content: ":x: | **Specify a valid emoji**"});
             if (emoji && !emojis.includes(args[3])) {
                 let checking = await client.emojis.cache.find(x => x.id === emoji.id);
-                if (!checking) return message.channel.send(`:x: | **Invalid Emoji**`);
+                if (!checking) return message.channel.send({content: `:x: | **Invalid Emoji**`});
             };
             const numRRs = await rrSchema.countDocuments({}) + 1;
             const rr = new rrSchema({
@@ -48,11 +47,11 @@ module.exports = {
                 .setTitle("Success!")
                 .setDescription("Reaction role spawned successfully")
                 .setColor(config.embedColor);
-            return message.channel.send(embed);
+            return message.channel.send({embeds: [embed]});
         }
         catch (e){
             console.log(e.stack);
-            return message.channel.send(":x: There was an error. Please make sure you're using the proper arguments and try again.");
+            return message.channel.send({content: ":x: There was an error. Please make sure you're using the proper arguments and try again."});
         }
     }
 }; 

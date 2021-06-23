@@ -1,5 +1,5 @@
 //Modules
-const { Client, Collection } = require("discord.js");
+const { Client, Collection, Intents } = require("discord.js");
 const functions = require("./functions.js");
 const config = require("./config.json");
 const fs = require("fs");
@@ -7,7 +7,8 @@ const mongoose = require('mongoose');
 const badwords = require('./nonowords.json');
 const client = new Client({
 //Stops the bot from mentioning @everyone
-disableEveryone: true
+    allowedMentions: {parse: ['users', 'roles'], repliedUser: true},
+    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES]
 });
 
 //Command Handler
@@ -50,7 +51,7 @@ client.on("message", async message => {
         if(message.content.toLowerCase().includes(badwords.badwords[i].toLowerCase())){
             message.delete().then(msg =>{
                 functions.warn(message.member, message.guild, message.channel, "no no word", client);
-                msg.channel.send("SMH MY HEAD NO NO WORD");
+                msg.channel.send({content: "SMH MY HEAD NO NO WORD"});
             })
         }
     }

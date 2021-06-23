@@ -1,6 +1,5 @@
 const { MessageEmbed } = require("discord.js");
 const { stripIndents } = require("common-tags");
-const utils = require('../../utils');
 const config = require("../../config.json");
 
 

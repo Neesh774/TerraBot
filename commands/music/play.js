@@ -13,7 +13,7 @@ module.exports= {
   run: async (client, message, args) => {
   const channel = message.member.voice.channel;
 
-  const error = (err) => message.channel.send(":x: There was an error. Please make sure you're using the proper arguments and try again.");;
+  const error = (err) => message.channel.send({content: err});;
   const send = (content) => message.channel.send(content);
   const setqueue = (id, obj) => message.client.queue.set(id, obj);
   const deletequeue = (id) => message.client.queue.delete(id);

@@ -18,6 +18,6 @@ module.exports = {
             .setFooter(`${post.upvotes} 👍 | Created by ${post.author} | From /r/${sub}`)
             .setURL(post.url);
 
-        message.channel.send(embed);
+        message.channel.send({embeds: [embed]});
     }
 }

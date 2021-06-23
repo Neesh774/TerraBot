@@ -44,13 +44,13 @@ module.exports = {
           .attachFiles(attachment);
         //define the welcome channel
         //send the welcome embed to there
-        message.channel.send(welcomeembed);
+        message.channel.send({embeds: [welcomeembed]});
         // embed = new Discord.MessageEmbed()
         //         .setColor(config.embedColor)
         //         .setTimestamp()
         //         .setDescription(`${member.user.username} boosted the server! We now have ${PS.premiumSubscriptionCount} boosts, and are on tier ${PS.premiumTier}.`)
         //         .setThumbnail(member.user.avatarURL());
         // const logs = PS.channels.cache.get(config.logs);
-        // logs.send(embed);
+        // logs.send({embeds: [embed]});
     }
 };

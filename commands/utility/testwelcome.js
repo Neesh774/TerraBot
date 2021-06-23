@@ -48,6 +48,6 @@ module.exports = {
           .attachFiles(attachment);
         //define the welcome channel
         //send the welcome embed to there
-        return message.channel.send(welcomeembed);
+        return message.channel.send({embeds: [welcomeembed]});
     }
 };

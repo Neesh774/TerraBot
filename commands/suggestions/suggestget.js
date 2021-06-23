@@ -25,7 +25,7 @@ module.exports = {
         .addField(`Votes`, `👍 ${suggest.upvotes}, 👎 ${suggest.downvotes}`)
         .setFooter(suggest.createdAt)
         .setAuthor(suggest.createdBy, suggest.createdByIcon);
-    return message.channel.send(embed);
+    return message.channel.send({embeds: [embed]});
     
     }
 };

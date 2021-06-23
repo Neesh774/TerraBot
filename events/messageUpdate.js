@@ -20,6 +20,6 @@ module.exports = {
             .addField("Old", `${oldMessage.content}`)
             .addField("New", `${newMessage.content}`)
             .setThumbnail(newMessage.author.displayAvatarURL({ dynamic: true }))
-        logs.send(embedMessageUpdate);
+        logs.send({embeds: [embedMessageUpdate]});
     }
 }
