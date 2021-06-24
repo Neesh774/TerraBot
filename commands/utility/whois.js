@@ -25,7 +25,7 @@
     
     var playing = ("[ " + user.presence.activities + " ]")
     
-    const person = new Discord.MessageEmbed()
+			const person = new Discord.MessageEmbed()
           .setTitle("User Info:")
           .addField("Full Username", `${user.tag}`)
           .addField("ID", user.id)
