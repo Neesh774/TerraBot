@@ -20,7 +20,7 @@ module.exports = {
             return;
         }
 
-        message.channel.send({content: `${data}`});
+        message.channel.send({content: `\`\`\`${data}\`\`\``});
     });
   }
 };

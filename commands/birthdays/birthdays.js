@@ -7,7 +7,13 @@ module.exports = {
     name: "birthdays",
     category: "birthdays",
     description: "TerraBot tells you how old everyone is :)",
-    usage: `${config.prefix}birthdays`,
+    usage: `${config.prefix}birthdays [page]`,
+    options: [{
+      name: 'page',
+      type: 'INTEGER',
+      description: 'The page of birthdays you want to see',
+      required: false,
+    }],
     run: async (client, message, args) => {
     //command
     let list = await bSchema.find({});

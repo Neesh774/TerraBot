@@ -2,7 +2,6 @@ const { MessageEmbed } = require("discord.js");
 const { stripIndents } = require("common-tags");
 const config = require("../../config.json");
 
-
 module.exports = {
     name: "help",
     aliases: ["h"],
@@ -45,11 +44,11 @@ function getAll(client, message) {
         .map(cat => stripIndents`**${cat[0].toUpperCase() + cat.slice(1)}** \n${commands(cat)}`)
         .reduce((string, category) => string + "\n" + category);
 
-        message.reply('Sent help to dms')
+        message.reply({content: 'Sent help to dms', reply: {messageReference: message.id}})
 
         
 
-    return message.author.send(embed.setDescription(info));
+    return message.author.send({embeds: [embed.setDescription(info)]});
     
 }
 

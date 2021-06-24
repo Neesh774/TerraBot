@@ -8,6 +8,18 @@ module.exports = {
     category: "birthdays",
     description: "TerraBot sets your birthday!",
     usage: `${config.prefix}setbday <mm> <dd>`,
+    options: [{
+        name: 'month',
+        type: 'INTEGER',
+        description: 'The month of your birthday, must be between 0 and 12.',
+        required: true,
+    },
+    {
+        name: 'day',
+        type: 'INTEGER',
+        description: 'The day of your birthday, must be between 0 and 31.',
+        required: true,
+    }],
     run: async (client, message, args) => {
     //command
     

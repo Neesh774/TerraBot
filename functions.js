@@ -172,10 +172,10 @@ module.exports = {
 
         let response = `Okily dokily ${message.user.username}, I'll remind you in ${time}`;
         if(content) response += `to ${content}`;    
-        message.reply(response);
+        message.reply({content: response});
 
         // Create reminder time out
-        setTimeout(() => {message.reply("Reminder to " + content)}, ms(time));
+        setTimeout(() => {message.reply({content: "Reminder to " + content})}, ms(time));
     },
     setCoolDown: async function(profile){
         profile.coolDown = false;
