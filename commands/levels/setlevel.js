@@ -7,6 +7,20 @@ module.exports = {
     category: "levels",
     description: "TerraBot will change the level a user is at",
     usage: `${config.prefix}setlevel <user> <level>`,
+    options: [
+        {
+            name: 'user',
+            type: 'USER',
+            description: 'The user you want to change the level of',
+            required: true,
+        },
+        {
+            name: 'level',
+            type: 'INTEGER',
+            description: 'The level that you want to set the user to',
+            required: true,
+        },
+    ],
     run: async (client, message, args) => {
         //command
         if(!message.member.hasPermission("MANAGE_MESSAGES")){

@@ -6,6 +6,20 @@ module.exports = {
     category: "levels",
     description: "TerraBot will automatically give users a role when they get to a certain level",
     usage: `${config.prefix}levelrole <roleID> <level>`,
+    options: [
+        {
+            name: 'role',
+            type: 'ROLE',
+            description: 'The role you want users to get',
+            required: true,
+        },
+        {
+            name: 'level',
+            type: 'INTEGER',
+            description: 'The level you want users to be at for this role.',
+            required: true,
+        },
+    ],
     run: async (client, message, args) => {
     //command
         let role = message.mentions.roles.first() || message.guild.roles.cache.get(args[0]);

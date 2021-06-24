@@ -6,6 +6,20 @@ module.exports = {
     category: "moderation",
     description: "bans a mentioned user",
     usage: `${config.prefix}ban <user> [reason]`,
+    options: [
+        {
+            name: 'user',
+            type: 'USER',
+            description: 'The user to be banned',
+            required: true,
+        },
+        {
+            name: 'reason',
+            type: 'STRING',
+            description: 'The reason to ban them',
+            required: false,
+        },
+    ],
     run: async (client, message, args) => {
         const PS = await client.guilds.fetch(config.PS); 
         const logs = await PS.channels.cache.get(config.logs);

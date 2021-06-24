@@ -8,6 +8,20 @@ module.exports = {
     usage: `${config.prefix}embed <TITLE> ++ <DESCRIPTION>`,
     description: "Resends a message from you as an Embed",
     memberpermissions: "MANAGE_MESSAGES",
+    options: [
+      {
+        name: 'title',
+        type: 'STRING',
+        description: 'The title of your embed',
+        required: true,
+      },
+        {
+          name: 'description',
+          type: 'STRING',
+          description: 'The description of your embed',
+          required: true,
+        },
+    ],
     run: async (client, message, args, user, text, prefix) => {
     try{
       if(!message.member.hasPermission("MANAGE_MESSAGES")){

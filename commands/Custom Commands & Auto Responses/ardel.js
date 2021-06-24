@@ -6,6 +6,14 @@ module.exports = {
     category: "Custom Commands and Auto Reponses",
     description: "Delete a certain auto responder",
     usage: `${config.prefix}ardel <responder ID>`,
+    options: [
+        {
+            name: 'responderid',
+            type: 'INTEGER',
+            description: 'Deletes an auto responder by its id',
+            required: true,
+        },
+    ],
     run: async (client, message, args) => {
     //responder
     const numResponders = await arSchema.countDocuments({});

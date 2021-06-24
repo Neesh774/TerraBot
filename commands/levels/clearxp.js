@@ -6,6 +6,7 @@ module.exports = {
     category: "levels",
     description: "TerraBot will clear all of the xp",
     usage: `${config.prefix}clearxp`,
+    options: [],
     run: async (client, message, args) => {
     //command
         if(!message.member.hasPermission("MANAGE_MESSAGES")){

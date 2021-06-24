@@ -6,6 +6,44 @@ module.exports = {
     category: "Custom Commands and Auto Reponses",
     description: "Creates a new custom command",
     usage: `${config.prefix}ccadd <trigger> <response URL> [another response URL] [another response URL]...`,
+    options: [
+        {
+            name: 'trigger',
+            type: 'INTEGER',
+            description: 'The phrase that will trigger the custom command',
+            required: true,
+        },
+        {
+            name: 'response1',
+            type: 'STRING',
+            description: 'The url, or phrase, that will be sent when someone uses this command',
+            required: true,
+        },
+        {
+            name: 'response2',
+            type: 'STRING',
+            description: 'The url, or phrase, that will be sent when someone uses this command',
+            required: false,
+        },
+        {
+            name: 'response3',
+            type: 'STRING',
+            description: 'The url, or phrase, that will be sent when someone uses this command',
+            required: false,
+        },
+        {
+            name: 'response4',
+            type: 'STRING',
+            description: 'The url, or phrase, that will be sent when someone uses this command',
+            required: false,
+        },
+        {
+            name: 'response5',
+            type: 'STRING',
+            description: 'The url, or phrase, that will be sent when someone uses this command',
+            required: false,
+        },
+    ],
     run: async (client, message, args) => {
     //command
         const numCommands = await ccSchema.countDocuments({});

@@ -6,6 +6,14 @@ module.exports = {
     category: "levels",
     description: "TerraBot will stop ignoring this channel when counting xp",
     usage: `${config.prefix}unmutexp <channel>`,
+    options: [
+        {
+            name: 'channel',
+            type: 'CHANNEL',
+            description: 'The channel you want to unmute',
+            required: true,
+        },
+    ],
     run: async (client, message, args) => {
     //command
         if(!message.member.hasPermission("MANAGE_MESSAGES")){

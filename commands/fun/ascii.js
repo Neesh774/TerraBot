@@ -6,6 +6,14 @@ module.exports = {
   category: "fun",
   description: "Converts text info ASCII",
   usage: `${config.prefix}ascii <text>`,
+  options: [
+    {
+      name: 'text',
+      type: 'STRING',
+      description: 'The text you want to ascii-ify.',
+      required: true,
+  },
+  ],
   run: async (client, message, args) => {
     //command
     var maxLen = 100;

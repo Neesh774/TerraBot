@@ -18,7 +18,7 @@ client.queue = new Map();
 client.coolDowns = new Set();
 //Command Folder location
 client.categories = fs.readdirSync("./commands/");
-["command"].forEach(handler => {
+['command'].forEach(handler => {
     require(`./handlers/${handler}`)(client);
 });
 

@@ -176,7 +176,7 @@ module.exports = {
 
         // Create reminder time out
         setTimeout(() => {message.reply({content: "Reminder to " + content})}, ms(time));
-    },
+	},
     setCoolDown: async function(profile){
         profile.coolDown = false;
         await profile.save();

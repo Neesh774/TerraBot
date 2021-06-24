@@ -6,6 +6,14 @@ module.exports = {
     category: "suggestions",
     description: "Suggest something in the suggestions channel!",
     usage: `${config.prefix}suggest <suggestion>`,
+    options: [
+        {
+            name: 'suggestion',
+            type: 'STRING',
+            description: 'The text you want to suggest',
+            required: true
+        },
+    ],
     run: async (client, message, args) => {
     //command
     const numSuggest = await sSchema.countDocuments({});

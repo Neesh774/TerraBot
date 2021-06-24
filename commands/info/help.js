@@ -8,6 +8,14 @@ module.exports = {
     category: "info",
     description: "Returns all commands, or one specific command info",
     usage: `${config.prefix}help [command]`,
+    options: [
+        {
+            name: 'command',
+            type: 'STRING',
+            description: 'The command you want help with',
+            required: false,
+        },
+    ],
     run: async (client, message, args) => {
         // If there's an args found
         // Send the info of that command found

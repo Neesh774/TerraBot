@@ -7,6 +7,20 @@ module.exports = {
    description: 'Set a reminder',
    args: true,
    usage: `${config.prefix}remindme <time> <reminder>`,
+   options: [
+      {
+         name: 'time',
+         type: 'STRING',
+         description: 'The time in which TerraBot will remind you',
+         required: true,
+      },
+      {
+         name: 'reminder',
+         type: 'STRING',
+         description: 'The actual reminder',
+         required: true,
+      },
+   ],
    run: async (client, message, args) => {
       if(!args[0]){
          return message.reply("When should I remind you?");

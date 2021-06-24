@@ -69,5 +69,5 @@ module.exports = {
             .setThumbnail(member.user.avatarURL())
             .setTimestamp();
         return logs.send({embeds: [embed]});
-    }
+	}
 }

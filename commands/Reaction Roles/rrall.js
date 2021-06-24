@@ -7,6 +7,7 @@ module.exports = {
     category: "Reaction Roles",
     description: "Displays all current reaction roles",
     usage: `${config.prefix}rrall`,
+    options: [],
     run: async(client, message, args) => {
         const numRRs = await rrSchema.countDocuments();
         let fields = [];

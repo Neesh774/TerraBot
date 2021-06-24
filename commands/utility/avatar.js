@@ -6,6 +6,14 @@ module.exports = {
     category: "utility",
     description: "Gets the avatar of a user or yourself",
     usage: `${config.prefix}avatar [user]`,
+    options: [
+        {
+            name: 'user',
+            type: 'USER',
+            description: 'The user you want the avatar of',
+            required: false,
+        },
+    ],
     run: async(client, message, args) => {
 
         //command

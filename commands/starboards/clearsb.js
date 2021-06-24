@@ -7,6 +7,27 @@ module.exports = {
   category: "Starboards",
   description: "Clears all of the starboards, or deletes a specific one.",
   usage: `${config.prefix}clearsb [original message id] [original message channel id]`,
+  options: [
+    {
+      name: 'specific',
+      type: 'SUB_COMMAND',
+      description: 'Delete a specific starboard',
+      options: [
+        {
+          name: 'channel',
+          type: 'CHANNEL',
+          description: 'The channel the starboard is in',
+          required: true,
+        },
+        {
+          name: 'message_id',
+          type: 'INTEGER',
+          description: 'The ID of the starboard message',
+          required: true,
+      },
+      ]
+  },
+  ],
   run: async (client, message, args) => {
     if(args[0]){
         if(!message.member.hasPermission("MANAGE_MESSAGES")){

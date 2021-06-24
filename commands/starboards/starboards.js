@@ -7,6 +7,14 @@ module.exports = {
   category: "Starboards",
   description: "Gives you a list of all the server's starboards",
   usage: `${config.prefix}starboards [page]`,
+  options: [
+    {
+      name: 'page',
+      type: 'INTEGER',
+      description: 'The page of the starboards to check',
+      required: false,
+  },
+  ],
   run: async (client, message, args) => {
   //command
     const sbs = await sbSchema.find();

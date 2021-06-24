@@ -9,11 +9,22 @@ module.exports = {
     run: async (client, message, args) => {
         const data = [];
         client.commands.forEach(cmd => {
-            data.push(
-                {
-                    name: cmd.name, 
-                    description: cmd.description
-                })})
+            if(cmd.options){
+                data.push(
+                    {
+                        name: cmd.name, 
+                        description: cmd.description,
+                        options: cmd.options
+                    })
+            }
+            else{
+                data.push(
+                    {
+                        name: cmd.name, 
+                        description: cmd.description
+                    })
+            }
+            })
 		const command = await client.guilds.cache.get(config.PS).commands.set(data);
     }
 }

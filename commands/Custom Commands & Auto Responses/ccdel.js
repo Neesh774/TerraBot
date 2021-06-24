@@ -5,7 +5,15 @@ module.exports = {
     name: "ccdel",
     category: "Custom Commands and Auto Reponses",
     description: "Delete a certain custom command",
-    usage: `${config.prefix}ccdel [command ID]`,
+    usage: `${config.prefix}ccdel <command ID>`,
+    options: [
+        {
+            name: 'command_id',
+            type: 'INTEGER',
+            description: 'The ID of the command you want to delete',
+            required: true,
+        },
+    ],
     run: async (client, message, args) => {
     //command
     const numCommands = await ccSchema.countDocuments({});

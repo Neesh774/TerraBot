@@ -7,6 +7,32 @@ module.exports = {
     category: "Reaction Roles",
     description: "Creates a reaction role on the given message with the given emote",
     usage: `${config.prefix}rr <Channel ID> <Message ID> <Role ID> <Reaction Emote>`,
+    options: [
+        {
+            name: 'channel',
+            type: 'CHANNEL',
+            description: 'The channel you want to make the reaction role in',
+            required: true,
+        },
+        {
+            name: 'message_id',
+            type: 'INTEGER',
+            description: 'The ID of the message you want to set this reaction role on',
+            required: true,
+        },
+        {
+            name: 'role',
+            type: 'ROLE',
+            description: 'The role you want to give users on this reaction role',
+            required: true,
+        },
+        {
+            name: 'emoji',
+            type: 'STRING',
+            description: 'The emoji you want to have represent this reaction role',
+            required: true,
+        },
+    ],
     run: async(client, message, args) => {
 
         //command

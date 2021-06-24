@@ -5,6 +5,14 @@ module.exports = {
     category: "utility",
     description: "TerraBot will repeat you.",
     usage: `${config.prefix}say <text>`,
+    options: [
+        {
+            name: 'text',
+            type: 'STRING',
+            description: 'The text TerraBot should say',
+            required: true,
+        },
+    ],
     run: async (client, message, args) => {
     //command
         if(!message.member.hasPermission("MANAGE_MESSAGES")){

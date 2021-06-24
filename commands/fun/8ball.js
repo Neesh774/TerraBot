@@ -6,6 +6,14 @@ module.exports = {
 	category: "fun",
 	description: "returns a response based on your question",
 	usage: `${config.prefix}8ball <question>`,
+	options: [
+		{
+            name: 'question',
+            type: 'STRING',
+            description: 'The question you want to ask the 8ball',
+            required: true,
+        },
+	],
 	run: async (client, message, args) => {
 		//command
 		var rand = ['Yes', 'No', 'Why are you even trying?', 'What do you think? NO', 'Maybe', 'Never', 'Yep'];

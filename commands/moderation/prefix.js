@@ -5,6 +5,14 @@ module.exports = {
     category: "moderation",
     description: "TerraBot changes it's own prefix!",
     usage: `${config.prefix}prefix <prefix>`,
+    options: [
+        {
+            name: 'prefix',
+            type: 'STRING',
+            description: 'The new prefix',
+            required: true,
+        },
+    ],
     run: async (client, message, args) => {
     //command
         if(!message.member.hasPermission("MANAGE_MESSAGES")){

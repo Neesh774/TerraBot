@@ -6,6 +6,20 @@ module.exports = {
     category: "moderation",
     description: "TerraBot exiles the user to the land of the rats",
     usage: `${config.prefix}mute <user> [time]`,
+    options: [
+        {
+            name: 'user',
+            type: 'USER',
+            description: 'The user to mute',
+            required: true,
+        },
+        {
+            name: 'time',
+            type: 'STRING',
+            description: 'How long TerraBot should mute them',
+            required: false,
+        },
+    ],
     run: async (client, message, args) => {
     //command
         if(!message.member.hasPermission("MANAGE_MESSAGES")){

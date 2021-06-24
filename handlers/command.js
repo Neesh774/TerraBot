@@ -17,7 +17,7 @@ module.exports = (client) => {
             let pull = require(`../commands/${dir}/${file}`);
     
             if (pull.name) {
-                client.commands.set(pull.name, pull);
+				client.commands.set(pull.name, pull);
                 table.addRow(file, 'Ready');
             } else {
                 table.addRow(file, `error -> missing a help.name, or help.name is not a string.`);

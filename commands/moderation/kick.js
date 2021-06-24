@@ -5,6 +5,20 @@ module.exports = {
     category: "moderation",
     description: "kicks a mentioned user",
     usage: `${config.prefix}kick <user> [reason]`,
+    options: [
+        {
+            name: 'user',
+            type: 'USER',
+            description: 'The user to be kicked',
+            required: true,
+        },
+        {
+            name: 'reason',
+            type: 'STRING',
+            description: 'The reason to kick them',
+            required: false,
+        },
+    ],
     run: async (client, message, args) => {
         const PS = await client.guilds.fetch(config.PS); 
         const logs = await PS.channels.cache.get(config.logs);

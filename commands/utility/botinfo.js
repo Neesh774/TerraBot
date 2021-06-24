@@ -13,6 +13,7 @@ module.exports = {
     category: "utility",
   description: "Sends detailed info about the client",
   usage: `${config.prefix}botinfo`,
+  options: [],
   run: async (client, message, args) => {
   //command
   let cpuLol;

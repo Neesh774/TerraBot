@@ -6,6 +6,14 @@ module.exports = {
     category: "Custom Commands and Auto Reponses",
     description: "Lists all auto responses",
     usage: `${config.prefix}arget [command ID]`,
+    options: [
+        {
+            name: 'command_id',
+            type: 'INTEGER',
+            description: 'The ID of the command you want info about',
+            required: false,
+        },
+    ],
     run: async (client, message, args) => {
     //command
     const numResponses = await arSchema.countDocuments({});

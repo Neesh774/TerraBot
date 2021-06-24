@@ -6,6 +6,14 @@ module.exports = {
     category: "Custom Commands and Auto Reponses",
     description: "Deletes a certain suggestion",
     usage: `${config.prefix}suggestdel <suggestion ID>`,
+    options: [
+        {
+            name: 'suggestion_id',
+            type: 'INTEGER',
+            description: 'The ID of the suggestion you want to delete',
+            required: true,
+        },
+    ],
     run: async (client, message, args) => {
     //command
     const numSuggests = await sSchema.countDocuments({});

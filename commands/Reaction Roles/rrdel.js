@@ -6,6 +6,14 @@ module.exports = {
     category: "Reaction Roles",
     description: "Deletes a certain reaction role",
     usage: `${config.prefix}rrdel [reaction role ID]`,
+    options: [
+        {
+            name: 'reaction_role_id',
+            type: 'INTEGER',
+            description: 'The ID of the reaction role you want to delete',
+            required: false,
+        },
+    ],
     run: async (client, message, args) => {
         //reaction role
         const numReactionRoles = await rrSchema.countDocuments({});

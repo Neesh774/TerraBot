@@ -6,6 +6,14 @@ module.exports = {
     category: "fun",
     description: "Will roll a 6-sided die.",
     usage: `${config.prefix}roll [# sides]`,
+    options: [
+        {
+            name: 'num_sides',
+            type: 'INTEGER',
+            description: 'The number of sides you want to roll',
+            required: false,
+        },
+    ],
     run: async (client, message, args) => {
         let sides = 6;
         if(args[0]){

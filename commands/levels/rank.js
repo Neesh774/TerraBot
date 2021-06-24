@@ -8,6 +8,14 @@ module.exports = {
     category: "levels",
     description: "TerraBot tells you what level you're at",
     usage: `${config.prefix}rank [user]`,
+    options: [
+        {
+            name: 'user',
+            type: 'USER',
+            description: 'The user you want to see the rank of',
+            required: false,
+        },
+    ],
     run: async (client, message, args) => {
         let member = await mSchema.findOne({userID: message.author.id});
         let user = message.author;

@@ -95,5 +95,5 @@ module.exports = {
         }
 
         if(updated) logs.send({embeds: [embed]});
-    }
+	}
 }

@@ -8,6 +8,14 @@ module.exports = {
     category: "levels",
     description: "TerraBot tells you the range of a certain level",
     usage: `${config.prefix}getxp <level>`,
+    options: [
+        {
+            name: 'level',
+            type: 'INTEGER',
+            description: 'The level you want information about',
+            required: true,
+        },
+    ],
     run: async (client, message, args) => {
     //command
         if(!args[0]){

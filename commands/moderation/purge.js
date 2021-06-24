@@ -7,6 +7,14 @@ module.exports = {
     category: "moderation",
     description: "Deletes messages in a text channel or specified number of messages in a text channel.",
     usage: `${config.prefix}purge <number of messages>`,
+    options: [
+        {
+            name: 'num_messages',
+            type: 'INTEGER',
+            description: 'The number of messages to delete',
+            required: true,
+        },
+    ],
     run: async (client, message, args) => {
         const PS = await client.guilds.fetch(config.PS); 
         const logs = await PS.channels.cache.get(config.logs);

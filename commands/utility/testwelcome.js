@@ -10,6 +10,7 @@ module.exports = {
     aliases: ["info"],
     category: "utility",
     description: "Test welcome",
+    options: [],
     usage: `${config.prefix}testwelcome`,
     run: async (client, message, args) => {
         let member = message.member;

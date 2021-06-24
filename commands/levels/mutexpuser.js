@@ -6,6 +6,14 @@ module.exports = {
     category: "levels",
     description: "TerraBot will ignore a certain user when counting xp",
     usage: `${config.prefix}mutexpuser <user>`,
+    options: [
+        {
+            name: 'user',
+            type: 'USER',
+            description: 'The user that you want to mute',
+            required: true,
+        },
+    ],
     run: async (client, message, args) => {
         //command
         if(!message.member.hasPermission("MANAGE_MESSAGES")){

@@ -7,6 +7,14 @@
     category: "utility",
     description: "Get information about a user",
     usage: `${config.prefix}whois <user>`,
+    options: [
+        {
+            name: 'user',
+            type: 'USER',
+            description: 'The user you want info about',
+            required: true,
+        },
+    ],
     run: async (client, message, args) => {
     //command
     

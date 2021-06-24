@@ -5,6 +5,7 @@ module.exports = {
   category: "utility",
 description: "Shows info about a server",
 usage: `${config.prefix}serverinfo`,
+options: [],
 run: async (client, message, args) => {
 //command
 let servericon = message.guild.iconURL;

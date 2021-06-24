@@ -5,7 +5,15 @@ module.exports = {
     name: "ccget",
     category: "Custom Commands and Auto Reponses",
     description: "Lists all custom commands",
-    usage: `${config.prefix}ccget [command ID]`,
+    usage: `${config.prefix}ccget <command ID>`,
+    options: [
+        {
+            name: 'command_id',
+            type: 'INTEGER',
+            description: 'The ID of the command you want info about',
+            required: true,
+        },
+    ],
     run: async (client, message, args) => {
     //command
     const numCommands = await ccSchema.countDocuments({});

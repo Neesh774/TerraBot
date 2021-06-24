@@ -6,6 +6,7 @@ module.exports = {
     category: "levels",
     description: "TerraBot lists all the channels that are xp muted",
     usage: `${config.prefix}xpmuted`,
+    options: [],
     run: async (client, message, args) => {
     //command
         let numMuted = await mcSchema.countDocuments();

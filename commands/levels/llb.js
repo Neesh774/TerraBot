@@ -6,6 +6,7 @@ module.exports = {
     category: "levels",
     description: "TerraBot will get you a leaderboard of all of the levels",
     usage: `${config.prefix}llb`,
+    options: [],
     run: async (client, message, args) => {
     //command
         let list = await mSchema.find({});

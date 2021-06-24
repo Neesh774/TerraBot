@@ -5,6 +5,14 @@ module.exports = {
     category: "fun",
     description: "Will mock the text you give me",
     usage: `${config.prefix}mock <text>`,
+    options: [
+        {
+            name: 'text',
+            type: 'STRING',
+            description: 'The text you want to mock',
+            required: true,
+        },
+    ],
     run: async (client, message, args) => {
     //command
         if(!args[0]){

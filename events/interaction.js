@@ -5,7 +5,7 @@ module.exports = {
     name: 'interaction',
     async execute(interaction, client){
         if(interaction.isCommand()){
-            if (interaction.commandName === 'ping') await interaction.reply({content: 'Pong!'});
+            if (interaction.commandName === 'levelrole') console.log(interaction.options.get('role'))
         }
-    }
+	}
 }

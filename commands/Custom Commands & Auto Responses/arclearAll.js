@@ -6,6 +6,7 @@ module.exports = {
     category: "Custom Commands and Auto Reponses",
     description: "Clears all auto responders",
     usage: `${config.prefix}arclearall`,
+    options: [],
     run: async (client, message, args) => {
         if(!message.member.hasPermission("MANAGE_MESSAGES")){
             return message.reply("You don't have permissions for that :/");
