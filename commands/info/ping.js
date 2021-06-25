@@ -1,4 +1,4 @@
-const config = require("../../config.json");
+const config = require('../../config.json');
 
 module.exports = {
     name: "ping",
@@ -9,7 +9,7 @@ module.exports = {
     run: async (client, message, args) => {
         const msg = await message.reply(`🏓 Pinging....`);
 
-        msg.edit({content: `🏓 Pong!
-        API Latency is ${Math.round(client.ws.ping)}ms`});
-    }
-}
+		msg.edit({ content: `🏓 Pong!
+        API Latency is ${Math.round(client.ws.ping)}ms` });
+	},
+};

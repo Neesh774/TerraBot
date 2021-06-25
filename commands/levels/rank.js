@@ -1,8 +1,8 @@
-const Discord = require("discord.js");
-const config = require("../../config.json");
+const Discord = require('discord.js');
+const config = require('../../config.json');
 const mSchema = require('../../models/memberschema.js');
 const canvacord = require('canvacord');
-const functions = require("../../functions.js");
+const functions = require('../../functions.js');
 module.exports = {
     name: "rank",
     category: "levels",

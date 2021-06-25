@@ -59,7 +59,7 @@ module.exports = {
             if (attachments || (parsedLinks && parsedLinks.length > 0)) emb.setImage(attachments ? attachments.url : parsedLinks.length > 0 ? parsedLinks[0] : '');
             return starboardChannel.send({embeds: [emb]});
         }
-        const suggest = await sSchema.findOne({messageID: message.id})
+        const suggest = await sSchema.findOne({messageID: message.id })
         if(suggest && !user.bot){
             switch(messageReaction.emoji.id){
                 case(config.upvote):

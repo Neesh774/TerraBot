@@ -10,6 +10,7 @@ module.exports = {
     aliases: ["info"],
     category: "utility",
     description: "Test boost",
+    options: [],
     usage: `${config.prefix}testboost`,
     run: async (client, message, args) => {
         const PS = await client.guilds.fetch(config.PS);

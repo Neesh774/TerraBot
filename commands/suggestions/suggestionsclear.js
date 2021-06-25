@@ -7,6 +7,7 @@ module.exports = {
     category: "suggestions",
     description: "Clears all pending suggestions",
     usage: `${config.prefix}suggestionsclear`,
+    options: [],
     run: async (client, message, args) => {
     //command
         if(!message.member.hasPermission("MANAGE_MESSAGES")){

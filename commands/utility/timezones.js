@@ -6,6 +6,7 @@ module.exports = {
     category: "utility",
     description: "TerraBot will give you a collection of all of the timezones",
     usage: `${config.prefix}timezones`,
+    options: [],
     run: async (client, message, args) => {
     //command
         const start = new Date();

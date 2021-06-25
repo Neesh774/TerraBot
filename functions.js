@@ -6,27 +6,13 @@ const mSchema = require('./models/memberschema.js');
 const mcSchema = require('./models/mchannelschema.js');
 const lrSchema = require('./models/levelroleschema.js');
 module.exports = {
-    getMember: function(message, toFind = '') {
-        toFind = toFind.toLowerCase();
+	getMember: function(message, toFind = '') {
+		toFind = toFind.toLowerCase();
 
-        let target = message.guild.members.get(toFind);
-        
-        if (!target && message.mentions.members)
-            target = message.mentions.members.first();
+		let target = message.guild.members.get(toFind);
 
-        if (!target && toFind) {
-            target = message.guild.members.find(member => {
-                return member.displayName.toLowerCase().includes(toFind) ||
-                member.user.tag.toLowerCase().includes(toFind)
-            });
-        }
-            
-        if (!target) 
-            target = message.member;
-            
-        return target;
+		if (!target && message.mentions.members) {target = message.mentions.members.first();}
     },
-
     formatDate: function(date) {
         return new Intl.DateTimeFormat('en-US').format(date)
     },
@@ -153,9 +139,9 @@ module.exports = {
     setReminder: async function(message, time, content){
         if (!time) return message.reply({content: "When should I remind you?"});
 
-        let response = `Okily dokily ${message.user.username}, I'll remind you in ${time}`;
-        if(content) response += `to ${content}`;    
-        message.reply({content: response});
+		// Only allow reactions from the author,
+		// and the emoji must be in the array we provided.
+		const filter = (reaction, user) => validReactions.includes(reaction.emoji.name) && user.id === author.id;
 
         // Create reminder time out
         setTimeout(() => {message.reply({content: "Reminder to " + content})}, ms(time));

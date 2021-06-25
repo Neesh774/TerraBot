@@ -1,16 +1,25 @@
-const { MessageEmbed } = require("discord.js");
-const Discord = require("discord.js");
-const config = require("../../config.json");
+const { MessageEmbed } = require('discord.js');
+const Discord = require('discord.js');
+const config = require('../../config.json');
 
 module.exports = {
-    name: "purge",
-    category: "moderation",
-    description: "Deletes messages in a text channel or specified number of messages in a text channel.",
-    usage: `${config.prefix}purge <number of messages>`,
-    run: async (client, message, args) => {
-        const PS = await client.guilds.fetch(config.PS); 
-        const logs = await PS.channels.cache.get(config.logs);
+	name: 'purge',
+	category: 'moderation',
+	description: 'Deletes messages in a text channel or specified number of messages in a text channel.',
+	usage: `${config.prefix}purge <number of messages>`,
+	options: [
+		{
+			name: 'num_messages',
+			type: 'INTEGER',
+			description: 'The number of messages to delete',
+			required: true,
+		},
+	],
+	run: async (client, message, args) => {
+		const PS = await client.guilds.fetch(config.PS);
+		const logs = await PS.channels.cache.get(config.logs);
 
+<<<<<<< HEAD
         if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply({content: "You Don't Have Sufficient Permissions!- [MANAGE_MESSAGES]"})
         if (isNaN(args[0]))
             return message.reply({content:'**Please Supply A Valid Amount To Delete Messages!**'});
@@ -27,7 +36,22 @@ module.exports = {
             .setColor(config.embedColor)
             .setTitle(`Purged Messages`)
             .setDescription(`${message.user.username} purged ${num} messages in <#${message.channel.id}>`);
+=======
+		if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send({ content: 'You Don\'t Have Sufficient Permissions!- [MANAGE_MESSAGES]' });
+		if (isNaN(args[0])) {return message.channel.send({ content:'**Please Supply A Valid Amount To Delete Messages!**' });}
 
-        logs.send({embeds: [embed]});
-    }
-}
+		if (args[0] > 100) {return message.channel.send({ content: '**Please Supply A Number Less Than 100!**' });}
+
+		if (args[0] < 1) {return message.channel.send({ content:'**Please Supply A Number More Than 1!**' });}
+		const num = parseInt(args[0]);
+		message.channel.bulkDelete(num + 1)
+			.then(messages => message.channel.send({ content: `**Succesfully deleted \`${messages.size}/${num + 1}\` messages**` }).then(msg => msg.delete({ timeout: 5000 }))).catch(() => null);
+		const embed = new MessageEmbed()
+			.setColor(config.embedColor)
+			.setTitle('Purged Messages')
+			.setDescription(`${message.author.username} purged ${num} messages in <#${message.channel.id}>`);
+>>>>>>> b406229fc442f1bd392ea7ab7f992bbcd3f35221
+
+		logs.send({ embeds: [embed] });
+	},
+};

@@ -7,6 +7,14 @@
     category: "utility",
     description: "Get information about a user",
     usage: `${config.prefix}whois <user>`,
+    options: [
+        {
+            name: 'user',
+            type: 'USER',
+            description: 'The user you want info about',
+            required: true,
+        },
+    ],
     run: async (client, message, args) => {
     //command
     
@@ -17,7 +25,7 @@
     
     var playing = ("[ " + user.presence.activities + " ]")
     
-    const person = new Discord.MessageEmbed()
+			const person = new Discord.MessageEmbed()
           .setTitle("User Info:")
           .addField("Full Username", `${user.tag}`)
           .addField("ID", user.id)

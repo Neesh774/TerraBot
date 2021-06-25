@@ -1,5 +1,5 @@
-const Discord = require("discord.js");
-const config = require("../../config.json");
+const Discord = require('discord.js');
+const config = require('../../config.json');
 const lSchema = require('../../models/levelroleschema.js');
 module.exports = {
     name: "levelrole",

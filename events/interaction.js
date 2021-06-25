@@ -20,5 +20,5 @@ module.exports = {
                 command.run(client, interaction, args);
             }
         }
-    }
+	}
 }

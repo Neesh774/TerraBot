@@ -7,6 +7,14 @@ module.exports = {
   category: "Starboards",
   description: "Gives you a list of who has the most starboards",
   usage: `${config.prefix}sblb [page]`,
+  options: [
+    {
+      name: 'page',
+      type: 'INTEGER',
+      description: 'The page of the starboard leaderboard to check',
+      required: false,
+  },
+  ],
   run: async (client, message, args) => {
     let list = await mSchema.find({});
     list.sort(function(a,b){

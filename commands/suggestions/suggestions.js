@@ -7,6 +7,7 @@ module.exports = {
     category: "suggestions",
     description: "Lists all suggestions",
     usage: `${config.prefix}suggestions`,
+    options: [],
     run: async (client, message, args) => {
     //command
     let fields = [];

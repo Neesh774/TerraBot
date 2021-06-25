@@ -1,6 +1,6 @@
-const Discord = require("discord.js");
-const config = require("../../config.json");
-const emojis = require("../../emojis.js")
+const Discord = require('discord.js');
+const config = require('../../config.json');
+const emojis = require('../../emojis.js');
 const rrSchema = require('../../models/rrschema.js');
 module.exports = {
     name: "rr",

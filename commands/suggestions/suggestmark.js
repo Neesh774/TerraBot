@@ -6,6 +6,40 @@ module.exports = {
     category: "suggestions",
     description: "Marks the given suggestion with the given status",
     usage: `${config.prefix}suggestmark <suggestion id> <Dead|In_Progress|Done> [reason]`,
+    options: [
+        {
+            name: 'suggestion_id',
+            type: 'INTEGER',
+            description: 'The ID of the suggestion you want to mark',
+            required: true,
+        },
+        {
+            name: 'mark',
+            type: 'STRING',
+            description: 'The status you want to give to the suggestion',
+            required: true,
+            choices: [
+                {
+                    name: "Rejected",
+                    value: "dead"
+                },
+                {
+                    name: "Undertaken",
+                    value: "in_progress"
+                },
+                {
+                    name: "Implemented",
+                    value: "done"
+                }
+            ]
+        },
+        {
+            name: 'reason',
+            type: 'STRING',
+            description: 'The reason you\'re marking this suggestion',
+            required: false,
+        },
+    ],
     run: async (client, message, args) => {
     //command
     const numSuggest = await sSchema.countDocuments({});
