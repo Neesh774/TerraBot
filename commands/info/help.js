@@ -44,11 +44,11 @@ function getAll(client, message) {
         .map(cat => stripIndents`**${cat[0].toUpperCase() + cat.slice(1)}** \n${commands(cat)}`)
         .reduce((string, category) => string + "\n" + category);
 
-        message.reply({content: 'Sent help to dms', reply: {messageReference: message.id}})
+        message.reply({content: 'Sent help to dms'})
 
         
 
-    return message.author.send({embeds: [embed.setDescription(info)]});
+    return message.user.send({embeds: [embed.setDescription(info)]});
     
 }
 
@@ -62,7 +62,7 @@ function getCMD(client, message, input) {
 
     // If no cmd is found, send not found embed
     if (!cmd) {
-        return message.channel.send(embed.setColor(config.embedColor).setDescription(info));
+        return message.reply(embed.setColor(config.embedColor).setDescription(info));
     }
 
     // Add all cmd info to the embed
@@ -74,5 +74,5 @@ function getCMD(client, message, input) {
         embed.setFooter(`Syntax: <> = required, [] = optional`);
     }
 
-    return message.channel.send(embed.setColor(config.embedColor).setDescription(info));
+    return message.reply(embed.setColor(config.embedColor).setDescription(info));
 }

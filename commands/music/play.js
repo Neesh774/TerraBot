@@ -13,8 +13,8 @@ module.exports= {
   run: async (client, message, args) => {
   const channel = message.member.voice.channel;
 
-  const error = (err) => message.channel.send({content: err});;
-  const send = (content) => message.channel.send(content);
+  const error = (err) => message.reply({content: err});;
+  const send = (content) => message.reply(content);
   const setqueue = (id, obj) => message.client.queue.set(id, obj);
   const deletequeue = (id) => message.client.queue.delete(id);
   var song;
@@ -39,7 +39,7 @@ module.exports= {
         name: Util.escapeMarkdown(ytdata.videoDetails.title),
         thumbnail:
           ytdata.player_response.videoDetails.thumbnail.thumbnails[0].url,
-        requested: message.author,
+        requested: message.user,
         videoId: ytdata.videoDetails.videoId,
         duration: forHumans(ytdata.videoDetails.lengthSeconds),
         url: ytdata.videoDetails.video_url,
@@ -47,7 +47,7 @@ module.exports= {
       };
     } catch (e) {
       console.log(e);
-      return message.channel.send(":x: There was an error. Please make sure you're using the proper arguments and try again.");
+      return message.reply(":x: There was an error. Please make sure you're using the proper arguments and try again.");
     }
   }
   else {
@@ -59,7 +59,7 @@ module.exports= {
       song = {
         name: Util.escapeMarkdown(data.title),
         thumbnail: data.image,
-        requested: message.author,
+        requested: message.user,
         videoId: data.videoId,
         duration: data.duration.toString(),
         url: data.url,
@@ -150,7 +150,7 @@ module.exports= {
       );
     } catch (e) {
       console.error(e);
-      return message.channel.send(":x: There was an error. Please make sure you're using the proper arguments and try again.");
+      return message.reply(":x: There was an error. Please make sure you're using the proper arguments and try again.");
     }
   }
 }

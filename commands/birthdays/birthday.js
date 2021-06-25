@@ -11,7 +11,7 @@ module.exports = {
     options: [],
     run: async (client, message, args) => {
     //command
-        const hasbday = await bSchema.findOne({userID: message.author.id});
+        const hasbday = await bSchema.findOne({userID: message.user.id});
         if(!hasbday){
             return message.reply("You don't have a birthday! Set one using the `setbday <mm> <dd>` command!");
         }
@@ -19,6 +19,6 @@ module.exports = {
         let embed = new Discord.MessageEmbed()
             .setColor(config.embedColor)
             .setDescription(`Your birthday is set to ${formattedDate}`);
-        return message.channel.send({embeds: [embed]});
+        return message.reply({embeds: [embed]});
     }
 };

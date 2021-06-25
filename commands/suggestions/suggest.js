@@ -23,9 +23,9 @@ module.exports = {
             const sSuggest = new sSchema({
                 id: numSuggest + 1,
                 suggestion: args.join(" "),
-                createdBy: message.author.tag,
-                createdByIcon: message.author.avatarURL(),
-                createdByID: message.author.id,
+                createdBy: message.user.tag,
+                createdByIcon: message.user.avatarURL(),
+                createdByID: message.user.id,
                 createdAt: message.createdAt.toUTCString(),
                 messageID: msgtwo.id,
                 status: "Unread",

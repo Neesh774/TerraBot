@@ -17,7 +17,7 @@ module.exports = {
             .setColor(config.embedColor)
             .setTitle("Responders were cleared")
             .setTimestamp()
-            .setDescription("Responders were cleared by user " + message.author.tag);
+            .setDescription("Responders were cleared by user " + message.user.tag);
         logs.send({embeds: [embed]});
         return message.reply("Successfully cleared the responders list!");
         

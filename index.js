@@ -44,7 +44,7 @@ client.on("message", async message => {
     //Loads prefix from config.json
     const prefix = (config.prefix);
     //Makes sure bot wont respond to other bots including itself
-    if (message.author.bot) return;
+    if (message.user.bot) return;
     //Checks if the command is from a server and not a dm
     if (!message.guild) return;
     for(var i = 0;i < badwords.badwords.length;i ++){

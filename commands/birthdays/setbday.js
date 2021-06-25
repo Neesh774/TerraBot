@@ -31,14 +31,14 @@ module.exports = {
         if((!month || !day) || month < 0 || month > 12 || day > 31 || day < 1){
             return message.reply("Please send me your birthday in the format `<mm> <dd>`(with spaces in between)!");
         }
-        const hasbday = await bSchema.findOne({userID: message.author.id});
+        const hasbday = await bSchema.findOne({userID: message.user.id});
         if(hasbday){
             await hasbday.remove();
         }
         let datestring = `${month} ${day}`;
         let bday = new bSchema({
-            user: message.author.username,
-            userID: message.author.id,
+            user: message.user.username,
+            userID: message.user.id,
             birthday: new Date(datestring)
         });
         await bday.save();
@@ -46,6 +46,6 @@ module.exports = {
             .setColor(config.embedColor)
             .setTitle("Birthday set successfully")
             .setDescription(`I set your birthday to ${new Date(datestring).toString().slice(4, 10)}`);
-        return message.channel.send({embeds: [embed]});
+        return message.reply({embeds: [embed]});
     }
 };

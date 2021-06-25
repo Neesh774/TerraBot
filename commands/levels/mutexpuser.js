@@ -14,8 +14,7 @@ module.exports = {
         if(!args[0]){
             return message.reply("Who should I ignore?");
         }
-        let user = message.mentions.members.first() || message.guild.members.cache.fetch(args[0]);
-        if (!user) return message.channel.send({content: `:x: | **User Not Found**`});
+        let user = args[0];
         
         let member = await mSchema.findOne({userID: user.id});
         console.log(member);

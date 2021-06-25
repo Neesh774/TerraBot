@@ -37,7 +37,7 @@ module.exports = {
           .addField("🤖 Arch", `\`${os.arch()}\``, true)
           .addField("💻 Platform", `\`\`${os.platform()}\`\``, true)
           .addField("API Latency", `${(client.ws.ping)}ms`)  
-      message.channel.send({embeds: [botinfo]})
+      message.reply({embeds: [botinfo]})
   });
   }
   };

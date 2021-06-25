@@ -9,17 +9,17 @@ module.exports= {
   run: async (client, message) => {
   const channel = message.member.voice.channel;
   if (!channel)
-    return message.channel.send(
+    return message.reply(
       "You must Join a voice channel before using this command!"
     );
   let queue = message.client.queue.get(message.guild.id);
   if (!queue)
-    return message.channel.send(
+    return message.reply(
       new MessageEmbed()
         .setColor(config.embedColor)
         .setDescription(":x: There are no songs playing in this server")
     );
-  message.channel.send(
+  message.reply(
     new MessageEmbed()
       .setColor(config.embedColor)
       .setDescription(

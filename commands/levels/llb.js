@@ -22,6 +22,6 @@ module.exports = {
             .setColor(config.embedColor)
             .setTitle(`Leaderboard for ${message.guild.name}`)
             .addFields(fields);
-        return message.channel.send({embeds: [embed]});
+        return message.reply({embeds: [embed]});
     }
 };

@@ -33,7 +33,7 @@ module.exports = {
             .setColor(config.embedColor)
             .setTitle("Suggestion Deleted")
             .setTimestamp()
-            .setDescription(`Suggestion with content ${suggest.suggestion} was cleared by user ` + message.author.tag);
+            .setDescription(`Suggestion with content ${suggest.suggestion} was cleared by user ` + message.user.tag);
         return logs.send({embeds: [embed]});
     }
 };

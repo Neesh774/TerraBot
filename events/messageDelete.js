@@ -7,18 +7,18 @@ module.exports = {
         const PS = await client.guilds.fetch(config.PS); 
         const logs = await PS.channels.cache.get(config.logs);
 
-        if(!message.author) return;
-        if(message.author.bot) return;
+        if(!message.user) return;
+        if(message.user.bot) return;
       
         let imageDelete = message.attachments.first() ? message.attachments.first().proxyURL : null;
       
         const embedMessageDelete = new Discord.MessageEmbed()
         .setTitle(`Message Deleted`)
-        .addField("Author", `${message.author} | ${message.author.id}`)
+        .addField("Author", `${message.user} | ${message.user.id}`)
         .addField("Deleted in", `${message.channel}`)
         .addField("Message Content", `${message.content || `[Attachment Link](${imageDelete})`}`)
         .setColor("#f54542")
-        .setThumbnail(message.author.displayAvatarURL({dynamic: true}))
+        .setThumbnail(message.user.displayAvatarURL({dynamic: true}))
         .setImage(imageDelete)
         .setTimestamp();
         logs.send({embeds: [embedMessageDelete]});

@@ -19,6 +19,6 @@ module.exports = {
             .setColor(config.embedColor)
             .setDescription(`You got a ${string}!`)
             .setThumbnail("https://cdn.onlinewebfonts.com/svg/img_441781.png");
-        return message.channel.send({embeds: [embed]});
+        return message.reply({embeds: [embed]});
     }
 };

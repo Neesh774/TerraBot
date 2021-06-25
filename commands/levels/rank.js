@@ -9,11 +9,10 @@ module.exports = {
     description: "TerraBot tells you what level you're at",
     usage: `${config.prefix}rank [user]`,
     run: async (client, message, args) => {
-        let member = await mSchema.findOne({userID: message.author.id});
-        let user = message.author;
+        let member = await mSchema.findOne({userID: message.user.id});
+        let user = message.user;
         if(args[0]){
-            user = message.mentions.members.first().user || message.guild.members.cache.fetch(args[0]);
-            if (!user) return message.channel.send({content: `:x: | **User Not Found**`});
+            user = args[0];
             member = await mSchema.findOne({userID: user.id});
         }
         const list = await mSchema.find();
@@ -43,7 +42,7 @@ module.exports = {
     rank.build()
         .then(data => {
             const attachment = new Discord.MessageAttachment(data, "RankCard.png");
-            message.channel.send({files: [attachment]});
+            message.reply({files: [attachment]});
         });
     }
 };

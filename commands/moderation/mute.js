@@ -15,8 +15,8 @@ module.exports = {
             return message.reply("You need to give me someone to mute!");
         }
         let member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase());
-        if (!member) return message.channel.send({content: "**User Is Not In The Guild**"});
-        if (member === message.member) return message.channel.send({content: "**You Cannot Mute Yourself**"})
+        if (!member) return message.reply({content: "**User Is Not In The Guild**"});
+        if (member === message.member) return message.reply({content: "**You Cannot Mute Yourself**"})
         const PS = await client.guilds.fetch(config.PS); 
         const logs = await PS.channels.cache.get(config.logs);
         if(member.roles.cache.has('838076447095914526')){
@@ -32,7 +32,7 @@ module.exports = {
             try{
                 time = ms(args[1]);
             }
-            catch(e){return message.channel.send({content: ":x: There was an error. Please make sure you're using the proper arguments and try again."});}
+            catch(e){return message.reply({content: ":x: There was an error. Please make sure you're using the proper arguments and try again."});}
             member.roles.add(message.guild.roles.cache.get(config.mutedRole));
             member.send({content: `You were muted in ${message.guild.name} for ${args[1]}`});
             setTimeout(() => {

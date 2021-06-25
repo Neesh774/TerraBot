@@ -23,7 +23,7 @@ module.exports = {
                 .setTitle(`Responder #${args[0]}`)
                 .setDescription(responder.trigger)  
                 .addFields(fields);
-        return message.channel.send({embeds: [embed]});         
+        return message.reply({embeds: [embed]});         
     }
     else{
         const numResponses = await arSchema.countDocuments({});
@@ -35,7 +35,7 @@ module.exports = {
             .setColor(config.embedColor)
             .setTitle("Automatic Responder")
             .addFields(fields);
-        return message.channel.send({embeds: [embed]});
+        return message.reply({embeds: [embed]});
         }
     }
 };

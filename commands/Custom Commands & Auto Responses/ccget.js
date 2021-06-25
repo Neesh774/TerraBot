@@ -23,7 +23,7 @@ module.exports = {
                 .setTitle(`Command #${args[0]}`)
                 .setDescription(command.trigger)  
                 .addFields(fields);
-        return message.channel.send({embeds: [embed]});         
+        return message.reply({embeds: [embed]});         
     }
     else{
         const numCommands = await ccSchema.countDocuments({});
@@ -35,7 +35,7 @@ module.exports = {
             .setColor(config.embedColor)
             .setTitle("Custom Commands")
             .addFields(fields);
-        return message.channel.send({embeds: [embed]});
+        return message.reply({embeds: [embed]});
         }
     }
 };

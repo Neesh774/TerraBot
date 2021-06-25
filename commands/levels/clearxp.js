@@ -19,7 +19,7 @@ module.exports = {
             .setColor(config.embedColor)
             .setTitle("Levels were cleared")
             .setTimestamp()
-            .setDescription("All levels were cleared by user " + message.author.toString());
+            .setDescription("All levels were cleared by user " + message.user.toString());
         return logs.send({embeds: [embed]});
     }
 };

@@ -17,7 +17,7 @@ module.exports = {
             .setColor(config.embedColor)
             .setTitle("Commands were cleared")
             .setTimestamp()
-            .setDescription("Commands were cleared by user " + message.author.tag);
+            .setDescription("Commands were cleared by user " + message.user.tag);
         logs.send({embeds: [embed]});
         return message.reply("Successfully cleared the commands list!");
         

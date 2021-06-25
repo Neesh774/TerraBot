@@ -26,7 +26,7 @@ module.exports = {
             trigger: trigger,
             responsesArray: responses,
             created: message.createdAt.toUTCString(),
-            createdByID: message.author.id
+            createdByID: message.user.id
         });
         ar.save().catch(err => console.log(err));
         let fields = [];
@@ -37,12 +37,12 @@ module.exports = {
             .setColor(config.embedColor)
             .setTimestamp()
             .setTitle("Auto Response Created")
-            .setDescription(`An auto responder was created by ${message.author.tag}`)
+            .setDescription(`An auto responder was created by ${message.user.tag}`)
             .addField("Trigger", trigger)
             .addFields(fields);
         const PS = await client.guilds.fetch(config.PS); 
         const logs = await PS.channels.cache.get(config.logs);
         logs.send({embeds: [embed]});
-        return message.channel.send({embeds: [embed]});
+        return message.reply({embeds: [embed]});
     }
 };

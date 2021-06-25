@@ -9,12 +9,12 @@ module.exports = {
   run: async (client, message, args) => {
   const channel = message.member.voice.channel;
   if (!channel)
-    return message.channel.send(
+    return message.reply(
       "You must Join a voice channel before using this command!"
     );
   const queue = message.client.queue.get(message.guild.id);
   if (!queue)
-    return message.channel.send(
+    return message.reply(
       new MessageEmbed()
         .setDescription("** :x: There are no songs in queue to shuffle**")
         .setColor(config.embedColor)

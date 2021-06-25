@@ -9,17 +9,16 @@ module.exports = {
   description: "Tells you how many starboards you have, or how many someone else has",
   usage: `${config.prefix}sbs [user]`,
   run: async (client, message, args) => {
-    let member = await mSchema.findOne({userID: message.author.id});
-    let user = message.author;
+    let member = await mSchema.findOne({userID: message.user.id});
+    let user = message.user;
     if(args[0]){
-        user = message.mentions.members.first().user || message.guild.members.cache.fetch(args[0]);
-        if (!user) return message.channel.send({content: `:x: | **User Not Found**`});
+        user = args[0];
         member = await mSchema.findOne({userID: user.id});
     }
     let embed = new Discord.MessageEmbed() 
         .setColor(config.embedColor)
-        .setTitle(`${message.author.username}'s starboards`)
-        .setAuthor("TerraBot Starboards", message.author.avatarURL());
+        .setTitle(`${message.user.username}'s starboards`)
+        .setAuthor("TerraBot Starboards", message.user.avatarURL());
     if(member.starboards > 0){
         let fields = [];
         const starboards = await sbSchema.find({authorID: user.id});
@@ -31,6 +30,6 @@ module.exports = {
         }
         embed.addFields(fields);
     }
-    return message.channel.send({embeds: [embed]});
+    return message.reply({embeds: [embed]});
   }
 };

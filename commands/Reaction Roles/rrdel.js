@@ -31,7 +31,7 @@ module.exports = {
                     .setColor(config.embedColor)
                     .setTitle("Reaction Role Deleted")
                     .setTimestamp()
-                    .setDescription(`Reaction role was cleared by user ` + message.author.tag);
+                    .setDescription(`Reaction role was cleared by user ` + message.user.tag);
                 return logs.send({embeds: [embed]});
         }
         else{
@@ -46,7 +46,7 @@ module.exports = {
                     .setColor(config.embedColor)
                     .setTitle("Reaction Roles Cleared")
                     .setTimestamp()
-                    .setDescription(`Reaction roles were cleared by user ` + message.author.tag);
+                    .setDescription(`Reaction roles were cleared by user ` + message.user.tag);
                 return logs.send({embeds: [embed]});
         }
     }  

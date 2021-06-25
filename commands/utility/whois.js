@@ -27,7 +27,7 @@
           .setColor(config.embedColor)
           .setTimestamp()
           .setThumbnail(user.avatarURL())  
-      message.channel.send({embeds: [person]})
+      message.reply({embeds: [person]})
 
     };
     }

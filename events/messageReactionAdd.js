@@ -38,18 +38,18 @@ module.exports = {
             const sb = new sbSchema({
                 messageID: message.id,
                 channelID: message.channel.id,
-                author: message.author.username,
-                authorID: message.author.id,
-                authorAvatar: message.author.avatarURL()
+                author: message.user.username,
+                authorID: message.user.id,
+                authorAvatar: message.user.avatarURL()
             })
             sb.save();
 
-            const member = await mSchema.findOne({userID: message.author.id});
+            const member = await mSchema.findOne({userID: message.user.id});
             member.starboards ++;
             await member.save();
 
             const emb = new Discord.MessageEmbed()
-              .setAuthor(message.author.username, message.author.avatarURL())
+              .setAuthor(message.user.username, message.user.avatarURL())
               .addField('Channel', messageReaction.message.channel.toString(), false)
               // eslint-disable-next-line quotes
               .setColor(config.embedColor)

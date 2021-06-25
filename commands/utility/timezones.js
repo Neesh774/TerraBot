@@ -34,6 +34,6 @@ module.exports = {
             .addField("AST", "```css\n" +  ast + "```", true)
             .addField("IST", "```css\n" +  ist + "```", false)
             .addField("AWST/SGT", "```css\n" +  awst + "```", false)
-        return message.channel.send({embeds: [embed]});
+        return message.reply({embeds: [embed]});
     }
 };

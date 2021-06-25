@@ -30,23 +30,6 @@ module.exports = {
     formatDate: function(date) {
         return new Intl.DateTimeFormat('en-US').format(date)
     },
-
-    promptMessage: async function (message, author, time, validReactions) {
-        // We put in the time as seconds, with this it's being transfered to MS
-        time *= 1000;
-
-        // For every emoji in the function parameters, react in the good order.
-        for (const reaction of validReactions) await message.react(reaction);
-
-        // Only allow reactions from the author, 
-        // and the emoji must be in the array we provided.
-        const filter = (reaction, user) => validReactions.includes(reaction.emoji.name) && user.id === author.id;
-
-        // And ofcourse, await the reactions
-        return message
-            .awaitReactions(filter, { max: 1, time: time})
-            .then(collected => collected.first() && collected.first().emoji.name);
-    },
     warn: async function(member, guild, channel, reason, client){
         let wModel;
         wModel = await wSchema.findOne({warnedID: member.id});
@@ -138,7 +121,7 @@ module.exports = {
         let responses = schema.responsesArray;
         let ranInt = Math.floor(Math.random() * responses.length);
         try{
-            return message.channel.send({content: responses[ranInt]});
+            return message.reply({content: responses[ranInt]});
         }
         catch(e){
             console.log(e.stack);
@@ -161,7 +144,7 @@ module.exports = {
         let responses = schema.responsesArray;
         let ranInt = Math.floor(Math.random() * responses.length);
         try{
-            return message.channel.send({content: responses[ranInt]});
+            return message.reply({content: responses[ranInt]});
         }
         catch(e){
             console.log(e.stack);
@@ -211,14 +194,14 @@ module.exports = {
     },
     levelUser: async function(message, client){
         const mc = await mcSchema.findOne({channel: message.channel.id});
-        let og = await mSchema.exists({userID: message.author.id});
-        if(message.author.bot || mc){
+        let og = await mSchema.exists({userID: message.user.id});
+        if(message.user.bot || mc){
             return;
         }
         if(!og){
             let ms = new mSchema({
-                name: message.author.username,
-                userID: message.author.id,
+                name: message.user.username,
+                userID: message.user.id,
                 level: 1,
                 xp: 0,
                 muted: false,
@@ -226,7 +209,7 @@ module.exports = {
             });
             await ms.save();
         }
-        let profile = await mSchema.findOne({userID: message.author.id});
+        let profile = await mSchema.findOne({userID: message.user.id});
         if(profile.muted){
             return;
         }
@@ -245,7 +228,7 @@ module.exports = {
                 let embed = new Discord.MessageEmbed()
                     .setColor(config.embedColor)
                     .setTitle("CONGRATS!")
-                    .setDescription(`${message.author.toString()} just leveled up to level ${nextLevel}!`)
+                    .setDescription(`${message.user.toString()} just leveled up to level ${nextLevel}!`)
                     .setImage("https://octoperf.com/img/blog/minor-version-major-features/level-up.gif");
                 if(lr){
                     await message.member.roles.add(lr.roleID);
@@ -254,7 +237,7 @@ module.exports = {
                     let lrPing = role.toString();
                     embed.addField("Awarded Roles", lrPing);
                 }
-                message.channel.send({embeds: [embed]});
+                message.reply({embeds: [embed]});
             }
             await profile.save();
             client.coolDowns.add(profile.userID);

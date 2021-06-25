@@ -9,7 +9,7 @@ module.exports = {
   run: async (client, message) => {
   const channel = message.member.voice.channel;
   if (!channel)
-    return message.channel.send(
+    return message.reply(
       "You must Join a voice channel before using this command!"
     );
   const queue = message.client.queue.get(message.guild.id);
@@ -37,7 +37,7 @@ module.exports = {
   else np = queue.queue[0].name;
   if (queue) thumbnail = queue.queue[0].thumbnail;
   else thumbnail = message.guild.iconURL();
-  message.channel.send(
+  message.reply(
     new MessageEmbed()
       .setAuthor(
         "TerraBot Music",

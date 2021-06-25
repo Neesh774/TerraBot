@@ -19,9 +19,9 @@ module.exports = {
         }
         let embed = new MessageEmbed()
             .setColor(config.embedColor)
-            .setAuthor(message.member.nickname, message.author.avatarURL())
+            .setAuthor(message.member.nickname, message.user.avatarURL())
             .setDescription(text)
             .setThumbnail("https://media.tenor.com/images/d0f9e3756a2b5546d88d6716de6f8c3f/tenor.gif");
-        return message.channel.send({embeds: [embed]});
+        return message.reply({embeds: [embed]});
     }
 };

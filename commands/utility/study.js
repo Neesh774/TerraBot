@@ -13,7 +13,7 @@ module.exports = {
       message.member.roles.remove("834258771474645022");
       setTimeout(() => {
           message.member.roles.add("834258771474645022");
-          message.reply(`${message.author.toString()}, did you study well?`);
+          message.reply(`${message.user.toString()}, did you study well?`);
       }, ms(time));
    }
 };

@@ -44,7 +44,7 @@ module.exports = {
           .attachFiles(attachment);
         //define the welcome channel
         //send the welcome embed to there
-        message.channel.send({embeds: [welcomeembed]});
+        message.reply({embeds: [welcomeembed]});
         // embed = new Discord.MessageEmbed()
         //         .setColor(config.embedColor)
         //         .setTimestamp()

@@ -8,18 +8,18 @@ module.exports = {
         const logs = await PS.channels.cache.get(config.logs);
 
         if(newMessage.partial) return;
-        if(newMessage.author.bot) return;
+        if(newmessage.user.bot) return;
         if(oldMessage.content == newMessage.content) return;
         
         const embedMessageUpdate = new Discord.MessageEmbed()
             .setTitle("Message Edited")
             .setColor("#f5c842")
-            .addField("Author", `${oldMessage.author} | ${oldMessage.author.id}`)
+            .addField("Author", `${oldmessage.user} | ${oldmessage.user.id}`)
             .addField("Edited in", `<#${newMessage.channel.id}> | ${newMessage.channel.id}`)
             .addField("Jump!", `[Click here](${newMessage.url})`)
             .addField("Old", `${oldMessage.content}`)
             .addField("New", `${newMessage.content}`)
-            .setThumbnail(newMessage.author.displayAvatarURL({ dynamic: true }))
+            .setThumbnail(newmessage.user.displayAvatarURL({ dynamic: true }))
         logs.send({embeds: [embedMessageUpdate]});
     }
 }

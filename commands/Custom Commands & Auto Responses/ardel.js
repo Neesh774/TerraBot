@@ -33,7 +33,7 @@ module.exports = {
             .setColor(config.embedColor)
             .setTitle("Responder Deleted")
             .setTimestamp()
-            .setDescription(`Responder with trigger ${responder.trigger} was cleared by user ` + message.author.tag);
+            .setDescription(`Responder with trigger ${responder.trigger} was cleared by user ` + message.user.tag);
         return logs.send({embeds: [embed]});
     }
 };

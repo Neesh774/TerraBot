@@ -12,6 +12,6 @@ module.exports = {
         let embed = new Discord.MessageEmbed()
             .setColor(config.embedColor)
             .setDescription(topic);
-        return message.channel.send({embeds: [embed]});
+        return message.reply({embeds: [embed]});
     }
 }

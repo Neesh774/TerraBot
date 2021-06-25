@@ -14,9 +14,7 @@ module.exports = {
         if(!args[0]){
             return message.reply("Which channel should I stop ignoring?");
         }
-        let channelID = args[0].substring(2, 20);
-        let channel = message.mentions.channels.first() || await message.guild.channels.cache.get(channelID);
-        if (!channel) return message.channel.send({content: `:x: | **Channel Not Found**`});
+        let channel = args[0];
         let mc = await mcSchema.findOne({channel: channelID});
         if(!mc){
             return message.reply("That channel isn't muted!");

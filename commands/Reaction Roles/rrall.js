@@ -20,6 +20,6 @@ module.exports = {
             .setColor(config.embedColor)
             .setTitle("Reaction Roles for " + message.guild.name)
             .addFields(fields);
-        return message.channel.send({embeds: [embed]});
+        return message.reply({embeds: [embed]});
     }
 }; 

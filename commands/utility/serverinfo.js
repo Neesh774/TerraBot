@@ -22,7 +22,7 @@ let serverembed = new Discord.MessageEmbed()
 .addField("Total Members", message.guild.memberCount)
 .setThumbnail(message.guild.iconURL({dynamic: true}))
 .setTimestamp()
-.setFooter(message.author.username, message.author.avatarURL);
-message.channel.send({embeds: [serverembed]});
+.setFooter(message.user.username, message.user.avatarURL);
+message.reply({embeds: [serverembed]});
 }
 };

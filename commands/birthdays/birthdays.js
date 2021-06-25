@@ -51,6 +51,6 @@ module.exports = {
       .setTitle(`Birthdays [${page}/${numPages}]`)
       .addFields(fields)
       .setAuthor("TerraBot Birthdays", PS.iconURL());
-    return message.channel.send({embeds: [embed]});
+    return message.reply({embeds: [embed]});
     }
 };
