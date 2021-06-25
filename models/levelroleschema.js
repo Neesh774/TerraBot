@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const lrSchema = mongoose.Schema({
-    roleID: String,
-    level: Number,
+	roleID: String,
+	level: Number,
 });
 
-module.exports = mongoose.model("level role", lrSchema);
+module.exports = mongoose.model('level role', lrSchema);
