@@ -1,16 +1,16 @@
-//Modules
-const { Client, Collection } = require("discord.js");
-const functions = require("./functions.js");
-const config = require("./config.json");
-const fs = require("fs");
+// Modules
+const { Client, Collection } = require('discord.js');
+const functions = require('./functions.js');
+const config = require('./config.json');
+const fs = require('fs');
 const mongoose = require('mongoose');
 const badwords = require('./nonowords.json');
 const client = new Client({
-//Stops the bot from mentioning @everyone
-disableEveryone: true
+// Stops the bot from mentioning @everyone
+	disableEveryone: true,
 });
 
-//Command Handler
+// Command Handler
 client.commands = new Collection();
 client.aliases = new Collection();
 client.queue = new Map();
@@ -29,16 +29,17 @@ for (const file of eventFiles) {
 	const event = require(`./events/${file}`);
 	if (event.once) {
 		client.once(event.name, (...args) => event.execute(...args, client));
-	} else {
+	}
+	else {
 		client.on(event.name, (...args) => event.execute(...args, client));
 	}
 }
 
-//Bot Status
-client.on("ready", () => {
-    console.log(`Bot User ${client.user.username} has been logged in and is ready to use!`);
-    client.user.setActivity('thelp', { type: 'WATCHING' });
-    functions.connectMongoose(mongoose);
+// Bot Status
+client.on('ready', () => {
+	console.log(`Bot User ${client.user.username} has been logged in and is ready to use!`);
+	client.user.setActivity('thelp', { type: 'WATCHING' });
+	functions.connectMongoose(mongoose);
 });
 
 client.on("message", async message => {
@@ -71,10 +72,10 @@ client.on("message", async message => {
     let command = client.commands.get(cmd);
     if (!command) command = client.commands.get(client.aliases.get(cmd));
 
-    if (command){
-        command.run(client, message, args);
-    }
+	if (command) {
+		command.run(client, message, args);
+	}
 });
 
-//Log into discord using the token in config.json
+// Log into discord using the token in config.json
 client.login(config.token);

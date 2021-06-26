@@ -71,5 +71,8 @@
     "utility"
   ],
   "author": "Neesh",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.29.0"
+  }
 }

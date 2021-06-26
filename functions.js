@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const config = require('./config.json');
 const Discord = require('discord.js');
 const ms = require('ms');
@@ -6,61 +7,32 @@ const mSchema = require('./models/memberschema.js');
 const mcSchema = require('./models/mchannelschema.js');
 const lrSchema = require('./models/levelroleschema.js');
 module.exports = {
-    getMember: function(message, toFind = '') {
-        toFind = toFind.toLowerCase();
+	getMember: function(message, toFind = '') {
+		toFind = toFind.toLowerCase();
 
-        let target = message.guild.members.get(toFind);
-        
-        if (!target && message.mentions.members)
-            target = message.mentions.members.first();
+		let target = message.guild.members.get(toFind);
 
-        if (!target && toFind) {
-            target = message.guild.members.find(member => {
-                return member.displayName.toLowerCase().includes(toFind) ||
-                member.user.tag.toLowerCase().includes(toFind)
-            });
-        }
-            
-        if (!target) 
-            target = message.member;
-            
-        return target;
-    },
+		if (!target && message.mentions.members) {target = message.mentions.members.first();}
 
-    formatDate: function(date) {
-        return new Intl.DateTimeFormat('en-US').format(date)
-    },
+		if (!target && toFind) {
+			target = message.guild.members.find(member => {
+				return member.displayName.toLowerCase().includes(toFind) ||
+                member.user.tag.toLowerCase().includes(toFind);
+			});
+		}
 
-    promptMessage: async function (message, author, time, validReactions) {
-        // We put in the time as seconds, with this it's being transfered to MS
-        time *= 1000;
+		if (!target) {target = message.member;}
 
-        // For every emoji in the function parameters, react in the good order.
-        for (const reaction of validReactions) await message.react(reaction);
+		return target;
+	},
 
-        // Only allow reactions from the author, 
-        // and the emoji must be in the array we provided.
-        const filter = (reaction, user) => validReactions.includes(reaction.emoji.name) && user.id === author.id;
+	formatDate: function(date) {
+		return new Intl.DateTimeFormat('en-US').format(date);
+	},
 
-        // And ofcourse, await the reactions
-        return message
-            .awaitReactions(filter, { max: 1, time: time})
-            .then(collected => collected.first() && collected.first().emoji.name);
-    },
-    warn: async function(member, guild, channel, reason, client){
-        let wModel;
-        wModel = await wSchema.findOne({warnedID: member.id});
-        if(!wModel){
-            wModel = new wSchema({
-                numberWarns: 0,
-                reasons: [],
-                warned: member.user.username,
-                warnedID: member.id
-            });
-            await wModel.save();
-        }
-        const AC = await client.guilds.fetch(config.AC); 
-        const logs = await AC.channels.cache.get(config.logs);
+	promptMessage: async function(message, author, time, validReactions) {
+		// We put in the time as seconds, with this it's being transfered to MS
+		time *= 1000;
 
         wModel.numberWarns ++;
         await wModel.save();
@@ -182,9 +154,9 @@ module.exports = {
     setReminder: async function(message, time, content){
         if (!time) return message.reply("When should I remind you?");
 
-        let response = `Okily dokily ${message.user.username}, I'll remind you in ${time}`;
-        if(content) response += `to ${content}`;    
-        message.reply(response);
+		// Only allow reactions from the author,
+		// and the emoji must be in the array we provided.
+		const filter = (reaction, user) => validReactions.includes(reaction.emoji.name) && user.id === author.id;
 
         // Create reminder time out
         setTimeout(() => {message.reply("Reminder to " + content)}, ms(time));
