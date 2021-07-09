@@ -22,13 +22,7 @@ module.exports = {
 		const embed = new MessageEmbed()
 			.setColor(config.embedColor)
 			.setDescription(rand[ranInt])
-<<<<<<< HEAD
-			.setThumbnail("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/8_ball_icon.svg/1024px-8_ball_icon.svg.png");
-		return message.reply({embeds: [embed]});
-	}
-=======
 			.setThumbnail('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/8_ball_icon.svg/1024px-8_ball_icon.svg.png');
-		return message.channel.send({ embeds: [embed] });
+		return message.reply({ embeds: [embed] });
 	},
->>>>>>> b406229fc442f1bd392ea7ab7f992bbcd3f35221
 };

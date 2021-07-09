@@ -16,6 +16,8 @@ client.commands = new Collection();
 client.aliases = new Collection();
 client.queue = new Map();
 client.coolDowns = new Set();
+client.autoResponseCoolDowns = new Set();
+client.ccCoolDowns = new Set();
 // Command Folder location
 client.categories = fs.readdirSync('./commands/');
 ['command'].forEach(handler => {
@@ -41,36 +43,56 @@ client.on('ready', () => {
 	functions.connectMongoose(mongoose);
 });
 
-client.on("message", async message => {
-    //Loads prefix from config.json
+client.on('message', async message => {
+    // Loads prefix from config.json
     const prefix = (config.prefix);
-    //Makes sure bot wont respond to other bots including itself
-    if (message.user.bot) return;
-    //Checks if the command is from a server and not a dm
+    // Makes sure bot wont respond to other bots including itself
+    if (message.system || message.author.bot) return;
+    // Checks if the command is from a server and not a dm
     if (!message.guild) return;
-    for(var i = 0;i < badwords.badwords.length;i ++){
+    for(var i = 0;i < badwords.badwords.length;i++){
         if(message.content.toLowerCase().includes(badwords.badwords[i].toLowerCase())){
             message.delete().then(msg =>{
-                functions.warn(message.member, message.guild, message.channel, "no no word", client);
-                msg.channel.send({content: "SMH MY HEAD NO NO WORD"});
+                functions.warn(message.member, message.guild, message.channel, 'no no word', client);
+                msg.channel.send({ content: 'SMH MY HEAD NO NO WORD' });
             })
         }
     }
-    await functions.sendAutoResponse(message);
+    await functions.sendAutoResponse(message, client);
     await functions.levelUser(message, client);
-    //Checks if the command starts with a prefix
+    // Checks if the command starts with a prefix
     if (!message.content.startsWith(prefix)) return;
-    //Makes sure bot wont respond to other bots including itself
+    // Makes sure bot wont respond to other bots including itself
     if (!message.member) message.member = await message.guild.fetchMember(message);
 
-	if (cmd.length === 0) return;
-	await functions.sendCustomCommand(message);
-	let command = client.commands.get(cmd);
-	if (!command) command = client.commands.get(client.aliases.get(cmd));
+	const args = message.content.slice(prefix.length).trim().split(/ +/g);
+	const cmd = args.shift().toLowerCase();
 
-	if (command) {
-		command.run(client, message, args);
-	}
+	if (cmd.length === 0) return;
+	await functions.sendCustomCommand(message, client);
+	if(cmd === 'deployslashes'){
+        const data = [];
+		client.commands.forEach(com => {
+			if(com.options) {
+				data.push(
+					{
+						name: com.name,
+						description: com.description,
+						options: com.options,
+					});
+			}
+			else{
+				data.push(
+					{
+						name: com.name,
+						description: com.description,
+					});
+			}
+		});
+		const command = await client.guilds.cache.get(config.PS).commands.set(data);
+		message.reply('Deployed all slashes');
+    }
+
 });
 
 // Log into discord using the token in config.json

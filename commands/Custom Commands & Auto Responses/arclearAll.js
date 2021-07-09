@@ -2,28 +2,6 @@ const Discord = require('discord.js');
 const config = require('../../config.json');
 const arSchema = require('../../models/arschema.js');
 module.exports = {
-<<<<<<< HEAD
-    name: "arclearall",
-    category: "Custom Commands and Auto Reponses",
-    description: "Clears all auto responders",
-    usage: `${config.prefix}arclearall`,
-    run: async (client, message, args) => {
-        if(!message.member.hasPermission("MANAGE_MESSAGES")){
-            return message.reply("You don't have permissions for that :/");
-        }
-        await arSchema.deleteMany();
-        const PS = await client.guilds.fetch(config.PS); 
-        const logs = await PS.channels.cache.get(config.logs);
-        let embed = new Discord.MessageEmbed()
-            .setColor(config.embedColor)
-            .setTitle("Responders were cleared")
-            .setTimestamp()
-            .setDescription("Responders were cleared by user " + message.user.tag);
-        logs.send({embeds: [embed]});
-        return message.reply("Successfully cleared the responders list!");
-        
-    }
-=======
 	name: 'arclearall',
 	category: 'Custom Commands and Auto Reponses',
 	description: 'Clears all auto responders',
@@ -45,5 +23,4 @@ module.exports = {
 		return message.reply('Successfully cleared the responders list!');
 
 	},
->>>>>>> b406229fc442f1bd392ea7ab7f992bbcd3f35221
 };

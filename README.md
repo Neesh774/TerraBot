@@ -90,3 +90,7 @@ TerraBot is a general purpose discord bot I made for the [Project Solaris Server
 - ``skipto <id>`` will skip to a certain song by it's id.
 - ``stop`` will stop any playing music.
 - ``volume <amount>`` will change the volume of the playing music.
+
+## Ideas
+- ``pin`` will pin a message by it's channel and message ID.
+- ``recipe`` will give you a random recipe.

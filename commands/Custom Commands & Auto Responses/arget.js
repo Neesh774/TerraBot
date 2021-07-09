@@ -2,44 +2,6 @@ const Discord = require('discord.js');
 const config = require('../../config.json');
 const arSchema = require('../../models/arschema.js');
 module.exports = {
-<<<<<<< HEAD
-    name: "arget",
-    category: "Custom Commands and Auto Reponses",
-    description: "Lists all auto responses",
-    usage: `${config.prefix}arget [command ID]`,
-    run: async (client, message, args) => {
-    //command
-    const numResponses = await arSchema.countDocuments({});
-    let fields = [];
-    if(args[0]){
-        if(args[0] > numResponses){
-            return message.reply("That responder doesn't exist!");
-        }
-        const responder = arSchema.findOne({id: args[0]});
-        for(var i = 0; i < responder.responses.length;i ++){
-            fields.push({"name":`Response #${i+1}`, "value": `${responder.responses[i]}`});
-        }
-        let embed = new Discord.MessageEmbed()
-                .setColor(config.embedColor)
-                .setTitle(`Responder #${args[0]}`)
-                .setDescription(responder.trigger)  
-                .addFields(fields);
-        return message.reply({embeds: [embed]});         
-    }
-    else{
-        const numResponses = await arSchema.countDocuments({});
-        for(var i = 1;i < numResponses + 1;i ++){
-            const responder = await arSchema.findOne({id: i}).exec();
-            fields.push({"name": `#${i}`, "value": `Trigger: ${responder.trigger}`});
-        }
-        let embed = new Discord.MessageEmbed()
-            .setColor(config.embedColor)
-            .setTitle("Automatic Responder")
-            .addFields(fields);
-        return message.reply({embeds: [embed]});
-        }
-    }
-=======
 	name: 'arget',
 	category: 'Custom Commands and Auto Reponses',
 	description: 'Lists all auto responses',
@@ -69,7 +31,7 @@ module.exports = {
 				.setTitle(`Responder #${args[0]}`)
 				.setDescription(responder.trigger)
 				.addFields(fields);
-			return message.channel.send({ embeds: [embed] });
+			return message.reply({ embeds: [embed] });
 		}
 		else{
 			// eslint-disable-next-line no-redeclare
@@ -81,8 +43,7 @@ module.exports = {
 				.setColor(config.embedColor)
 				.setTitle('Automatic Responder')
 				.addFields(fields);
-			return message.channel.send({ embeds: [embed] });
+			return message.reply({ embeds: [embed] });
 		}
 	},
->>>>>>> b406229fc442f1bd392ea7ab7f992bbcd3f35221
 };

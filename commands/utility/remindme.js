@@ -1,6 +1,6 @@
 const ms = require('ms');
-const functions = require("../../functions.js");
-const config = require("../../config.json");
+const functions = require('../../functions.js');
+const config = require('../../config.json');
 
 module.exports = {
    name: 'remindme',
@@ -23,12 +23,12 @@ module.exports = {
    ],
    run: async (client, message, args) => {
       if(!args[0]){
-         return message.reply("When should I remind you?");
+         return message.reply('When should I remind you?');
       }
       if(!args[1]){
-         return message.reply("What should I remind you with?");
+         return message.reply('What should I remind you with?');
       }
-      const timeArg = args.shift();
-      functions.setReminder(message, timeArg, args.join(' '));
-   }
+      const timeArg = args[0]
+      functions.setReminder(message.member, timeArg, args.join(' '));
+   },
 };

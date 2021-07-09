@@ -26,5 +26,6 @@ module.exports = {
 			}
 		});
 		const command = await client.guilds.cache.get(config.PS).commands.set(data);
+		message.reply('Deployed all slashes');
 	},
 };
