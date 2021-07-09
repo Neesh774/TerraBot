@@ -38,7 +38,28 @@ for (const file of eventFiles) {
 }
 
 // Bot Status
-client.on('ready', () => {
+client.on('ready', async () => {
+    const data = [];
+    client.slashcommands.forEach(cmd => {
+        if(cmd.options) {
+            data.push(
+                {
+                    name: cmd.name,
+                    description: cmd.description,
+                    options: cmd.options,
+                });
+        }
+        else{
+            data.push(
+                {
+                    name: cmd.name,
+                    description: cmd.description,
+                });
+        }
+    });
+    const PS = client.guilds.cache.get(config.PS);
+    const commands = await PS.commands.set(data);
+    console.log('Slash commands deployed successfully.')
 	console.log(`Bot User ${client.user.username} has been logged in and is ready to use!`);
 	client.user.setActivity('thelp', { type: 'WATCHING' });
 	functions.connectMongoose(mongoose);
