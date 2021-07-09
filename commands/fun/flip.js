@@ -7,8 +7,8 @@ module.exports = {
 	description: 'Flips a coin',
 	usage: `${config.prefix}flip`,
 	run: async (client, message, args) => {
-		var result = Math.round(Math.random());
-		var string = '';
+		const result = Math.round(Math.random());
+		let string = '';
 		if(result == 1) {
 			string = 'Heads';
 		}
@@ -19,6 +19,6 @@ module.exports = {
 			.setColor(config.embedColor)
 			.setDescription(`You got a ${string}!`)
 			.setThumbnail('https://cdn.onlinewebfonts.com/svg/img_441781.png');
-		return message.reply({ embeds: [embed] });
+		return message.channel.send(embed);
 	},
 };

@@ -7,14 +7,6 @@ module.exports = {
 	category: 'Starboards',
 	description: 'Gives you a list of all the server\'s starboards',
 	usage: `${config.prefix}starboards [page]`,
-	options: [
-		{
-			name: 'page',
-			type: 'INTEGER',
-			description: 'The page of the starboards to check',
-			required: false,
-		},
-	],
 	run: async (client, message, args) => {
 		// command
 		const sbs = await sbSchema.find();
@@ -38,15 +30,14 @@ module.exports = {
 			start = 10 * (args[0] - 1);
 			end = numEntries + start;
 			page = args[0];
-			for(var i = start; i < end; i++) {
+			for(let i = start; i < end; i++) {
 				const channel = await PS.channels.cache.get(sbs[i].channelID);
 				const msg = await channel.messages.fetch(sbs[i].messageID);
 				fields.push({ 'name': `#${i + 1} | ${sbs[i].author}`, 'value': `[Jump!](${msg.url})` });
 			}
 		}
 		else{
-			// eslint-disable-next-line no-redeclare
-			for(var i = start; i < end; i++) {
+			for(let i = start; i < end; i++) {
 				const channel = await PS.channels.cache.get(sbs[i].channelID);
 				const msg = await channel.messages.fetch(sbs[i].messageID);
 				fields.push({ 'name': `#${i + 1} | ${sbs[i].author}`, 'value': `[Jump!](${msg.url})` });
@@ -60,6 +51,6 @@ module.exports = {
 			.setTitle(`Starboards [${page}/${numPages}]`)
 			.addFields(fields)
 			.setAuthor('TerraBot Starboard Leaderboard', PS.iconURL());
-		return message.reply({ embeds: [embed] });
+		return message.channel.send(embed);
 	},
 };

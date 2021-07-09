@@ -6,9 +6,8 @@ module.exports = {
 	category: 'Custom Commands and Auto Reponses',
 	description: 'Clears all auto responders',
 	usage: `${config.prefix}arclearall`,
-	options: [],
 	run: async (client, message, args) => {
-		if(!message.member.hasPermission('MANAGE_MESSAGES')) {
+		if(!message.member.permissions.has('MANAGE_MESSAGES')) {
 			return message.reply('You don\'t have permissions for that :/');
 		}
 		await arSchema.deleteMany();
@@ -19,7 +18,7 @@ module.exports = {
 			.setTitle('Responders were cleared')
 			.setTimestamp()
 			.setDescription('Responders were cleared by user ' + message.author.tag);
-		logs.send({ embeds: [embed] });
+		logs.send(embed);
 		return message.reply('Successfully cleared the responders list!');
 
 	},

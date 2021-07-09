@@ -6,19 +6,11 @@ module.exports = {
 	category: 'Custom Commands and Auto Reponses',
 	description: 'Delete a certain auto responder',
 	usage: `${config.prefix}ardel <responder ID>`,
-	options: [
-		{
-			name: 'responderid',
-			type: 'INTEGER',
-			description: 'Deletes an auto responder by its id',
-			required: true,
-		},
-	],
 	run: async (client, message, args) => {
 		// responder
 		const numResponders = await arSchema.countDocuments({});
 		const fields = [];
-		if(!message.member.hasPermission('MANAGE_MESSAGES')) {
+		if(!message.member.permissions.has('MANAGE_MESSAGES')) {
 			return message.reply('You don\'t have permissions for that :/');
 		}
 		if(!args[0]) {
@@ -29,7 +21,7 @@ module.exports = {
 		}
 		const responder = await arSchema.findOne({ id: args[0] });
 		await arSchema.deleteOne({ id: args[0] });
-		for(var i = responder.id + 1;i < numResponders + 1; i++) {
+		for(let i = responder.id + 1;i < numResponders + 1; i++) {
 			const nextResponse = await arSchema.findOne({ id:i });
 			nextResponse.id--;
 			await nextResponse.save();
@@ -42,6 +34,6 @@ module.exports = {
 			.setTitle('Responder Deleted')
 			.setTimestamp()
 			.setDescription(`Responder with trigger ${responder.trigger} was cleared by user ` + message.author.tag);
-		return logs.send({ embeds: [embed] });
+		return logs.send(embed);
 	},
 };

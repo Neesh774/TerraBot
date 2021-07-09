@@ -13,6 +13,7 @@ const client = new Client({
 
 // Command Handler
 client.commands = new Collection();
+client.slashcommands = new Collection();
 client.aliases = new Collection();
 client.queue = new Map();
 client.coolDowns = new Set();
@@ -20,7 +21,7 @@ client.autoResponseCoolDowns = new Set();
 client.ccCoolDowns = new Set();
 // Command Folder location
 client.categories = fs.readdirSync('./commands/');
-['command'].forEach(handler => {
+['command', 'slashcommands'].forEach(handler => {
 	require(`./handlers/${handler}`)(client);
 });
 
@@ -59,39 +60,20 @@ client.on('message', async message => {
         }
     }
     await functions.sendAutoResponse(message, client);
-    await functions.levelUser(message, client);
     // Checks if the command starts with a prefix
     if (!message.content.startsWith(prefix)) return;
     // Makes sure bot wont respond to other bots including itself
     if (!message.member) message.member = await message.guild.fetchMember(message);
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/g);
-	const cmd = args.shift().toLowerCase();
-
-	if (cmd.length === 0) return;
-	await functions.sendCustomCommand(message, client);
-	if(cmd === 'deployslashes'){
-        const data = [];
-		client.commands.forEach(com => {
-			if(com.options) {
-				data.push(
-					{
-						name: com.name,
-						description: com.description,
-						options: com.options,
-					});
-			}
-			else{
-				data.push(
-					{
-						name: com.name,
-						description: com.description,
-					});
-			}
-		});
-		const command = await client.guilds.cache.get(config.PS).commands.set(data);
-		message.reply('Deployed all slashes');
-    }
+    const cmd = args.shift().toLowerCase();
+    if (cmd.length === 0) return;
+    await functions.sendCustomCommand(message, client);
+    let command = client.commands.get(cmd);
+    if (!command) command = client.commands.get(client.aliases.get(cmd));
+	if (command) {
+		command.run(client, message, args);
+	}
 
 });
 

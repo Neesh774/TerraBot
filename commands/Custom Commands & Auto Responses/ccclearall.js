@@ -7,7 +7,7 @@ module.exports = {
 	description: 'Clears all custom commands',
 	usage: `${config.prefix}ccclearall`,
 	run: async (client, message, args) => {
-		if(!message.member.hasPermission('MANAGE_MESSAGES')) {
+		if(!message.member.permissions.has('MANAGE_MESSAGES')) {
 			return message.reply('You don\'t have permissions for that :/');
 		}
 		await ccSchema.deleteMany();
@@ -18,7 +18,7 @@ module.exports = {
 			.setTitle('Commands were cleared')
 			.setTimestamp()
 			.setDescription('Commands were cleared by user ' + message.author.tag);
-		logs.send({ embeds: [embed] });
+		logs.send(embed);
 		return message.reply('Successfully cleared the commands list!');
 
 	},

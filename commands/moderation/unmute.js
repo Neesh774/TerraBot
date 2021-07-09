@@ -5,17 +5,9 @@ module.exports = {
 	category: 'moderation',
 	description: 'TerraBot brings the user back from the land of the rats',
 	usage: `${config.prefix}unmute <user>`,
-	options: [
-		{
-			name: 'user',
-			type: 'USER',
-			description: 'The user you want to unmute',
-			required: true,
-		},
-	],
 	run: async (client, message, args) => {
 		// command
-		if(!message.member.hasPermission('MANAGE_MESSAGES')) {
+		if(!message.member.permissions.has('MANAGE_MESSAGES')) {
 			return message.reply('You don\'t have permissions for that :/');
 		}
 		if(!args[0]) {

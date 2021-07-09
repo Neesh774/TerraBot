@@ -112,7 +112,7 @@ module.exports = {
 		try{
             client.ccCoolDowns.add(schema.id);
 			setTimeout(() => {client.ccCoolDowns.delete(schema.id);}, 5 * 1000);
-			return message.reply({ content: responses[ranInt] });
+			return message.reply({ content: responses[ranInt], allowedMentions: { repliedUser: false } });
 		}
 		catch(e) {
 			console.log(e.stack);
@@ -140,7 +140,7 @@ module.exports = {
 		try{
             client.autoResponseCoolDowns.add(schema.id);
 			setTimeout(() => {client.autoResponseCoolDowns.delete(schema.id);}, 5 * 1000);
-			return message.reply({ content: responses[ranInt] });
+			return message.reply({ content: responses[ranInt], allowedMentions: { repliedUser: false } });
 		}
 		catch(e) {
 			console.log(e.stack);

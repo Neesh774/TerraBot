@@ -8,14 +8,6 @@ module.exports = {
 	category: 'levels',
 	description: 'TerraBot tells you the range of a certain level',
 	usage: `${config.prefix}getxp <level>`,
-	options: [
-		{
-			name: 'level',
-			type: 'INTEGER',
-			description: 'The level you want information about',
-			required: true,
-		},
-	],
 	run: async (client, message, args) => {
 		// command
 		if(!args[0]) {
@@ -29,7 +21,7 @@ module.exports = {
 		}
 		catch(e) {
 			console.log(e.stack);
-			return message.reply({ content: ':x: There was an error. Please make sure you\'re using the proper arguments and try again.' });
+			return message.channel.send(':x: There was an error. Please make sure you\'re using the proper arguments and try again.');
 		}
 	},
 };

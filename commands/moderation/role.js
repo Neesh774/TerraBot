@@ -5,23 +5,9 @@ module.exports = {
 	category: 'moderation',
 	description: 'TerraBot gives the user whatever role you tell it to',
 	usage: `${config.prefix}role <user> <role name>`,
-	options: [
-		{
-			name: 'user',
-			type: 'USER',
-			description: 'The user to give the role to',
-			required: true,
-		},
-		{
-			name: 'role',
-			type: 'ROLE',
-			description: 'The role to give them',
-			required: true,
-		},
-	],
 	run: async (client, message, args) => {
 		// command
-		if(!message.member.hasPermission('MANAGE_MESSAGES')) {
+		if(!message.member.permissions.has('MANAGE_MESSAGES')) {
 			return message.reply('You don\'t have permissions for that :/');
 		}
 		if(!args[0]) {

@@ -10,8 +10,8 @@ module.exports = {
 	run: async (client, message) => {
 		const channel = message.member.voice.channel;
 		if (!channel) {
-			return message.reply(
-				{ content: 'You must Join a voice channel before using this command!' },
+			return message.channel.send(
+				'You must Join a voice channel before using this command!',
 			);
 		}
 
@@ -21,7 +21,7 @@ module.exports = {
 
 		await channel.join();
 
-		return message.reply(
+		return message.channel.send(
 			new MessageEmbed()
 				.setDescription('**Joined the voice channel :white_check_mark: **')
 				.setColor(config.embedColor),

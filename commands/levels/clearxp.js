@@ -6,10 +6,9 @@ module.exports = {
 	category: 'levels',
 	description: 'TerraBot will clear all of the xp',
 	usage: `${config.prefix}clearxp`,
-	options: [],
 	run: async (client, message, args) => {
 		// command
-		if(!message.member.hasPermission('MANAGE_MESSAGES')) {
+		if(!message.member.permissions.has('MANAGE_MESSAGES')) {
 			return message.reply('You don\'t have permissions for that :/');
 		}
 		await mSchema.deleteMany();
@@ -21,6 +20,6 @@ module.exports = {
 			.setTitle('Levels were cleared')
 			.setTimestamp()
 			.setDescription('All levels were cleared by user ' + message.author.toString());
-		return logs.send({ embeds: [embed] });
+		return logs.send(embed);
 	},
 };

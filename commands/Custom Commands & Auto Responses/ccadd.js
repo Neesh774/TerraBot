@@ -6,48 +6,10 @@ module.exports = {
 	category: 'Custom Commands and Auto Reponses',
 	description: 'Creates a new custom command',
 	usage: `${config.prefix}ccadd <trigger> <response URL> [another response URL] [another response URL]...`,
-	options: [
-		{
-			name: 'trigger',
-			type: 'INTEGER',
-			description: 'The phrase that will trigger the custom command',
-			required: true,
-		},
-		{
-			name: 'response1',
-			type: 'STRING',
-			description: 'The url, or phrase, that will be sent when someone uses this command',
-			required: true,
-		},
-		{
-			name: 'response2',
-			type: 'STRING',
-			description: 'The url, or phrase, that will be sent when someone uses this command',
-			required: false,
-		},
-		{
-			name: 'response3',
-			type: 'STRING',
-			description: 'The url, or phrase, that will be sent when someone uses this command',
-			required: false,
-		},
-		{
-			name: 'response4',
-			type: 'STRING',
-			description: 'The url, or phrase, that will be sent when someone uses this command',
-			required: false,
-		},
-		{
-			name: 'response5',
-			type: 'STRING',
-			description: 'The url, or phrase, that will be sent when someone uses this command',
-			required: false,
-		},
-	],
 	run: async (client, message, args) => {
 		// command
 		const numCommands = await ccSchema.countDocuments({});
-		if(!message.member.hasPermission('MANAGE_MESSAGES')) {
+		if(!message.member.permissions.has('MANAGE_MESSAGES')) {
 			return message.reply('You don\'t have permissions for that :/');
 		}
 		if(!args[0]) {
@@ -68,7 +30,7 @@ module.exports = {
 		});
 		cc.save().catch(err => console.log(err));
 		const fields = [];
-		for(var i = 0;i < responses.length;i++) {
+		for(let i = 0;i < responses.length;i++) {
 			fields.push({ 'name':`Response #${i + 1}`, 'value': responses[i] });
 		}
 		const embed = new Discord.MessageEmbed()
@@ -80,7 +42,7 @@ module.exports = {
 			.addFields(fields);
 		const PS = await client.guilds.fetch(config.PS);
 		const logs = await PS.channels.cache.get(config.logs);
-		logs.send({ embeds: [embed] });
-		return message.reply({ embeds: [embed] });
+		logs.send(embed);
+		return message.channel.send(embed);
 	},
 };

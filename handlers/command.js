@@ -7,8 +7,6 @@ table.setHeading('Command', 'Load status');
 
 console.log('Welcome to [ TerraBot ] // Discord: 🧀♅ツNeeshツ♅🧀#7740');
 
-// Loads Discord economy module
-
 module.exports = (client) => {
 	readdirSync('./commands/').forEach(dir => {
 		const commands = readdirSync(`./commands/${dir}/`).filter(file => file.endsWith('.js'));

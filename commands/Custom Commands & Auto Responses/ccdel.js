@@ -5,20 +5,12 @@ module.exports = {
 	name: 'ccdel',
 	category: 'Custom Commands and Auto Reponses',
 	description: 'Delete a certain custom command',
-	usage: `${config.prefix}ccdel <command ID>`,
-	options: [
-		{
-			name: 'command_id',
-			type: 'INTEGER',
-			description: 'The ID of the command you want to delete',
-			required: true,
-		},
-	],
+	usage: `${config.prefix}ccdel [command ID]`,
 	run: async (client, message, args) => {
 		// command
 		const numCommands = await ccSchema.countDocuments({});
 		const fields = [];
-		if(!message.member.hasPermission('MANAGE_MESSAGES')) {
+		if(!message.member.permissions.has('MANAGE_MESSAGES')) {
 			return message.reply('You don\'t have permissions for that :/');
 		}
 		if(args[0] > numCommands) {
@@ -26,7 +18,7 @@ module.exports = {
 		}
 		const command = await ccSchema.findOne({ id: args[0] });
 		await ccSchema.deleteOne({ id: args[0] });
-		for(var i = command.id + 1;i < numCommands + 1; i++) {
+		for(let i = command.id + 1;i < numCommands + 1; i++) {
 			const nextCommand = await ccSchema.findOne({ id:i });
 			nextCommand.id--;
 			await nextCommand.save();
@@ -39,6 +31,6 @@ module.exports = {
 			.setTitle('Command Deleted')
 			.setTimestamp()
 			.setDescription(`Command with trigger ${command.trigger} was cleared by user ` + message.author.tag);
-		return logs.send({ embeds: [embed] });
+		return logs.send(embed);
 	},
 };

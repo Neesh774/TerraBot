@@ -2,20 +2,13 @@ const { MessageEmbed } = require('discord.js');
 const { stripIndents } = require('common-tags');
 const config = require('../../config.json');
 
+
 module.exports = {
 	name: 'help',
 	aliases: ['h'],
 	category: 'info',
 	description: 'Returns all commands, or one specific command info',
 	usage: `${config.prefix}help [command]`,
-	options: [
-		{
-			name: 'command',
-			type: 'STRING',
-			description: 'The command you want help with',
-			required: false,
-		},
-	],
 	run: async (client, message, args) => {
 		// If there's an args found
 		// Send the info of that command found
@@ -53,11 +46,11 @@ function getAll(client, message) {
 		.map(cat => stripIndents`**${cat[0].toUpperCase() + cat.slice(1)}** \n${commands(cat)}`)
 		.reduce((string, category) => string + '\n' + category);
 
-        message.reply({content: 'Sent help to dms'})
+	message.reply('Sent help to dms');
 
 
-    return message.user.send({embeds: [embed.setDescription(info)]});
-    
+	return message.author.send(embed.setDescription(info));
+
 }
 
 function getCMD(client, message, input) {
@@ -68,10 +61,10 @@ function getCMD(client, message, input) {
 
 	let info = `No information found for command **${input.toLowerCase()}**`;
 
-    // If no cmd is found, send not found embed
-    if (!cmd) {
-        return message.reply(embed.setColor(config.embedColor).setDescription(info));
-    }
+	// If no cmd is found, send not found embed
+	if (!cmd) {
+		return message.channel.send(embed.setColor(config.embedColor).setDescription(info));
+	}
 
 	// Add all cmd info to the embed
 	if (cmd.name) info = `**Command name**: ${cmd.name}`;
@@ -82,5 +75,5 @@ function getCMD(client, message, input) {
 		embed.setFooter('Syntax: <> = required, [] = optional');
 	}
 
-    return message.reply(embed.setColor(config.embedColor).setDescription(info));
+	return message.channel.send(embed.setColor(config.embedColor).setDescription(info));
 }

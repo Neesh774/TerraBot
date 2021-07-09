@@ -5,8 +5,8 @@ module.exports = {
     name: 'interaction',
     async execute(interaction, client){
         if(interaction.isCommand()){
-            let command = client.commands.get(interaction.commandName);
-            if (!command) command = client.commands.get(client.aliases.get(interaction.commandName));
+            let command = client.slashcommands.get(interaction.commandName);
+            if (!command) command = client.slashcommands.get(client.aliases.get(interaction.commandName));
             const args = [];
             interaction.options.each(option => {
                 if(option.options){

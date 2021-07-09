@@ -13,6 +13,7 @@
     "cheerio": "*",
     "common-tags": "^1.8.0",
     "cpu-stat": "^2.0.1",
+    "dayjs": "^1.10.6",
     "discord-economy": "^1.2.2",
     "discord-rpc": "^3.2.0",
     "discord-ytdl-core": "^5.0.3",

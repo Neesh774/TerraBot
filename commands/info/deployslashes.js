@@ -8,8 +8,11 @@ module.exports = {
 	usage: `${config.prefix}deployslashes`,
 	run: async (client, message, args) => {
 		const data = [];
-		client.commands.forEach(cmd => {
+        if(!message.member.permissions.has('MANAGE_MESSAGES') && message.member.id !== config.neesh) message.reply('You don\'t have permissions for that :/');
+		client.slashcommands.forEach(cmd => {
 			if(cmd.options) {
+                console.log(`Deploying ${cmd.name} with options:`)
+                console.log(cmd.options);
 				data.push(
 					{
 						name: cmd.name,
@@ -26,6 +29,6 @@ module.exports = {
 			}
 		});
 		const command = await client.guilds.cache.get(config.PS).commands.set(data);
-		message.reply('Deployed all slashes');
+        message.reply('Deployed all slashes');
 	},
 };
