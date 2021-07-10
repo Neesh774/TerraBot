@@ -2,29 +2,18 @@ const { MessageEmbed } = require('discord.js');
 const config = require('../../config.json');
 module.exports = {
     name: 'embed',
-    category: 'Administration',
-    aliases: ['embed'],
-    cooldown: 2,
+    category: 'Utility',
     usage: `${config.prefix}embed <TITLE> ++ <DESCRIPTION>`,
     description: 'Resends a message from you as an Embed',
-    memberpermissions: 'MANAGE_MESSAGES',
-    run: async (client, message, args, user, text, prefix) => {
+    run: async (client, message, args) => {
     try{
       if(!message.member.permissions.has('MANAGE_MESSAGES')){
         return message.channel.send({ embeds: [new MessageEmbed()
             .setColor(config.embedColor)
-            .setTitle('❌ ERROR | You don\'t have permission for that.')
-            .setDescription(`Usage: \`${prefix}${this.usage}\``)] },
+            .setTitle('❌ ERROR | You don\'t have permission for that.')] },
       );
       }
-      if(!args[0]) {
-return message.channel.send({ embeds: [new MessageEmbed()
-            .setColor(config.embedColor)
-            .setTitle('❌ ERROR | You didn\'t provide a Title, nor a Description')
-            .setDescription(`Usage: \`${prefix}${this.usage}\``)] },
-        );
-}
-        message.delete();
+      message.delete();
       const userargs = args.join(' ').split('++');
       const title = userargs[0];
       const desc = userargs.slice(1).join(' ')

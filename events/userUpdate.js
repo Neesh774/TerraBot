@@ -4,9 +4,9 @@ const config = require('../config.json');
 module.exports = {
     name: 'userUpdate',
     async execute(oldUser, newUser, client){
-        const PS = await client.guilds.fetch(config.PS); 
+        const PS = await client.guilds.fetch(config.PS);
         const logs = await PS.channels.cache.get(config.logs);
-        let member = await PS.members.fetch(newUser.id);
+        const member = await PS.members.fetch(newUser.id);
         let updated = false;
         let embed = false;
         if(oldUser.avatar != newUser.avatar){
@@ -35,9 +35,9 @@ module.exports = {
                 )
                 .setTimestamp();
             updated = true;
-        } 
-        if(updated){
-            return logs.send({embeds: [embed]});
         }
-    }
+        if(updated){
+            return logs.send({ embeds: [embed] });
+        }
+    },
 }

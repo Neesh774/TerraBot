@@ -22,13 +22,8 @@ module.exports = {
       },
    ],
    run: async (client, message, args) => {
-      if(!args[0]){
-         return message.reply('When should I remind you?');
-      }
-      if(!args[1]){
-         return message.reply('What should I remind you with?');
-      }
       const timeArg = args[0]
-      functions.setReminder(message.member, timeArg, args.join(' '));
+      functions.setReminder(message.member, timeArg, args[1]);
+      message.reply(`Set a reminder to \`${args[1]}\` in ${timeArg}`)
    },
 };

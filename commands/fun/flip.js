@@ -1,24 +1,24 @@
-const config = require("../../config.json");
+const config = require('../../config.json');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = {
-    name: "flip",
-    category: "fun",
-    description: "Flips a coin",
+    name: 'flip',
+    category: 'fun',
+    description: 'Flips a coin',
     usage: `${config.prefix}flip`,
     run: async (client, message, args) => {
         var result = Math.round(Math.random());
-        var string = "";
+        var string = '';
         if(result == 1){
-            string = "Heads";
+            string = 'Heads';
         }
         else{
-            string = "Tails";
+            string = 'Tails';
         }
-        let embed = new MessageEmbed()
+        const embed = new MessageEmbed()
             .setColor(config.embedColor)
             .setDescription(`You got a ${string}!`)
-            .setThumbnail("https://cdn.onlinewebfonts.com/svg/img_441781.png");
-        return message.channel.send({embeds: [embed]});
-    }
+            .setThumbnail('https://cdn.onlinewebfonts.com/svg/img_441781.png');
+        return message.channel.send({ embeds: [embed] });
+    },
 };

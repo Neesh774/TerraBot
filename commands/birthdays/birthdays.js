@@ -32,12 +32,9 @@ module.exports = {
       numEntries = list.length - 10 * (numPages - 1);
     }
     start = 10 * (arg - 1);
-    console.log(start)
     end = numEntries + start;
-    console.log(end)
     page = arg;
     for(var i = start; i < end; i++){
-        console.log(i);
       fields.push({ 'name': `#${i + 1} | ${list[i].user}`, 'value': `${list[i].birthday.toString().slice(4, 10)}` })
     }
     const embed = new Discord.MessageEmbed()

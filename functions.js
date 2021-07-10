@@ -146,11 +146,8 @@ module.exports = {
 			console.log(e.stack);
 		}
 	},
-	setReminder: async function(message, time, content) {
-		if (!time) return message.reply({ content: 'When should I remind you?' });
-
-		// Create reminder time out
-		setTimeout(() => {message.reply({ content: 'Reminder to ' + content });}, ms(time));
+	setReminder: async function(author, time, content) {
+		setTimeout(() => {author.send({ content: `You told me to remind you to \`${content}\`` });}, ms(time));
 	},
 	setCoolDown: async function(profile) {
 		profile.coolDown = false;

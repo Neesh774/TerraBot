@@ -2,12 +2,9 @@ const { MessageEmbed } = require('discord.js');
 const config = require('../../config.json');
 module.exports = {
     name: 'embed',
-    category: 'Administration',
-    aliases: ['embed'],
-    cooldown: 2,
+    category: 'Utility',
     usage: `${config.prefix}embed <TITLE> ++ <DESCRIPTION>`,
     description: 'Resends a message from you as an Embed',
-    memberpermissions: 'MANAGE_MESSAGES',
     options: [
       {
         name: 'title',
@@ -22,13 +19,12 @@ module.exports = {
           required: true,
         },
     ],
-    run: async (client, message, args, user, text, prefix) => {
+    run: async (client, message, args) => {
     try{
       if(!message.member.permissions.has('MANAGE_MESSAGES')){
         return message.reply({ embeds: [new MessageEmbed()
             .setColor(config.embedColor)
-            .setTitle('❌ ERROR | You don\'t have permission for that.')
-            .setDescription(`Usage: \`${prefix}${this.usage}\``)] },
+            .setTitle('❌ ERROR | You don\'t have permission for that.')] },
       );
       }
       message.reply({ content: 'Successfully sent the embed!', ephemeral: true });
@@ -46,4 +42,3 @@ module.exports = {
     }
   },
 }
-/** Template by Tomato#6966 | https://github.com/Tomato6966/Discord-Js-Handler-Template */

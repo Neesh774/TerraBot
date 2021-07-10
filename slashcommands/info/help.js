@@ -53,11 +53,11 @@ function getAll(client, message) {
 		.map(cat => stripIndents`**${cat[0].toUpperCase() + cat.slice(1)}** \n${commands(cat)}`)
 		.reduce((string, category) => string + '\n' + category);
 
-        message.reply({content: 'Sent help to dms'})
+        message.reply({ content: 'Sent help to dms' })
 
 
-    return message.user.send({embeds: [embed.setDescription(info)]});
-    
+    return message.user.send({ embeds: [embed.setDescription(info)] });
+
 }
 
 function getCMD(client, message, input) {

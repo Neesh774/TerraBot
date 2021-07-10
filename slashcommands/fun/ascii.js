@@ -18,9 +18,9 @@ module.exports = {
 		// command
 		var maxLen = 100;
 
-    if(args.join(' ').length > maxLen) return message.reply({content: `The max length is ${maxLen}!`}) 
+    if(args.join(' ').length > maxLen) return message.reply({ content: `The max length is ${maxLen}!` })
 
-    if(!args[0]) return message.reply({content: 'Please enter some text.'});
+    if(!args[0]) return message.reply({ content: 'Please enter some text.' });
 
 		figlet(`${args.join(' ')}`, function(err, data) {
 			if (err) {
@@ -28,7 +28,7 @@ module.exports = {
 				return;
 			}
 
-        message.reply({content: `\`\`\`${data}\`\`\``});
+        message.reply({ content: `\`\`\`${data}\`\`\`` });
     });
-  }
+  },
 };

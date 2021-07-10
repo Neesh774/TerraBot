@@ -44,7 +44,7 @@ module.exports = {
           .setImage('attachment://boost-image.png')
         // define the welcome channel
         // send the welcome embed to there
-        message.reply({ embeds: [welcomeembed], files: attachment });
+        message.reply({ embeds: [welcomeembed], files: [attachment] });
         // embed = new Discord.MessageEmbed()
         //         .setColor(config.embedColor)
         //         .setTimestamp()
