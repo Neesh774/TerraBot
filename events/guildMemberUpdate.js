@@ -84,9 +84,8 @@ module.exports = {
 				.setFooter('TerraBot Info', member.guild.iconURL({ dynamic: true }))
 				.addField(`${member.user.username}, Thanks for boosting!`, `The server now has ${PS.premiumSubscriptionCount} boosts, and is on tier ${PS.premiumTier}.`, true)
 				.setImage('attachment://boost-image.png')
-				.attachFiles(attachment);
 			const welcome = PS.channels.cache.get(config.welcome);
-			welcome.send({ embeds: [welcomeembed] });
+			welcome.send({ embeds: [welcomeembed], files: [attachment] });
 			updated = true;
 			embed = new Discord.MessageEmbed()
 				.setColor(config.embedColor)

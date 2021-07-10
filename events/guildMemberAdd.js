@@ -57,10 +57,9 @@ module.exports = {
 			.setFooter('TerraBot Info', member.guild.iconURL({ dynamic: true }))
 			.addField(`${member.user.username}, Welcome to the Project Solaris Discord!`, `The server now has ${member.guild.memberCount} members.`, true)
 			.setImage('attachment://welcome-image.png')
-			.attachFiles(attachment);
 		// define the welcome channel
 		// send the welcome embed to there
-		channel.send({ embeds: [welcomeembed] });
+		channel.send({ embeds: [welcomeembed], files: [attachment] });
 
 		const logs = await PS.channels.cache.get(config.logs);
 		const embed = new Discord.MessageEmbed()
