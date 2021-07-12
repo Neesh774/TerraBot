@@ -22,9 +22,9 @@ module.exports = {
 			if(args[0] > numResponses) {
 				return message.reply('That responder doesn\'t exist!');
 			}
-			const responder = arSchema.findOne({ id: args[0] });
-			for(var i = 0; i < responder.responses.length;i++) {
-				fields.push({ 'name':`Response #${i + 1}`, 'value': `${responder.responses[i]}` });
+			const responder = await arSchema.findOne({ id: args[0] });
+			for(var i = 0; i < responder.responsesArray.length;i++) {
+				fields.push({ 'name':`Response #${i + 1}`, 'value': `${responder.responsesArray[i]}` });
 			}
 			const embed = new Discord.MessageEmbed()
 				.setColor(config.embedColor)

@@ -15,7 +15,7 @@ module.exports = {
         if(args[0] > numResponses){
             return message.reply('That responder doesn\'t exist!');
         }
-        const responder = arSchema.findOne({ id: args[0] });
+        const responder = await arSchema.findOne({ id: args[0] });
         for(var i = 0; i < responder.responses.length;i++){
             fields.push({ 'name':`Response #${i + 1}`, 'value': `${responder.responses[i]}` });
         }
