@@ -8,6 +8,7 @@ const lrSchema = require('./models/levelroleschema.js');
 const rrschema = require('./models/rrschema');
 const sSchema = require('./models/suggestschema');
 const sbSchema = require('./models/starboard');
+const mongo = require('./token.json');
 module.exports = {
 	getMember: async function(id, client, guild) {
 		return await guild.members.fetch(id);
@@ -118,7 +119,7 @@ module.exports = {
 		}
 	},
 	connectMongoose: async function(mongoose) {
-		await mongoose.connect(config.mongoURI, {
+		await mongoose.connect(mongo.mongoURI, {
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
 			useFindAndModify: false,
