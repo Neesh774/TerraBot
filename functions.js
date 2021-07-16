@@ -5,13 +5,12 @@ const wSchema = require('./models/warnSchema.js');
 const mSchema = require('./models/memberschema.js');
 const mcSchema = require('./models/mchannelschema.js');
 const lrSchema = require('./models/levelroleschema.js');
+const rrschema = require('./models/rrschema');
+const sSchema = require('./models/suggestschema');
+const sbSchema = require('./models/starboard');
 module.exports = {
-	getMember: function(message, toFind = '') {
-		toFind = toFind.toLowerCase();
-
-		let target = message.guild.members.get(toFind);
-
-		if (!target && message.mentions.members) {target = message.mentions.members.first();}
+	getMember: async function(id, client, guild) {
+		return await guild.members.fetch(id);
 	},
 	formatDate: function(date) {
 		return new Intl.DateTimeFormat('en-US').format(date);
@@ -188,15 +187,7 @@ module.exports = {
 			return;
 		}
 		if(!og) {
-			const mss = new mSchema({
-				name: message.author.username,
-				userID: message.author.id,
-				level: 1,
-				xp: 0,
-				muted: false,
-				starboards: 0,
-			});
-			await mss.save();
+			await this.createUserProfile(message.author);
 		}
 		const profile = await mSchema.findOne({ userID: message.author.id });
 		if(profile.muted) {
@@ -233,4 +224,39 @@ module.exports = {
 			setTimeout(() => {client.coolDowns.delete(profile.userID);}, 60 * 1000);
 		}
 	},
+	createUserProfile: async function(user){
+		const mss = new mSchema({
+			name: user.username,
+			userID: user.id,
+			level: 1,
+			xp: 0,
+			muted: false,
+			starboards: 0,
+		});
+		await mss.save();
+	},
+	cacheMessages: async function(client){
+		const reactionRoles = await rrschema.find({});
+		reactionRoles.forEach((rr) => {
+			client.channels.fetch(rr.channelID).then(async (channel) =>{
+				await channel.messages.fetch(rr.messageID);
+			})
+		});
+		console.log("Cached all reaction roles!");
+		const suggestions = await sSchema.find({});
+		const PS = await client.guilds.fetch(config.PS);
+		const suggest = await PS.channels.cache.get(config.suggestions);
+		suggestions.forEach((s) => {
+			suggest.messages.fetch(s.messageID)
+		});
+		console.log("Cached all suggestions!");
+		const starboards = await sbSchema.find({});
+		starboards.forEach((sb) => {
+			client.channels.fetch(sb.channelID).then(async (channel) =>{
+				await channel.messages.fetch(sb.messageID);
+			})
+		});
+		console.log("Cached all starboards!");
+		
+	}
 };

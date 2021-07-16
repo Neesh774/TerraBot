@@ -44,7 +44,6 @@ module.exports = {
     start = 10 * (arg - 1);
     end = numEntries + start;
     page = arg;
-    console.log(list);
     if(!list[i]){
       return message.reply("Looks like we don't have any starboards yet :/");
     }

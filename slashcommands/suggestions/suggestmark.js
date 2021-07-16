@@ -69,6 +69,37 @@ module.exports = {
         suggest.reason = 'N/A';
     }
     suggest.save();
+    const PS = await client.guilds.fetch(config.PS);
+    const suggestChannel = await PS.channels.cache.get(config.suggestions);
+
+    const sMessage = await suggestChannel.messages.fetch(suggest.messageID);
+    if(suggest.status === 'dead'){
+        const newSuggest = new Discord.MessageEmbed()
+            .setColor(config.embedColor)
+            .setTitle(`Suggestion #${index} marked as rejected`)
+            .setDescription(`${suggest.suggestion}`)
+            .addField('Status', 'Dead')
+            .addField('Reason', `${suggest.reason}`)
+        await sMessage.edit({embeds: [newSuggest]});
+    }
+    else if(suggest.status === 'in_progress'){
+        const newSuggest = new Discord.MessageEmbed()
+            .setColor(config.embedColor)
+            .setTitle(`Suggestion #${index} marked as undertaken!`)
+            .setDescription(`${suggest.suggestion}`)
+            .addField('Status', 'In Progress')
+            .addField('Reason', `${suggest.reason}`)
+        await sMessage.edit({embeds: [newSuggest]});
+    }
+    else if(suggest.status === 'done'){
+        const newSuggest = new Discord.MessageEmbed()
+            .setColor(config.embedColor)
+            .setTitle(`Suggestion #${index} marked as implemented`)
+            .setDescription(`${suggest.suggestion}`)
+            .addField('Status', 'Implemented')
+            .addField('Reason', `${suggest.reason}`)
+        await sMessage.edit({embeds: [newSuggest]});
+    }
     const embed = new Discord.MessageEmbed()
         .setColor(config.embedColor)
         .setTitle('Suggestion #' + index + ' updated successfully!')
@@ -76,37 +107,6 @@ module.exports = {
         .addField('Status', `${suggest.status}`)
         .addField('Reason', `${suggest.reason}`)
         .setAuthor(suggest.createdBy, suggest.createdByIcon);
-    message.reply({ embeds: [embed] });
-    const PS = await client.guilds.fetch(config.PS);
-    const suggestChannel = await PS.channels.cache.get(config.suggestions);
-
-    const sMessage = await suggestChannel.messages.fetch(suggest.messageID);
-    if(mark.toLowerCase() === 'dead'){
-        const newSuggest = new Discord.MessageEmbed()
-            .setColor(config.embedColor)
-            .setTitle(`Suggestion #${index} marked as dead`)
-            .setDescription(`${suggest.suggestion}`)
-            .addField('Status', 'Dead')
-            .addField('Reason', `${suggest.reason}`)
-        return sMessage.edit(newSuggest);
-    }
-    else if(mark.toLowerCase() === 'in_progress'){
-        const newSuggest = new Discord.MessageEmbed()
-            .setColor(config.embedColor)
-            .setTitle(`Suggestion #${index} marked as In Progress!`)
-            .setDescription(`${suggest.suggestion}`)
-            .addField('Status', 'In Progress')
-            .addField('Reason', `${suggest.reason}`)
-        return sMessage.edit(newSuggest);
-    }
-    else if(mark.toLowerCase() === 'done'){
-        const newSuggest = new Discord.MessageEmbed()
-            .setColor(config.embedColor)
-            .setTitle(`Suggestion #${index} marked as implemented`)
-            .setDescription(`${suggest.suggestion}`)
-            .addField('Status', 'Implemented')
-            .addField('Reason', `${suggest.reason}`)
-        sMessage.edit(newSuggest);
-    }
+    return message.reply({ embeds: [embed] });
     },
 };

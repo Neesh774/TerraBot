@@ -1,0 +1,17 @@
+{
+    "prefix": "t",
+    "clientID": "834972549891883028",
+    "embedColor": "#d63741",
+    "mutedRole": "771859977417654302",
+    "upvote": "845854669304889369",
+    "downvote": "845854689265713172",
+    "mongoURI": "mongodb+srv://Neesh:fljnyI5WBOyvnyvH@cluster0.99zcx.mongodb.net/projectsolaris?retryWrites=true&w=majority",
+    "PS": "644368555403640872",
+    "logs": "794657056069910588",
+    "starboardEmote": "743241184411123754",
+    "starboardChannel": "796122150083100702",
+    "general": "648415220296974338",
+    "suggestions": "786316994915729469",
+    "welcome": "648415335774552084",
+    "neesh": "297504183282565130"
+  }

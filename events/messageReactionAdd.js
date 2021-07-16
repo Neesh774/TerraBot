@@ -26,14 +26,11 @@ module.exports = {
                 return logs.send({ embeds: [embed] });
             }
         }
-        if(message.reactions.cache.size == 5 && message.reactions.cache.every(reaction => reaction.emoji.id == config.starboardEmote)){
+        if(message.reactions.cache.some(reaction => {
+            return reaction.emoji.id === config.starboardEmote && reaction.count === 1
+        })){
             const starboardChannel = await PS.channels.cache.get(config.starboardChannel);
-            const parsedLinks = message.content.match(/^https?:\/\/(\w+\.)?imgur.com\/(\w*\d\w*)+(\.[a-zA-Z]{3})?$/);
             const attachments = message.attachments && message.attachments.first() ? message.attachments.first() : undefined;
-            if (parsedLinks && parsedLinks.length > 0) {
-              // Removing links
-              message.content.replace(/^https?:\/\/(\w+\.)?imgur.com\/(\w*\d\w*)+(\.[a-zA-Z]{3})?$/, '');
-            }
 
             const sb = new sbSchema({
                 messageID: message.id,
@@ -54,9 +51,8 @@ module.exports = {
               // eslint-disable-next-line quotes
               .setColor(config.embedColor)
             if (message.content.length > 0) emb.setDescription(message.content.slice(0, 1999));
-            if (parsedLinks) emb.addField('Links', parsedLinks.join('\n'), true);
             emb.addField('Source', `[Jump!](https://discordapp.com/channels/${message.guild.id}/${message.channel.id}/${message.id})`);
-            if (attachments || (parsedLinks && parsedLinks.length > 0)) emb.setImage(attachments ? attachments.url : parsedLinks.length > 0 ? parsedLinks[0] : '');
+            if (attachments) emb.setImage(attachments.url);
             return starboardChannel.send({ embeds: [emb] });
         }
         const suggest = await sSchema.findOne({ messageID: message.id })

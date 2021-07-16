@@ -2,13 +2,14 @@
 const { Client, Collection, Intents } = require('discord.js');
 const functions = require('./functions.js');
 const config = require('./config.json');
+const token = require('./token.json');
 const fs = require('fs');
 const mongoose = require('mongoose');
 const badwords = require('./nonowords.json');
 const client = new Client({
 // Stops the bot from mentioning @everyone
 	allowedMentions: { parse: ['users', 'roles'], repliedUser: true },
-	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES],
+	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
 });
 
 // Command Handler
@@ -59,7 +60,8 @@ client.on('ready', async () => {
     });
     const PS = client.guilds.cache.get(config.PS);
     const commands = await PS.commands.set(data);
-    console.log('Slash commands deployed successfully.')
+    console.log('Slash commands deployed successfully.');
+    functions.cacheMessages(client);
 	console.log(`Bot User ${client.user.username} has been logged in and is ready to use!`);
 	client.user.setActivity('thelp', { type: 'WATCHING' });
 	functions.connectMongoose(mongoose);
@@ -99,4 +101,4 @@ client.on('message', async message => {
 });
 
 // Log into discord using the token in config.json
-client.login(config.token);
+client.login(token.token);

@@ -17,11 +17,11 @@ module.exports = {
     run: async (client, message, args) => {
         //reaction role
         const numReactionRoles = await rrSchema.countDocuments({});
+        if(!message.member.permissions.has("MANAGE_MESSAGES")){
+            return message.reply("You don't have permissions for that :/");
+        }
         if(args[0]){
             let fields = [];
-                if(!message.member.permissions.has("MANAGE_MESSAGES")){
-                    return message.reply("You don't have permissions for that :/");
-                }
                 if(args[0] > numReactionRoles){
                     return message.reply("That reaction role doesn't exist!");
                 }
@@ -43,10 +43,7 @@ module.exports = {
                 return logs.send({embeds: [embed]});
         }
         else{
-            if(!message.member.permissions.has("MANAGE_MESSAGES")){
-                return message.reply("You don't have permissions for that :/");
-            }
-            rrSchema.deleteMany({});
+            await rrSchema.deleteMany({});
             message.reply(`Reaction roles successfully cleared!`);
                 const PS = await client.guilds.fetch(config.PS); 
                 const logs = await PS.channels.cache.get(config.logs);

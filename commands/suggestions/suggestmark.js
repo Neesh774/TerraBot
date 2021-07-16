@@ -54,7 +54,7 @@ module.exports = {
             .setDescription(`${suggest.suggestion}`)
             .addField('Status', 'Dead')
             .addField('Reason', `${suggest.reason}`)
-        return sMessage.edit(newSuggest);
+        return sMessage.edit({embeds: [newSuggest]});
     }
     else if(mark.toLowerCase() === 'in_progress'){
         const newSuggest = new Discord.MessageEmbed()
@@ -63,7 +63,7 @@ module.exports = {
             .setDescription(`${suggest.suggestion}`)
             .addField('Status', 'In Progress')
             .addField('Reason', `${suggest.reason}`)
-        return sMessage.edit(newSuggest);
+        return sMessage.edit({embeds:[newSuggest]});
     }
     else if(mark.toLowerCase() === 'done'){
         const newSuggest = new Discord.MessageEmbed()
@@ -72,7 +72,7 @@ module.exports = {
             .setDescription(`${suggest.suggestion}`)
             .addField('Status', 'Implemented')
             .addField('Reason', `${suggest.reason}`)
-        sMessage.edit(newSuggest);
+        sMessage.edit({embeds: [newSuggest]});
     }
     },
 };

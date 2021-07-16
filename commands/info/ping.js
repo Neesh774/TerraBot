@@ -9,7 +9,6 @@ module.exports = {
     run: async (client, message, args) => {
         const msg = await message.channel.send({ content: '🏓 Pinging....' });
 
-        msg.edit({ content: `🏓 Pong!
-        API Latency is ${Math.round(client.ws.ping)}ms` });
+        msg.edit({ content: `🏓 Pong!\nAPI Latency is ${Math.round(client.ws.ping)}ms` });
     },
 }

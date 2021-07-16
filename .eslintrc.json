@@ -42,6 +42,7 @@
 		"space-unary-ops": "error",
 		"spaced-comment": "error",
 		"yoda": "error",
-        "no-unused-vars": "off"
+        "no-unused-vars": "off",
+		"parser": "babel-eslint"
 	}
 }

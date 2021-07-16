@@ -7,21 +7,30 @@ module.exports = {
     category: 'levels',
     description: 'TerraBot will change the level a user is at',
     usage: `${config.prefix}setlevel <user> <level>`,
-
+    options: [
+        {
+            name: 'user',
+            type: 'USER',
+            description: 'The user you want to set the level of',
+            required: true,
+        },
+        {
+            name: 'level',
+            type: 'INTEGER',
+            description: 'The level you want to set the user to',
+            required: true,
+        },
+    ],
     run: async (client, message, args) => {
         // command
         if(!message.member.permissions.has('MANAGE_MESSAGES')){
             return message.reply('You don\'t have permissions for that :/');
         }
-        if(!args[0]){
-            return message.reply('Whose level should I change?');
-        }
-        if(!args[1]){
-            return message.reply('What level should I set them to?');
-        }
-        const user = args[0];
-
+        const user = await functions.getMember(args[0], client, message.guild);
         const member = await mSchema.findOne({ userID: user.id });
+        if(!member){
+            await functions.createUserProfile(user.user)
+        }
         if(args[1] < 0){
             message.reply('Couldn\'t set them to that level.');
         }

@@ -28,7 +28,7 @@ module.exports = {
 		if(!args[0]) {
 			return message.reply('You need to give me someone to mute!');
 		}
-		const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase());
+		const member = await message.guild.members.fetch(args[0]);
 		if (!member) return message.reply({ content: '**User Is Not In The Guild**' });
 		if (member === message.member) return message.reply({ content: '**You Cannot Mute Yourself**' });
 		const PS = await client.guilds.fetch(config.PS);

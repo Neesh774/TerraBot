@@ -28,16 +28,16 @@ module.exports = {
 		// make it "2D"
 		const ctx = canvas.getContext('2d');
 		// set the Background to the welcome.png
-		const background = await Canvas.loadImage(path.resolve(__dirname, '../assets/welcome.png'));
+		const background = await Canvas.loadImage(path.resolve(__dirname, '../../assets/welcome.png'));
 		ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 		// ctx.strokeStyle = '#f2f2f2';
 		ctx.strokeRect(0, 0, canvas.width, canvas.height);
 		// set the first text string
-		var textString3 = `${member.user.username}`;
-		ctx.font = '130px "regular"';
-		ctx.fillStyle = '#36212e';
+		const textString3 = `${member.user.username}`;
+		ctx.font = '180px "bold"';
+		ctx.fillStyle = '#ffffff';
 		ctx.textAlign = 'center';
-		ctx.fillText(textString3, 1500, 950, 1700);
+		ctx.fillText(textString3, 1500, 970, 1900);
 		// create a circular "mask"
 		ctx.beginPath();
 		ctx.arc(320, 915, 180, 0, Math.PI * 2, true);// position of img
@@ -50,7 +50,6 @@ module.exports = {
 		// get it as a discord attachment
 		const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
 		// define the welcome embed
-		const channel = PS.channels.cache.get(config.welcome);
 		const welcomeembed = new Discord.MessageEmbed()
 			.setColor(config.embedColor)
 			.setTimestamp()
@@ -59,7 +58,7 @@ module.exports = {
 			.setImage('attachment://welcome-image.png')
 		// define the welcome channel
 		// send the welcome embed to there
-		channel.send({ embeds: [welcomeembed], files: [attachment] });
+		message.channel.send({embeds: [welcomeembed], files: [attachment]});
 
 		const logs = await PS.channels.cache.get(config.logs);
 		const embed = new Discord.MessageEmbed()

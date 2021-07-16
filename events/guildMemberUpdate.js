@@ -2,8 +2,8 @@ const Discord = require('discord.js');
 const config = require('../config.json');
 const path = require('path');
 const { registerFont, createCanvas } = require('canvas');
-registerFont(path.resolve(__dirname, '../assets/project-solaris.ttf'), { family: 'Regular' });
 const Canvas = require('canvas');
+Canvas.registerFont(path.resolve(__dirname, '../assets/whitneybold.ttf'), { family: 'Bold' });
 
 module.exports = {
 	name: 'guildMemberUpdate',
@@ -61,9 +61,9 @@ module.exports = {
 			// ctx.strokeStyle = '#f2f2f2';
 			ctx.strokeRect(0, 0, canvas.width, canvas.height);
 			// set the first text string
-			var textString3 = `${member.user.username}`;
-			ctx.font = '130px "regular"';
-			ctx.fillStyle = '#36212e';
+			const textString3 = `${member.user.username}`;
+			ctx.font = '180px "bold"';
+			ctx.fillStyle = '#ffffff';
 			ctx.textAlign = 'center';
 			ctx.fillText(textString3, 1500, 970, 1900);
 			// create a circular "mask"

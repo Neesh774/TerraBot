@@ -19,7 +19,7 @@ module.exports = {
             .addField('Jump!', `[Click here](${newMessage.url})`)
             .addField('Old', `${oldMessage.content}`)
             .addField('New', `${newMessage.content}`)
-            .setThumbnail(newMessage.user.displayAvatarURL({ dynamic: true }))
+            .setThumbnail(newMessage.author.displayAvatarURL({ dynamic: true }))
         logs.send({ embeds: [embedMessageUpdate] });
 	},
 }

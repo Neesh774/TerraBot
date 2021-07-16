@@ -19,7 +19,8 @@ module.exports = {
     run: async (client, message, args) => {
         let user = message.user;
         if(args[0]){
-            user = args[0];
+            guildMember = await functions.getMember(args[0], client, message.guild);
+            user = guildMember.user;
         }
         const member = await mSchema.findOne({ userID: user.id });
         const list = await mSchema.find();
@@ -38,7 +39,6 @@ module.exports = {
             .setAvatar(user.displayAvatarURL({ format: 'png', dynamic: 'false' }))
             .setCurrentXP(member.xp - currentlevelXP)
             .setRequiredXP(nextLevelXP - currentlevelXP)
-            .setStatus(user.presence.status)
             .renderEmojis(true)
             .setProgressBar('#3eafa7', 'COLOR')
             .setUsername(user.username)

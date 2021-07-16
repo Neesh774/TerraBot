@@ -10,11 +10,8 @@ module.exports = {
     run: async (client, message, args) => {
 
         // command
-        if (!args[0]) return message.channel.send({ content: ':x: | **Specify The ChannelID or mention The Channel**' });
-        if (!args[1]) return message.channel.send({ content: ':x: | **Specify The messageID**' });
-        if (!args[2]) return message.channel.send({ content: ':x: | **Specify The roleID or mention The Role**' });
-        if (!args[3]) return message.channel.send({ content: ':x: | **Specify The emoji**' });
         try{
+            console.log(args);
             const channel = message.mentions.channels.first() || await message.guild.channels.cache.get(args[0]);
             if (!channel) return message.channel.send({ content: ':x: | **Channel Not Found**' });
             const channelid = channel.id;
@@ -27,27 +24,26 @@ module.exports = {
             if (!role) return message.channel.send({ content: ':x: | **Role Not Found**' });
             role = role.id;
 
-            const emoji = await Discord.Util.parseEmoji(args[3]);
-            if (!emoji && !emojis.includes(args[3])) return message.channel.send({ content: ':x: | **Specify a valid emoji**' });
-            if (emoji && !emojis.includes(args[3])) {
-                const checking = await client.emojis.cache.find(x => x.id === emoji.id);
-                if (!checking) return message.channel.send({ content: ':x: | **Invalid Emoji**' });
-            }
+            let embed = new Discord.MessageEmbed()
+                .setTitle("Success!")
+                .setDescription("Reaction role spawned successfully")
+                .setColor(config.embedColor);
+
+            let emoji = args[3];
+            if(emoji.includes(':')) emoji = emoji.replace("<:", "").slice(emoji.replace("<:", "").indexOf(":") + 1, emoji.replace("<:", "").length - 1);
+            console.log(emoji);
+            await msg.react(emoji).then(() => {//attempt unicode emoji
+                message.reply({embeds: [embed]});
+            }).catch(err => message.reply("Invalid emoji. I must have access to the emoji.").then(m => setTimeout(async () => {await m.delete()}, 7500)))
             const numRRs = await rrSchema.countDocuments({}) + 1;
             const rr = new rrSchema({
                 id: numRRs,
                 messageID: mes,
                 channelID: channelid,
                 roleID: role,
-                reactionID: emoji.id,
+                reactionID: emoji
             });
             rr.save();
-            msg.react(emoji.id)
-            const embed = new Discord.MessageEmbed()
-                .setTitle('Success!')
-                .setDescription('Reaction role spawned successfully')
-                .setColor(config.embedColor);
-            return message.channel.send({ embeds: [embed] });
         }
         catch (e){
             console.log(e.stack);
