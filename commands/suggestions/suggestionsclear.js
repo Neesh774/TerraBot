@@ -19,7 +19,7 @@ module.exports = {
             .setColor(config.embedColor)
             .setTitle('Suggestions were cleared')
             .setTimestamp()
-            .setDescription('Suggestions were cleared by user ' + message.member.username);
+            .setDescription('Suggestions were cleared by user ' + message.author.username);
         logs.send({ embeds: [embed] });
         return message.reply('Successfully cleared the suggestions list!');
     },

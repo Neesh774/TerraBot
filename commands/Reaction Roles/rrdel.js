@@ -38,7 +38,7 @@ module.exports = {
             if(!message.member.permissions.has('MANAGE_MESSAGES')){
                 return message.reply('You don\'t have permissions for that :/');
             }
-            rrSchema.deleteMany({});
+            await rrSchema.deleteMany({});
             message.reply('Reaction roles successfully cleared!');
                 const PS = await client.guilds.fetch(config.PS);
                 const logs = await PS.channels.cache.get(config.logs);

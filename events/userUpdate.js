@@ -30,8 +30,8 @@ module.exports = {
                 .setFooter(`ID: ${newUser.id}`)
                 .setAuthor(member.guild.name, member.guild.iconURL())
                 .addFields(
-                    { name: 'Old:', value: `${oldUser.name}`, inline: true },
-                    { name: 'New:', value: `${newUser.name}`, inline: true },
+                    { name: 'Old:', value: `${oldUser.username}`, inline: true },
+                    { name: 'New:', value: `${newUser.username}`, inline: true },
                 )
                 .setTimestamp();
             updated = true;
