@@ -13,72 +13,40 @@ module.exports = {
 		required: true,
 	},
 	{
-		name: 'response1',
+		name: 'responses',
 		type: 'STRING',
-		description: 'The phrase that will be sent back to the user',
-		required: true,
-	},
-	{
-		name: 'response2',
-		type: 'STRING',
-		description: 'The phrase that will be sent back to the user',
-		required: false,
-	},
-	{
-		name: 'response3',
-		type: 'STRING',
-		description: 'The phrase that will be sent back to the user',
-		required: false,
-	},
-	{
-		name: 'response4',
-		type: 'STRING',
-		description: 'The phrase that will be sent back to the user',
-		required: false,
-	},
-	{
-		name: 'response5',
-		type: 'STRING',
-		description: 'The phrase that will be sent back to the user',
-		required: false,
+		description: 'The phrases that will be sent to the user, separated by \'&&\'',
 	}],
-	run: async (client, message, args) => {
+	run: async (client, interaction) => {
 		// command
 		const numResponders = await arSchema.countDocuments({});
-		if(!message.member.permissions.has('MANAGE_MESSAGES')) {
-			return message.reply('You don\'t have permissions for that :/');
+		if (!interaction.member.permissions.has('MANAGE_MESSAGES')) {
+			return interaction.editReply('You don\'t have permissions for that :/');
 		}
-		if(!args[0]) {
-			return message.reply('You need to give me a trigger!');
-		}
-		if(!args[1]) {
-			return message.reply('You need to give me atleast one response!');
-		}
-		const trigger = args[0];
-		args.splice(0, 1);
-		const responses = args;
+		const trigger = interaction.options.getString('trigger');
+		const responses = interaction.options.getString('responses').split('&&');
 		const ar = new arSchema({
 			id: numResponders + 1,
 			trigger: trigger,
 			responsesArray: responses,
-			created: message.createdAt.toUTCString(),
-			createdByID: message.author.id,
+			created: interaction.createdAt.toUTCString(),
+			createdByID: interaction.user.id,
 		});
 		ar.save().catch(err => console.log(err));
 		const fields = [];
-		for(var i = 0;i < responses.length;i++) {
+		for (let i = 0;i < responses.length;i++) {
 			fields.push({ 'name':`Response #${i + 1}`, 'value': responses[i] });
 		}
 		const embed = new Discord.MessageEmbed()
 			.setColor(config.embedColor)
 			.setTimestamp()
 			.setTitle('Auto Response Created')
-			.setDescription(`An auto responder was created by ${message.author.tag}`)
+			.setDescription(`An auto responder was created by ${interaction.user.tag}`)
 			.addField('Trigger', trigger)
 			.addFields(fields);
 		const PS = await client.guilds.fetch(config.PS);
 		const logs = await PS.channels.cache.get(config.logs);
 		logs.send({ embeds: [embed] });
-		return message.reply({ embeds: [embed] });
+		return interaction.editReply({ embeds: [embed] });
 	},
 };

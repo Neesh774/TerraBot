@@ -5,4 +5,4 @@ const lrSchema = mongoose.Schema({
     level: Number,
 });
 
-module.exports = mongoose.model("level role", lrSchema);
+module.exports = mongoose.model('level role', lrSchema);

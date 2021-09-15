@@ -14,31 +14,32 @@ module.exports = {
 			required: true,
 		},
 	],
-	run: async (client, message, args) => {
+	run: async (client, interaction) => {
 		// command
 		const numCommands = await ccSchema.countDocuments({});
 		const fields = [];
-		if(!message.member.permissions.has('MANAGE_MESSAGES')) {
-			return message.reply('You don\'t have permissions for that :/');
+		if (!interaction.member.permissions.has('MANAGE_MESSAGES')) {
+			return interaction.editReply('You don\'t have permissions for that :/');
 		}
-		if(args[0] > numCommands) {
-			return message.reply('That command doesn\'t exist!');
+		const commandid = interaction.options.getInteger('command_id');
+		if (commandid > numCommands) {
+			return interaction.editReply('That command doesn\'t exist!');
 		}
-		const command = await ccSchema.findOne({ id: args[0] });
-		await ccSchema.deleteOne({ id: args[0] });
-		for(var i = command.id + 1;i < numCommands + 1; i++) {
+		const command = await ccSchema.findOne({ id: commandid });
+		await ccSchema.deleteOne({ id: command });
+		for (let i = command.id + 1;i < numCommands + 1; i++) {
 			const nextCommand = await ccSchema.findOne({ id:i });
 			nextCommand.id--;
 			await nextCommand.save();
 		}
-		message.reply(`Command with trigger ${command.trigger} successfully deleted!`);
+		interaction.editReply(`Command with trigger ${command.trigger} successfully deleted!`);
 		const PS = await client.guilds.fetch(config.PS);
 		const logs = await PS.channels.cache.get(config.logs);
 		const embed = new Discord.MessageEmbed()
 			.setColor(config.embedColor)
 			.setTitle('Command Deleted')
 			.setTimestamp()
-			.setDescription(`Command with trigger ${command.trigger} was cleared by user ` + message.author.tag);
+			.setDescription(`Command with trigger ${command.trigger} was cleared by user ` + interaction.user.tag);
 		return logs.send({ embeds: [embed] });
 	},
 };

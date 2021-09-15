@@ -4,21 +4,18 @@ const Canvas = require('canvas');
 const mSchema = require('../models/memberschema.js');
 const path = require('path');
 const { registerFont, createCanvas } = require('canvas');
-registerFont(path.resolve(__dirname, '../assets/project-solaris.ttf'), { family: 'Regular' });
+registerFont(path.resolve(__dirname, '../assets/whitneybold.ttf'), { family: 'Regular' });
 
 module.exports = {
 	name: 'guildMemberAdd',
 	async execute(member, client) {
+		if (member.guild.id != config.PS) return;
 		const PS = await client.guilds.fetch(config.PS);
 		const ms = new mSchema({
 			rank: PS.memberCount + 1,
 			name: member.nickname,
 			userID: member.id,
-			level: 0,
 			coolDown: false,
-			toNextLevel: 50,
-			xp: 0,
-			levelxp: 0,
 			muted: 0,
 			starboards: 0,
 		});
@@ -28,7 +25,7 @@ module.exports = {
 		// make it "2D"
 		const ctx = canvas.getContext('2d');
 		// set the Background to the welcome.png
-		const background = await Canvas.loadImage(path.resolve(__dirname, '../../assets/welcome.png'));
+		const background = await Canvas.loadImage(path.resolve(__dirname, '../assets/welcome.png'));
 		ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 		// ctx.strokeStyle = '#f2f2f2';
 		ctx.strokeRect(0, 0, canvas.width, canvas.height);
@@ -57,8 +54,9 @@ module.exports = {
 			.addField(`${member.user.username}, Welcome to the Project Solaris Discord!`, `The server now has ${member.guild.memberCount} members.`, true)
 			.setImage('attachment://welcome-image.png')
 		// define the welcome channel
+		const welcome = await PS.channels.fetch(config.welcome);
 		// send the welcome embed to there
-		message.channel.send({embeds: [welcomeembed], files: [attachment]});
+		welcome.send({embeds: [welcomeembed], files: [attachment]});
 
 		const logs = await PS.channels.cache.get(config.logs);
 		const embed = new Discord.MessageEmbed()

@@ -1,3 +1,5 @@
 node_modules
 token.json
 beanofinal.zip
+*.zip
+nonowords.json

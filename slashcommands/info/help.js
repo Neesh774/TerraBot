@@ -16,22 +16,22 @@ module.exports = {
 			required: false,
 		},
 	],
-	run: async (client, message, args) => {
+	run: async (client, interaction) => {
 		// If there's an args found
 		// Send the info of that command found
 		// If no info found, return not found embed.
-		if (args[0]) {
-			return getCMD(client, message, args[0]);
+		if (interaction.options.getString('command')) {
+			return getCMD(client, interaction, interaction.options.getString('command'));
 		}
 		else {
 			// Otherwise send all the commands available
 			// Without the cmd info
-			return getAll(client, message);
+			return getAll(client, interaction);
 		}
 	},
 };
 
-function getAll(client, message) {
+function getAll(client, interaction) {
 	const embed = new MessageEmbed()
 		.setColor(config.embedColor)
 		.setThumbnail('https://cdn.discordapp.com/avatars/546100087579738133/ea87b6e238044da37381c2277987fd3e.webp')
@@ -42,7 +42,7 @@ function getAll(client, message) {
 	// Map all the commands
 	// with the specific category
 	const commands = (category) => {
-		return client.commands
+		return client.slashcommands
 			.filter(cmd => cmd.category === category)
 			.map(cmd => `\`${cmd.name}\``)
 			.join(', ');
@@ -53,25 +53,25 @@ function getAll(client, message) {
 		.map(cat => stripIndents`**${cat[0].toUpperCase() + cat.slice(1)}** \n${commands(cat)}`)
 		.reduce((string, category) => string + '\n' + category);
 
-        message.reply({ content: 'Sent help to dms' })
+	interaction.editReply({ content: 'Sent help to dms' });
 
 
-    return message.user.send({ embeds: [embed.setDescription(info)] });
+	return interaction.user.send({ embeds: [embed.setDescription(info)] });
 
 }
 
-function getCMD(client, message, input) {
+function getCMD(client, interaction, input) {
 	const embed = new MessageEmbed();
 
 	// Get the cmd by the name or alias
-	const cmd = client.commands.get(input.toLowerCase()) || client.commands.get(client.aliases.get(input.toLowerCase()));
+	const cmd = client.slashcommands.get(input.toLowerCase()) || client.slashcommands.get(client.aliases.get(input.toLowerCase()));
 
 	let info = `No information found for command **${input.toLowerCase()}**`;
 
-    // If no cmd is found, send not found embed
-    if (!cmd) {
-        return message.reply(embed.setColor(config.embedColor).setDescription(info));
-    }
+	// If no cmd is found, send not found embed
+	if (!cmd) {
+		return interaction.editReply(embed.setColor(config.embedColor).setDescription(info));
+	}
 
 	// Add all cmd info to the embed
 	if (cmd.name) info = `**Command name**: ${cmd.name}`;
@@ -82,5 +82,5 @@ function getCMD(client, message, input) {
 		embed.setFooter('Syntax: <> = required, [] = optional');
 	}
 
-    return message.reply(embed.setColor(config.embedColor).setDescription(info));
+	return interaction.editReply({ embeds: [embed.setColor(config.embedColor).setDescription(info)] });
 }

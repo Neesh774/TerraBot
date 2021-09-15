@@ -5,7 +5,7 @@ const rrSchema = mongoose.Schema({
     messageID: String,
     channelID: String,
     roleID: String,
-    reactionID: String
+    reactionID: String,
 });
 
-module.exports = mongoose.model("Reaction Roles", rrSchema);
+module.exports = mongoose.model('Reaction Roles', rrSchema);

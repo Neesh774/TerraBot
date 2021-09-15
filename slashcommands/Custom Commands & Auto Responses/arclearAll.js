@@ -7,9 +7,9 @@ module.exports = {
 	description: 'Clears all auto responders',
 	usage: `${config.prefix}arclearall`,
 	options: [],
-	run: async (client, message, args) => {
-		if(!message.member.permissions.has('MANAGE_MESSAGES')) {
-			return message.reply('You don\'t have permissions for that :/');
+	run: async (client, interaction) => {
+		if (!interaction.member.permissions.has('MANAGE_MESSAGES')) {
+			return interaction.editReply('You don\'t have permissions for that :/');
 		}
 		await arSchema.deleteMany();
 		const PS = await client.guilds.fetch(config.PS);
@@ -18,9 +18,9 @@ module.exports = {
 			.setColor(config.embedColor)
 			.setTitle('Responders were cleared')
 			.setTimestamp()
-			.setDescription('Responders were cleared by user ' + message.author.tag);
+			.setDescription('Responders were cleared by user ' + interaction.user.tag);
 		logs.send({ embeds: [embed] });
-		return message.reply('Successfully cleared the responders list!');
+		return interaction.editReply('Successfully cleared the commands list!');
 
 	},
 };

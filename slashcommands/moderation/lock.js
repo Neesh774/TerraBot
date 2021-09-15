@@ -1,34 +1,41 @@
 const config = require('../../config.json');
-const Discord= require('discord.js')
+const Discord = require('discord.js');
 module.exports = {
-    name: "lock",
-    category: "moderation",
-    description: "Locks the current channel and prevents anyone from sending messages",
+    name: 'lock',
+    category: 'moderation',
+    description: 'Locks the current channel and prevents anyone from sending messages',
     usage: `${config.prefix}lock`,
     options: [],
-    run: async (client, message, args) =>{
-        if(!message.channel.permissionsFor(message.member).has("BAN_MEMBERS") ) return message.reply("You don't have permissions for that :/");
-        if(client.lockedChannels.has(message.channel.id)){
+	moderation: true,
+    run: async (client, interaction) => {
+        if (!message.channel.permissionsFor(message.member).has('BAN_MEMBERS')) return interaction.editReply('You don\'t have permissions for that :/');
+        if (client.lockedChannels.has(message.channel.id)) {
             message.channel.permissionOverwrites.edit(message.guild.roles.everyone, {
-                SEND_MESSAGES: true
-            })
+                SEND_MESSAGES: true,
+            },
+            {
+                reason: `Unlock by ${message.user.username}`,
+            });
             client.lockedChannels.delete(message.channel.id);
             console.log(client.lockedChannels);
-            let lockEmbed = new Discord.MessageEmbed()                
+            const lockEmbed = new Discord.MessageEmbed()
                 .setDescription(`Successfully unlocked ${message.channel.name}`)
-                .setColor(config.embedColor)
-            return message.reply({embeds: [lockEmbed]});
+                .setColor(config.embedColor);
+            return interaction.editReply({ embeds: [lockEmbed] });
         }
-        else{
+        else {
             message.channel.permissionOverwrites.edit(message.guild.roles.everyone, {
-                SEND_MESSAGES: false
-            })
+                SEND_MESSAGES: false,
+            },
+            {
+                reason: `Lock by ${message.user.username}`,
+            });
             client.lockedChannels.add(message.channel.id);
             console.log(client.lockedChannels);
-            let unlockEmbed = new Discord.MessageEmbed()                
+            const unlockEmbed = new Discord.MessageEmbed()
                 .setDescription(`Successfully locked ${message.channel.name}`)
-                .setColor(config.embedColor)
-            return message.reply({embeds: [unlockEmbed]});
+                .setColor(config.embedColor);
+            return interaction.editReply({ embeds: [unlockEmbed] });
         }
-    }
-}
+    },
+};

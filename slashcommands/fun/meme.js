@@ -7,7 +7,7 @@ module.exports = {
 	category: 'fun',
 	description: 'Sends a random meme from Reddit',
 	usage: `${config.prefix}meme`,
-	run: async (client, message, args) => {
+	run: async (client, interaction) => {
 		const sub = 'dankmemes';
 
 		const post = await Reddit.top(sub);
@@ -18,6 +18,6 @@ module.exports = {
 			.setFooter(`${post.upvotes} 👍 | Created by ${post.author} | From /r/${sub}`)
 			.setURL(post.url);
 
-		message.reply({ embeds: [embed] });
+		interaction.editReply({ embeds: [embed] });
 	},
 };

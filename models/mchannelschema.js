@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const mChannelSchema = mongoose.Schema({
-    channel: String
+    channel: String,
 });
 
-module.exports = mongoose.model("XP Muted Channels", mChannelSchema);
+module.exports = mongoose.model('XP Muted Channels', mChannelSchema);

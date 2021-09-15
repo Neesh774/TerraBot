@@ -1,4 +1,4 @@
-const Discord = require('discord.js')
+const Discord = require('discord.js');
 const config = require('../../config.json');
 const sSchema = require('../../models/suggestschema');
 module.exports = {
@@ -14,26 +14,24 @@ module.exports = {
             required: true,
         },
     ],
-    run: async (client, message, args) => {
+    run: async (client, interaction) => {
     // command
     const numSuggest = await sSchema.countDocuments({});
-    if(!args[0]){
-        return message.reply('Which suggestion do you want me to get?');
+    const id = interaction.options.getInteger('suggestion_id');
+    if (id > numSuggest || id <= 0) {
+        return interaction.editReply('That suggestion doesn\'t exist!');
     }
-    if(args[0] > numSuggest || args[0] <= 0){
-        return message.reply('That suggestion doesn\'t exist!');
-    }
-    const suggest = await sSchema.findOne({ id: args[0] }).exec();
+    const suggest = await sSchema.findOne({ id: id }).exec();
     const embed = new Discord.MessageEmbed()
         .setColor(config.embedColor)
-        .setTitle('Suggestion #' + args[0])
+        .setTitle('Suggestion #' + id)
         .setDescription(`${suggest.suggestion}`)
         .addField('Status', suggest.status)
         .addField('Reason', suggest.reason)
         .addField('Votes', `👍 ${suggest.upvotes}, 👎 ${suggest.downvotes}`)
         .setFooter(suggest.createdAt)
         .setAuthor(suggest.createdBy, suggest.createdByIcon);
-    return message.reply({ embeds: [embed] });
+    return interaction.editReply({ embeds: [embed] });
 
     },
 };

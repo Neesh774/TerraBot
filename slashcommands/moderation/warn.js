@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const functions = require('../../functions.js');
+const functions = require('../../functions/databaseFuncs');
 const config = require('../../config.json');
 
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
 		{
 			name: 'user',
 			type: 'USER',
-			description: 'The user you want to wanr',
+			description: 'The user you want to warn',
 			required: true,
 		},
 		{
@@ -21,21 +21,15 @@ module.exports = {
 			required: false,
 		},
 	],
-	run: async (client, message, args) => {
-		if(!message.member.permissions.has('KICK_MEMBERS')) {
-			return message.reply('You don\'t have permissions for that :/');
+	moderation: true,
+	run: async (client, interaction) => {
+		if (!interaction.member.permissions.has('KICK_MEMBERS')) {
+			return interaction.editReply('You don\'t have permissions for that :/');
 		}
-		if(!args[0]) {
-			return message.reply('You need to give me someone to warn!');
-		}
-		var reason;
-		const memberID = args.shift().substring(3, 21);
-		if(args[1]) {
-			reason = args.join(' ');
-		}
+		const reason = interaction.options.getString('reason') ?? 'No reason given';
 		const PS = await client.guilds.fetch(config.PS);
-		const member = await PS.members.fetch(memberID);
+		const member = interaction.options.getMember('user');
 
-		functions.warn(member, message.guild, message.channel, reason, client);
+		functions.warn(member, interaction.guild, interaction.channel, reason, client, interaction, true);
 	},
 };

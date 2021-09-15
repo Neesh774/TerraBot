@@ -14,28 +14,29 @@ module.exports = {
 			required: false,
 		},
 	],
-	run: async (client, message, args) => {
+	run: async (client, interaction) => {
 		// command
 		const numResponses = await arSchema.countDocuments({});
 		const fields = [];
-		if(args[0]) {
-			if(args[0] > numResponses) {
-				return message.reply('That responder doesn\'t exist!');
+		const commandID = interaction.options.getInteger('command_id');
+		if (commandID) {
+			if (commandID > numResponses) {
+				return interaction.editReply('That responder doesn\'t exist!');
 			}
-			const responder = await arSchema.findOne({ id: args[0] });
-			for(var i = 0; i < responder.responsesArray.length;i++) {
+			const responder = await arSchema.findOne({ id: commandID });
+			for (let i = 0; i < responder.responsesArray.length;i++) {
 				fields.push({ 'name':`Response #${i + 1}`, 'value': `${responder.responsesArray[i]}` });
 			}
 			const embed = new Discord.MessageEmbed()
 				.setColor(config.embedColor)
-				.setTitle(`Responder #${args[0]}`)
+				.setTitle(`Responder #${commandID}`)
 				.setDescription(responder.trigger)
 				.addFields(fields);
-			return message.reply({ embeds: [embed] });
+			return interaction.editReply({ embeds: [embed], ephemeral: false });
 		}
-		else{
+		else {
 			// eslint-disable-next-line no-redeclare
-			for(var i = 1;i < numResponses + 1;i++) {
+			for (let i = 1;i < numResponses + 1;i++) {
 				const responder = await arSchema.findOne({ id: i }).exec();
 				fields.push({ 'name': `#${i}`, 'value': `Trigger: ${responder.trigger}` });
 			}
@@ -43,7 +44,7 @@ module.exports = {
 				.setColor(config.embedColor)
 				.setTitle('Automatic Responder')
 				.addFields(fields);
-			return message.reply({ embeds: [embed] });
+			return interaction.editReply({ embeds: [embed], ephemeral: false });
 		}
 	},
 };

@@ -6,8 +6,9 @@ module.exports = {
     category: 'info',
     description: 'Returns latency and API ping',
     usage: `${config.prefix}ping`,
-    run: async (client, message, args) => {
-		message.reply({ content: `🏓 Pong!
+    options: [],
+    run: async (client, interaction) => {
+		interaction.editReply({ content: `🏓 Pong!
         API Latency is ${Math.round(client.ws.ping)}ms` });
 	},
 };

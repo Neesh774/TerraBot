@@ -19,65 +19,57 @@ module.exports = {
 			required: false,
 		},
 	],
-	run: async (client, message, args) => {
+	moderation: true,
+	run: async (client, interaction) => {
 		const PS = await client.guilds.fetch(config.PS);
 		const logs = await PS.channels.cache.get(config.logs);
 
 		try {
-			if (!message.member.permissions.has('KICK_MEMBERS')) return message.reply('**You Do Not Have Permissions To Kick Members! - [KICK_MEMBERS]**');
-			if (!message.guild.me.permissions.has('KICK_MEMBERS')) return message.reply('**I Do Not Have Permissions To Kick Members! - [KICK_MEMBERS]**');
+			if (!interaction.member.permissions.has('KICK_MEMBERS')) return interaction.editReply('**You Do Not Have Permissions To Kick Members! - [KICK_MEMBERS]**');
+			if (!interaction.guild.me.permissions.has('KICK_MEMBERS')) return interaction.editReply('**I Do Not Have Permissions To Kick Members! - [KICK_MEMBERS]**');
 
-			if (!args[0]) return message.reply({ content: '**Enter A User To Kick!**' });
+			const kickMember = interaction.options.getMember('user');
+			if (!kickMember) return interaction.editReply({ content: '**User Is Not In The Guild!**' });
 
-			var kickMember = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase());
-			if (!kickMember) return message.reply({ content: '**User Is Not In The Guild!**' });
+			if (kickMember.id === interaction.member.id) return interaction.editReply({ content: '**You Cannot Kick Yourself!**' });
 
-			if (kickMember.id === message.member.id) return message.reply({ content: '**You Cannot Kick Yourself!**' });
-
-			if (!kickMember.kickable) return message.reply({ content: '**Cannot Kick This User!**' });
-			if (kickMember.user.bot) return message.reply({ content: '**Cannot Kick A Bot!**' });
-
-			var reason = args.slice(1).join(' ');
+			const reason = interaction.options.getString('reason');
 			try {
-				const sembed2 = new Discord.MessageEmbed()
-					.setColor(config.embedColor)
-					.setDescription(`**You Have Been Kicked From ${message.guild.name} for - ${reason || 'No Reason!'}**`)
-					.setFooter(message.guild.name, message.guild.iconURL());
-				kickMember.send({ embeds: [sembed2] }).then(() =>
+				kickMember.send({ content: '`**You Have Been Kicked From ${interaction.guild.name} for - ${reason || \'No Reason!\'}**`' }).then(() =>
 					kickMember.kick()).catch(() => null);
 			}
 			catch {
 				kickMember.kick();
 			}
 			if (reason) {
-				var sembed = new Discord.MessageEmbed()
+				const sembed = new Discord.MessageEmbed()
 					.setColor(config.embedColor)
 					.setDescription(`**${kickMember.user.username}** has been kicked for ${reason}`);
-				message.reply({ embeds: [sembed] });
+				interaction.editReply({ embeds: [sembed] });
 			}
 			else {
-				var sembed2 = new Discord.MessageEmbed()
+				const sembed2 = new Discord.MessageEmbed()
 					.setColor(config.embedColor)
 					.setDescription(`**${kickMember.user.username}** has been kicked`);
-				message.reply({ embeds: [sembed2] });
+				interaction.editReply({ embeds: [sembed2] });
 			}
 
 			const embed = new Discord.MessageEmbed()
 				.setColor(config.embedColor)
 				.setThumbnail(kickMember.user.displayAvatarURL({ dynamic: true }))
-				.setFooter(message.guild.name, message.guild.iconURL())
+				.setFooter(interaction.guild.name, interaction.guild.iconURL())
 				.addField('**Moderation**', 'kick')
 				.addField('**User Kicked**', kickMember.user.username)
-				.addField('**Kicked By**', message.author.username)
+				.addField('**Kicked By**', interaction.user.username)
 				.addField('**Reason**', `${reason || '**No Reason**'}`)
-				.addField('**Date**', message.createdAt.toLocaleString())
+				.addField('**Date**', interaction.createdAt.toLocaleString())
 				.setTimestamp();
 
 			logs.send({ embeds: [embed] });
 		}
 		catch (e) {
 			console.log(e.stack);
-			return message.reply({ content: '**:x: Error, please try again.**' });
+			return interaction.editReply({ content: '**:x: Error, please try again.**' });
 		}
 	},
 };

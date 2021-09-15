@@ -13,22 +13,25 @@ module.exports = {
 			required: true,
 		},
 	],
-	run: async (client, message, args) => {
+	moderation: true,
+	run: async (client, interaction) => {
 		// command
-		if(!message.member.permissions.has('MANAGE_MESSAGES')) {
-			return message.reply('You don\'t have permissions for that :/');
+		if (!interaction.member.permissions.has('MANAGE_MESSAGES')) {
+			return interaction.editReply('You don\'t have permissions for that :/');
 		}
-		if(!args[0]) {
-			return message.reply('You need to give me someone to unmute!');
-		}
-		const memberID = args[0].substring(3, 21);
 		const PS = await client.guilds.fetch(config.PS);
 		const logs = await PS.channels.cache.get(config.logs);
-		const member = await PS.members.fetch(memberID);
-		if(!member.roles.cache.has(config.mutedRole)) {
-			return message.reply('That user isn\'t muted.');
+		const member = interaction.options.getMember('user');
+		if (member.roles.cache.has(config.cafeGuest)) {
+			return interaction.editReply('That user isn\'t muted.');
 		}
-		member.roles.remove(message.guild.roles.cache.get(config.mutedRole));
-		return message.reply(`Unmuted ${member.toString()}`);
+		member.roles.add(interaction.guild.roles.cache.get(config.cafeGuest));
+		const logEmb = new Discord.MessageEmbed()
+				.setTitle(`${member.user.username} Muted`)
+				.setColor(config.embedColor)
+				.addField('Moderator', interaction.user.toString(), true)
+				.setFooter(`ID | ${member.id}`, member.user.displayAvatarURL());
+		logs.send({ embeds: [logEmb] });
+		return interaction.editReply(`Unmuted ${member.toString()}`);
 	},
 };

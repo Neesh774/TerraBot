@@ -5,7 +5,7 @@ const arSchema = mongoose.Schema({
     trigger: String,
     responsesArray: Array,
     created: String,
-    createdByID: String
+    createdByID: String,
 });
 
-module.exports = mongoose.model("Auto Responses", arSchema);
+module.exports = mongoose.model('Auto Responses', arSchema);

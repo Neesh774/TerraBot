@@ -1,4 +1,4 @@
-var figlet = require('figlet');
+const figlet = require('figlet');
 const config = require('../../config.json');
 
 module.exports = {
@@ -14,21 +14,19 @@ module.exports = {
 			required: true,
 		},
 	],
-	run: async (client, message, args) => {
+	run: async (client, interaction) => {
 		// command
-		var maxLen = 100;
+		const maxLen = 100;
+		const text = interaction.options.getString('text');
+		if (text.length() > maxLen) return interaction.editReply({ content: `The max length is ${maxLen}!` });
 
-    if(args.join(' ').length > maxLen) return message.reply({ content: `The max length is ${maxLen}!` })
-
-    if(!args[0]) return message.reply({ content: 'Please enter some text.' });
-
-		figlet(`${args.join(' ')}`, function(err, data) {
+		figlet(text, function(err, data) {
 			if (err) {
 				console.dir(err);
 				return;
 			}
 
-        message.reply({ content: `\`\`\`${data}\`\`\`` });
-    });
-  },
+			interaction.editReply({ content: `\`\`\`${data}\`\`\`` });
+		});
+	},
 };

@@ -10,7 +10,7 @@ module.exports = {
     description: "TerraBot will give you a collection of all of the timezones",
     usage: `${config.prefix}timezones`,
     options: [],
-    run: async (client, message, args) => {
+    run: async (client, interaction) => {
     //command
         dayjs.extend(utc);
         dayjs.extend(customParseFormat);
@@ -38,6 +38,6 @@ module.exports = {
             .addField("AST", "```css\n" +  ast + "```", true)
             .addField("IST", "```css\n" +  ist + "```", false)
             .addField("AWST/SGT", "```css\n" +  awst + "```", false)
-        return message.reply({embeds: [embed]});
+        return interaction.editReply({embeds: [embed]});
     }
 };

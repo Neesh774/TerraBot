@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const config = require('../../config.json');
+const fs = require('fs');
 module.exports = {
 	name: 'prefix',
 	category: 'moderation',
@@ -13,14 +14,14 @@ module.exports = {
 			required: true,
 		},
 	],
-	run: async (client, message, args) => {
+	moderation: true,
+	run: async (client, interaction) => {
 		// command
-		if(!message.member.permissions.has('MANAGE_MESSAGES')) {
-			return message.reply('You don\'t have permissions for that :/');
+		if (!interaction.member.permissions.has('MANAGE_MESSAGES')) {
+			return interaction.editReply('You don\'t have permissions for that :/');
 		}
-		if(!args[0]) {
-			return message.reply('You need to give me a new prefix!');
-		}
-		config.prefix = args[0];
+
+		config.prefix = interaction.options.getString('prefix');
+		fs.writeFileSync('config.json', JSON.stringify(interaction.options.getString('prefix')));
 	},
 };

@@ -13,23 +13,20 @@ module.exports = {
             required: true,
         },
     ],
-    run: async (client, message, args) => {
+    run: async (client, interaction) => {
     // command
-        if(!args[0]){
-            return message.reply('What am I mocking?');
-        }
-        var text = args.join(' ');
-        for(var i = 0; i < text.length;i++){
-            var ranInt = Math.round(Math.random());
-            if(ranInt == 1){
+        let text = interaction.options.getString('text');
+        for (let i = 0; i < text.length;i++) {
+            const ranInt = Math.round(Math.random());
+            if (ranInt == 1) {
                 text = text.replace(text[i], text[i].toUpperCase());
             }
         }
         const embed = new MessageEmbed()
             .setColor(config.embedColor)
-            .setAuthor(message.member.nickname, message.user.avatarURL())
+            .setAuthor(interaction.member.nickname, interaction.user.avatarURL())
             .setDescription(text)
             .setThumbnail('https://media.tenor.com/images/d0f9e3756a2b5546d88d6716de6f8c3f/tenor.gif');
-        return message.reply({ embeds: [embed] });
+        return interaction.editReply({ embeds: [embed] });
     },
 };

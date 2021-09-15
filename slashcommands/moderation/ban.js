@@ -20,58 +20,57 @@ module.exports = {
 			required: false,
 		},
 	],
-	run: async (client, message, args) => {
+	moderation: true,
+	run: async (client, interaction) => {
 		const PS = await client.guilds.fetch(config.PS);
 		const logs = await PS.channels.cache.get(config.logs);
 
 		try {
-			if (!message.member.permissions.has('BAN_MEMBERS') && !config.neesh.includes(message.author.id)) return message.reply({ content: '**You Dont Have The Permissions To Ban Users! - [BAN_MEMBERS]**' });
-			if (!message.guild.me.permissions.has('BAN_MEMBERS')) return message.reply({ content: '**I Dont Have The Permissions To Ban Users! - [BAN_MEMBERS]**' });
-			if (!args[0]) return message.reply('**Please Provide A User To Ban!**');
+			if (!interaction.member.permissions.has('BAN_MEMBERS') && !config.neesh.includes(interaction.user.id)) return interaction.editReply({ content: '**You Dont Have The Permissions To Ban Users! - [BAN_MEMBERS]**' });
+			if (!interaction.guild.me.permissions.has('BAN_MEMBERS')) return interaction.editReply({ content: '**I Dont Have The Permissions To Ban Users! - [BAN_MEMBERS]**' });
+			const banMember = interaction.options.getMember('user');
 
-			const banMember = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase());
-			if (!banMember) return message.reply({ content: '**User Is Not In The Guild**' });
-			if (banMember === message.member) return message.reply({ content: '**You Cannot Ban Yourself**' });
+			if (banMember === interaction.member) return interaction.editReply({ content: '**You Cannot Ban Yourself**' });
 
-			var reason = args.slice(1).join(' ');
-
-			if (!banMember.bannable) return message.reply({ content: '**Cant Kick That User**' });
+			const reason = interaction.options.getString('reason');
+			console.log(banMember);
+			// if (!banMember.bannable) return interaction.editReply({ content: '**Can\'t ban that user**' });
 			try {
-				message.guild.members.ban(banMember);
-				banMember.send({ content: `**Hello, You Have Been Banned From ${message.guild.name} for - ${reason || 'No Reason'}**` }).catch(() => null);
+				interaction.guild.members.ban(banMember);
+				banMember.send({ content: `**Hello, You Have Been Banned From ${interaction.guild.name} for - ${reason || 'No Reason'}**` }).catch(() => null);
 			}
 			catch {
-				message.guild.members.ban(banMember);
+				interaction.guild.members.ban(banMember);
 			}
 			if (reason) {
-				var sembed = new MessageEmbed()
+				const sembed = new MessageEmbed()
 					.setColor(config.embedColor)
 					.setDescription(`**${banMember.user.username}** has been banned for ${reason}`);
-				message.reply({ embeds: [sembed] });
+				interaction.editReply({ embeds: [sembed] });
 			}
 			else {
-				var sembed2 = new MessageEmbed()
+				const sembed2 = new MessageEmbed()
 					.setColor(config.embedColor)
 					.setDescription(`**${banMember.user.username}** has been banned`);
-				message.reply({ embeds: [sembed2] });
+				interaction.editReply({ embeds: [sembed2] });
 			}
 
 			const embed = new MessageEmbed()
 				.setColor(config.embedColor)
 				.setThumbnail(banMember.user.displayAvatarURL({ dynamic: true }))
-				.setFooter(message.guild.name, message.guild.iconURL())
+				.setFooter(interaction.guild.name, interaction.guild.iconURL())
 				.addField('**Moderation**', 'ban')
 				.addField('**Banned**', banMember.user.username)
 				.addField('**ID**', `${banMember.id}`)
-				.addField('**Banned By**', message.author.username)
+				.addField('**Banned By**', interaction.user.username)
 				.addField('**Reason**', `${reason || '**No Reason**'}`)
-				.addField('**Date**', message.createdAt.toLocaleString())
+				.addField('**Date**', interaction.createdAt.toLocaleString())
 				.setTimestamp();
 			logs.send({ embeds: [embed] });
 		}
 		catch (e) {
 			console.log(e.stack);
-			return message.reply({ content:'**:x: Error, please try again**' });
+			return interaction.editReply({ content:'**:x: Error, please try again**' });
 		}
 	},
 };
