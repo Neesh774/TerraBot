@@ -9,10 +9,11 @@ const mongoose = require('mongoose');
 const badwords = require('./nonowords.json');
 const Filter = require('badwords-filter');
 const mSchema = require('./models/memberschema');
+const { Player } = require("discord-player");
 const client = new Client({
 // Stops the bot from mentioning @everyone
 	allowedMentions: { parse: ['users', 'roles'], repliedUser: true },
-	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_BANS, Intents.FLAGS.GUILD_MEMBERS],
+	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_BANS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_VOICE_STATES,],
 });
 const automodFilter = {
     list: badwords.badwords,
@@ -20,6 +21,22 @@ const automodFilter = {
     useRegex: true,
 };
 const filter = new Filter(automodFilter);
+
+const player = new Player(client, {
+    autoSelfDeaf: true,
+    enableLive: true,
+    fetchBeforeQueued: true,
+    leaveOnEmpty: true,
+    leaveOnEmptyCooldown: 60000,
+    leaveOnEnd: true,
+    leaveOnEndCooldown: 60000,
+    leaveOnStop: true,
+    ytdlDownloadOptions: {
+        quality: 'highest',
+        filter: 'audioonly'
+    },
+});
+
 // Command Handler
 client.slashcommands = new Collection();
 client.aliases = new Collection();
@@ -29,6 +46,8 @@ client.autoResponseCoolDowns = new Set();
 client.ccCoolDowns = new Set();
 client.lockedChannels = new Set();
 client.lockDown = false;
+client.musicevents = new Collection();
+client.player = player;
 // Command Folder location
 client.categories = fs.readdirSync('./slashcommands/');
 ['slashcommands', 'event'].forEach(handler => {
@@ -52,7 +71,7 @@ client.on('ready', async () => {
 	try {
 		const modCommands = fs.readdirSync('./slashcommands/moderation');
 		const PS = client.guilds.cache.get(config.PS);
-		const commands = await PS.commands.fetch();
+		const commands = await client.slashcommands;
 		commands
 		.each(async (command) => {
             const slash = client.slashcommands.get(command.name);
@@ -69,6 +88,7 @@ client.on('ready', async () => {
 				},
 				process.env.GUILD_ID || undefined,
 			);
+            console.log(cmd.name);
 			if (moderation) {
 				cmd.permissions?.set({ permissions: moderationPerms });
 			}
@@ -115,3 +135,4 @@ client.on('messageCreate', async message => {
 
 // Log into discord using the token in config.json
 client.login(token.token);
+module.exports = client;

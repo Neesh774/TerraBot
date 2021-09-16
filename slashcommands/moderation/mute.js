@@ -32,11 +32,11 @@ module.exports = {
 		const PS = await client.guilds.fetch(config.PS);
 		const logs = await PS.channels.cache.get(config.logs);
 		let logEmb;
-		if (!member.roles.cache.has(config.cafeGuest)) {
+		if (member.roles.cache.has(config.mutedRole)) {
 			return interaction.editReply('That user is already muted.');
 		}
 		if (!interaction.options.getString('time')) {
-			member.roles.remove(interaction.guild.roles.cache.get(config.cafeGuest));
+			member.roles.add(interaction.guild.roles.cache.get(config.mutedRole));
 			member.send({ content:`You were muted in ${interaction.guild.name}` });
 			interaction.editReply(`Muted ${member.toString()}`);
 			logEmb = new Discord.MessageEmbed()
@@ -52,11 +52,11 @@ module.exports = {
 			}
 			catch (e) {return interaction.editReply({ content: ':x: There was an error. Please make sure you\'re using the proper arguments and try again.' });}
 			interaction.editReply(`Muted ${member.toString()}`);
-			member.roles.remove(interaction.guild.roles.cache.get(config.cafeGuest));
+			member.roles.add(interaction.guild.roles.cache.get(config.mutedRole));
 			member.send({ content: `You were muted in ${interaction.guild.name} for ${interaction.options.getString('time')}` });
 			setTimeout(() => {
 				member.send({ content: 'You were unmuted in ' + interaction.guild.name });
-				member.roles.add(interaction.guild.roles.cache.get(config.cafeGuest));
+				member.roles.remove(interaction.guild.roles.cache.get(config.mutedRole));
 			}, time);
 			logEmb = new Discord.MessageEmbed()
 				.setTitle(`${member.user.username} Muted for ${interaction.options.getString('time')}`)

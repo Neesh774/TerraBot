@@ -22,10 +22,10 @@ module.exports = {
 		const PS = await client.guilds.fetch(config.PS);
 		const logs = await PS.channels.cache.get(config.logs);
 		const member = interaction.options.getMember('user');
-		if (member.roles.cache.has(config.cafeGuest)) {
+		if (!member.roles.cache.has(config.mutedRole)) {
 			return interaction.editReply('That user isn\'t muted.');
 		}
-		member.roles.add(interaction.guild.roles.cache.get(config.cafeGuest));
+		member.roles.remove(interaction.guild.roles.cache.get(config.mutedRole));
 		const logEmb = new Discord.MessageEmbed()
 				.setTitle(`${member.user.username} Muted`)
 				.setColor(config.embedColor)
