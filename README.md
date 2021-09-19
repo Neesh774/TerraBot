@@ -80,3 +80,11 @@ TerraBot is a general purpose discord bot I made for the [Project Solaris Server
 ## Ideas
 - ``pin`` will pin a message by it's channel and message ID.
 - ``recipe`` will give you a random recipe.
+
+## Hosting
+If you want to host a copy of TerraBot yourself, you can do so by following these steps:
+- Create a bot account on Discord, and get the token.
+- Create a Discord server, and invite TerraBot to it.
+- Create a MongoDB collection, and get the URI.
+- Find the `sample_token.json` file in your TerraBot folder, and fill in your information.
+- Replace the values in the `config.json` file with your information. Feel free to DM me on Discord at ツCheesyNeeshツ#8152 if you need any help.
