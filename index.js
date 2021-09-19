@@ -88,7 +88,6 @@ client.on('ready', async () => {
 				},
 				process.env.GUILD_ID || undefined,
 			);
-            console.log(cmd.name);
 			if (moderation) {
 				cmd.permissions?.set({ permissions: moderationPerms });
 			}

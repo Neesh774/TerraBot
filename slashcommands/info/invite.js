@@ -7,6 +7,6 @@ module.exports = {
     usage: `${config.prefix}invite`,
     options: [],
     run: async (client, interaction) => {
-        return interaction.editReply(`Here's your invite link to Arcade Cafe! \n${config.invite}`);
+        return interaction.editReply(`Here's your invite link to Project Solaris! \n${config.invite}`);
     },
 }

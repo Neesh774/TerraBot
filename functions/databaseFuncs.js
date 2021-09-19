@@ -73,7 +73,7 @@ module.exports = {
 				.setDescription(`**${member.user.username}** was warned in ${channel.toString()} for reason ${reason}. They now have 4 warnings. They were kicked.`);
 		}
         else {
-            member.send(`You have been warned in Arcade Cafe for reason ${reason || 'N/A'}`);
+            member.send(`You have been warned in Project Solaris for reason ${reason || 'N/A'}`);
             logEmb = new Discord.MessageEmbed()
 				.setColor(config.embedColor)
 				.setThumbnail(member.user.avatarURL())

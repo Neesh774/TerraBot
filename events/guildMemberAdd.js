@@ -4,7 +4,7 @@ const Canvas = require('canvas');
 const mSchema = require('../models/memberschema.js');
 const path = require('path');
 const { registerFont, createCanvas } = require('canvas');
-registerFont(path.resolve(__dirname, '../assets/whitneybold.ttf'), { family: 'Regular' });
+registerFont(path.resolve(__dirname, '../assets/whitneybold.ttf'), { family: 'Bold' });
 
 module.exports = {
 	name: 'guildMemberAdd',

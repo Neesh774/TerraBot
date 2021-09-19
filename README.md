@@ -1,5 +1,5 @@
 # TerraBot
-TerraBot is a general purpose discord bot I made for the [Project Solaris Server](https://discord.gg/ss9Wtzb). It will log most important events, has moderation features, fun commands, and a starboard.
+TerraBot is a general purpose discord bot I made for the [Project Solaris Server](https://discord.gg/ss9Wtzb). It will log most important events, has moderation features, fun commands, and a starboard. It is fully compatible with Discord slash commands and buttons.
 ## Commands
 ### Birthdays
 - ``birthday`` tells you what your birthday is. It's ok, we all forget sometimes.
@@ -25,19 +25,6 @@ TerraBot is a general purpose discord bot I made for the [Project Solaris Server
 ### Info
 - ``help [command]`` will DM you with a list of all TerraBot's commands, or give you information about any one command.
 - ``ping``will give you information about TerraBot's latency.
-### Levels
-- ``clearxp`` will clear everybody's xp.
-- ``getlevel <xp>`` will tell you how many levels a certain amount of xp is.
-- ``getxp <level>`` will tell you how much xp a certain level is at.
-- ``levelrole <roleID> <level>`` will create a level role at level, and give users the role with roleID when they get to that level.
-- ``llb`` will give you a level leaderboard.
-- ``mutexp`` will stop a certain channel from allowing users to gain xp.
-- ``mutexpuser`` will toggle a mute on a user's xp.
-- ``rank [user]`` will tell you how much xp you have, or how much someone else has.
-- ``setlevel <user> <level>`` will set someone's level.
-- ``setxp <user> <xp>`` will set someone's xp.
-- ``unmutexp <channel>`` will allow a channel to give users xp.
-- ``xpmuted`` will tell you how many channels are muted.
 ### Moderation
 - ``ban <user> [reason]`` bans a user with an optional reason
 - ``kick <user> [reason]`` kicks a user with an optional reason.
@@ -75,21 +62,20 @@ TerraBot is a general purpose discord bot I made for the [Project Solaris Server
 - ``timezones`` will give you information about the most popular timezones.
 - ``whois <user>`` will give you information about a certain user.
 ### Music
-- ``connect`` will connect TerraBot to your voice channel.
-- ``disconnect`` will make TerraBot leave the voice channel.
-- ``loop`` will turn on loop mode for the current song.
-- ``lyrics`` will try to find lyrics for the current song.
-- ``np`` will tell you what's currently playing.
-- ``pause`` will pause the music.
-- ``play <song>`` will play a song by it's youtube link or name.
-- ``queue`` will display the current queue.
-- ``remove <id>`` will remove a song by it's id.
-- ``resume`` will continue the paused music.
-- ``shuffle`` will shuffle the queue.
+- ``back`` will go to the previous song.
+- ``disconnect`` will disconnect Terra from the VC.
+- ``filter`` will give you a list of filter options.
+- ``loop <option>`` will give you a list of loop options.
+- ``lyrics <song name>`` will give you the lyrics to a song.
+- ``next`` will go to the next song.
+- ``play <song name | spotify URL | playlist URL>`` will play a song.
+- ``playnext <song name | spotify URL | playlist URL>`` will play this song next.
+- ``queue`` will give you a list of the current queue.
 - ``skip`` will skip the current song.
-- ``skipto <id>`` will skip to a certain song by it's id.
-- ``stop`` will stop any playing music.
-- ``volume <amount>`` will change the volume of the playing music.
+- ``skipto <index>`` will skip to a certain song in the queue.
+- ``volume <1-100>`` will change the volume of the music player.
+- ``np`` will tell you what song is playing.
+- ``pause`` will pause/resume the music player.
 
 ## Ideas
 - ``pin`` will pin a message by it's channel and message ID.
