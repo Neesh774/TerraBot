@@ -3,7 +3,7 @@
   "clientID": "834972549891883028",
   "embedColor": "#d63741",
   "mutedRole": "771859977417654302",
-  "cafeStaff": "742835132599107706",
+  "staff": "742835132599107706",
   "upvote": "845854669304889369",
   "downvote": "845854689265713172",
   "PS": "644368555403640872",
@@ -16,5 +16,6 @@
   "neesh": "297504183282565130",
   "invite": "https://discord.gg/h5D5kq2mvH",
   "starboardCount": 5,
-  "botinvite": "https://discord.com/api/oauth2/authorize?client_id=857272674778087424&permissions=8&scope=applications.commands%20bot"
+  "botinvite": "https://discord.com/api/oauth2/authorize?client_id=857272674778087424&permissions=8&scope=applications.commands%20bot",
+  "tickets": "889306096970399775"
 }

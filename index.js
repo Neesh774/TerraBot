@@ -1,3 +1,4 @@
+/* eslint-disable no-inline-comments */
 // Modules
 const { Client, Collection, Intents } = require('discord.js');
 const databaseFuncs = require('./functions/databaseFuncs');
@@ -9,11 +10,11 @@ const mongoose = require('mongoose');
 const badwords = require('./nonowords.json');
 const Filter = require('badwords-filter');
 const mSchema = require('./models/memberschema');
-const { Player } = require("discord-player");
+const { Player } = require('discord-player');
 const client = new Client({
 // Stops the bot from mentioning @everyone
 	allowedMentions: { parse: ['users', 'roles'], repliedUser: true },
-	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_BANS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_VOICE_STATES,],
+	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_BANS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_VOICE_STATES],
 });
 const automodFilter = {
     list: badwords.badwords,
@@ -33,7 +34,7 @@ const player = new Player(client, {
     leaveOnStop: true,
     ytdlDownloadOptions: {
         quality: 'highest',
-        filter: 'audioonly'
+        filter: 'audioonly',
     },
 });
 
@@ -53,12 +54,23 @@ client.categories = fs.readdirSync('./slashcommands/');
 ['slashcommands', 'event'].forEach(handler => {
 	require(`./handlers/${handler}`)(client);
 });
+
 const moderationPerms = [
-    {
-        id: '742835132599107706',
-        type: 'ROLE',
-        permission: true,
-    },
+	{
+		id: '884176293686575164', // General Manager
+		type: 'ROLE',
+		permission: true,
+	},
+	{
+		id: '833806459690418236', // Cafe Owner
+		type: 'ROLE',
+		permission: true,
+	},
+	{
+		id: '839250900165066772', // Barista
+		type: 'ROLE',
+		permission: true,
+	},
 	{
 		id: config.neesh,
 		type: 'USER',
@@ -70,26 +82,25 @@ const moderationPerms = [
 client.on('ready', async () => {
 	try {
 		const modCommands = fs.readdirSync('./slashcommands/moderation');
-		const PS = client.guilds.cache.get(config.PS);
+		const AC = client.guilds.cache.get(config.AC);
 		const commands = await client.slashcommands;
 		commands
 		.each(async (command) => {
             const slash = client.slashcommands.get(command.name);
-            if(!slash){
+            if (!slash) {
                 return await command.delete();
             }
 			const moderation = modCommands.includes(`${command.name}.js`);
-			const cmd = await PS.commands.create(
+			const cmd = await AC.commands.create(
 				{
 					name: command.name,
 					description: command.description,
 					options: command.options,
 					defaultPermission: !moderation,
 				},
-				process.env.GUILD_ID || undefined,
 			);
 			if (moderation) {
-				cmd.permissions?.set({ permissions: moderationPerms });
+				await cmd.permissions?.set({ permissions: moderationPerms });
 			}
 		});
 		console.log('Slash commands deployed successfully.');
@@ -104,15 +115,17 @@ client.on('ready', async () => {
 });
 
 client.on('messageCreate', async message => {
+	// Loads prefix from config.json
 	const prefix = (config.prefix);
 	// Makes sure bot wont respond to other bots including itself
 	if (message.system || message.author.bot) return;
 	// Checks if the command is from a server and not a dm
 	if (!message.guild) return;
-    const member = await mSchema.findOne({ userID: message.author.id });
-    if(!member){
-        await databaseFuncs.createMember(message.author.username, message.author.id);
-    }
+	const schema = await mSchema.findOne({ userID: message.author.id });
+	if (!schema) {
+		databaseFuncs.createMember(message.author.username, message.author.id);
+	}
+	await messageFuncs.checkHighlight(message, client);
 	if (filter.isUnclean(message.content)) {
         message.delete().then(msg => {
             databaseFuncs.warn(message.member, message.guild, message.channel, 'no no word', client, message, false);
@@ -129,9 +142,7 @@ client.on('messageCreate', async message => {
 	const cmd = args.shift().toLowerCase();
 	if (cmd.length === 0) return;
 	await messageFuncs.sendCustomCommand(message, client);
-
 });
 
 // Log into discord using the token in config.json
 client.login(token.token);
-module.exports = client;
