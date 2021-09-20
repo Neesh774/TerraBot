@@ -132,6 +132,13 @@ client.on('messageCreate', async message => {
             msg.channel.send({ content: 'SMH MY HEAD NO NO WORD' }).then(m => setTimeout(() => m.delete(), 5000));
         });
     }
+	let exeFile = false;
+	message.attachments.each(attachment => {
+		if (attachment.name.endsWith('.exe')) {
+			exeFile = true;
+		}
+	});
+	if (exeFile) message.delete().then(msg => msg.channel.send({ content: 'No EXE files allowed' }).then(m => setTimeout(() => m.delete(), 5000)));
 	await messageFuncs.sendAutoResponse(message, client);
 	// Checks if the command starts with a prefix
 	if (!message.content.startsWith(prefix)) return;
