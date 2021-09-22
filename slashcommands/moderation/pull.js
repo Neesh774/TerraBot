@@ -14,20 +14,15 @@ module.exports = {
 
 
 		await interaction.editReply("Pulling git changes and restarting bot.");
-        git().pull('origin', 'v13', {}, async (err, result) => {
-            if (result.summary.changes === 0 && result.summary.insertions === 0 && result.summary.deletions === 0) {
-                await client.guilds.cache.get(config.PS).channels.cache.get(config.botLoggingChannel).send("The bot is up to date.");
-            } else {
-                await client.guilds.cache.get(config.PS).channels.cache.get(config.botLoggingChannel).send("**Changes: **" + result.summary.changes + "\n" +
-                    "**Insertions: **" + result.summary.insertions + "\n" +
-                    "**Deletions: **" + result.summary.deletions);
-                if (result.insertions.hasOwnProperty("package.json") || result.insertions.hasOwnProperty("package-lock.json")) {
-                    await client.guilds.cache.get(config.PS).channels.cache.get(config.botLoggingChannel).send("It seems the bot dependencies have changed, performing dependency update...");
-                    await execSync('npm install');
-                    await client.guilds.cache.get(config.PS).channels.cache.get(config.botLoggingChannel).send("Dependency update complete!");
-                }
-                await client.guilds.cache.get(config.PS).channels.cache.get(config.botLoggingChannel).send("Restarting...");
-            }
-        });
+        // pull changes and return an embed with a summary of the changes
+        const output = execSync('git pull').toString();
+        const embed = new Discord.MessageEmbed()
+            .setColor('#0099ff')
+            .setTitle('Pulled changes')
+            .setDescription(output)
+            .setFooter('TerraBot');
+        await interaction.channel.send(embed);
+        await client.destroy();
+        client.login(config.token);
 	},
 };
