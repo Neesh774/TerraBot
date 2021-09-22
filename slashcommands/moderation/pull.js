@@ -14,7 +14,7 @@ module.exports = {
 
 
 		await interaction.editReply("Pulling git changes and restarting bot.");
-        git().pull('origin', 'master', {}, async (err, result) => {
+        git().pull('origin', 'v13', {}, async (err, result) => {
             if (result.summary.changes === 0 && result.summary.insertions === 0 && result.summary.deletions === 0) {
                 await client.guilds.cache.get(config.PS).channels.cache.get(config.botLoggingChannel).send("The bot is up to date.");
             } else {
