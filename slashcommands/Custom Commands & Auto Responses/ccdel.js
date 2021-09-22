@@ -18,9 +18,6 @@ module.exports = {
 		// command
 		const numCommands = await ccSchema.countDocuments({});
 		const fields = [];
-		if (!interaction.member.permissions.has('MANAGE_MESSAGES')) {
-			return interaction.editReply('You don\'t have permissions for that :/');
-		}
 		const commandid = interaction.options.getInteger('command_id');
 		if (commandid > numCommands) {
 			return interaction.editReply('That command doesn\'t exist!');

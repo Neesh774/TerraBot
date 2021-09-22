@@ -18,9 +18,7 @@ module.exports = {
 		// responder
 		const numResponders = await arSchema.countDocuments({});
 		const fields = [];
-		if (!interaction.member.permissions.has('MANAGE_MESSAGES')) {
-			return interaction.editReply('You don\'t have permissions for that :/');
-		}
+
 		const id = interaction.options.getInteger('responderid');
 		if (id > numResponders) {
 			return interaction.editReply('That responder doesn\'t exist!');

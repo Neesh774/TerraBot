@@ -19,9 +19,6 @@ module.exports = {
 		const numReactionRoles = await rrSchema.countDocuments({});
 		if (interaction.options.getInteger('reaction_role_id')) {
 			const fields = [];
-			if (!interaction.member.permissions.has('MANAGE_MESSAGES')) {
-				return interaction.editReply('You don\'t have permissions for that :/');
-			}
 			const id = interaction.options.getInteger('reaction_role_id');
 			if (id > numReactionRoles) {
 				return interaction.editReply('That reaction role doesn\'t exist!');
@@ -44,9 +41,6 @@ module.exports = {
 			return logs.send({ embeds: [embed] });
 		}
 		else {
-			if (!interaction.member.permissions.has('MANAGE_MESSAGES')) {
-				return interaction.editReply('You don\'t have permissions for that :/');
-			}
 			await rrSchema.deleteMany({});
 			interaction.editReply('Reaction roles successfully cleared!');
 			const PS = await client.guilds.fetch(config.PS);
