@@ -108,6 +108,7 @@ client.on('ready', async () => {
 		client.user.setActivity('/help', { type: 'WATCHING' });
 		databaseFuncs.connectMongoose(mongoose);
 		await databaseFuncs.cacheMessages(client);
+		await messageFuncs.checkBirthday(client);
 	}
 	catch (e) {
 		console.log(e);
