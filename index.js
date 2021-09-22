@@ -82,7 +82,7 @@ const moderationPerms = [
 client.on('ready', async () => {
 	try {
 		const modCommands = fs.readdirSync('./slashcommands/moderation');
-		const AC = client.guilds.cache.get(config.AC);
+		const PS = client.guilds.cache.get(config.PS);
 		const commands = await client.slashcommands;
 		commands
 		.each(async (command) => {
@@ -91,7 +91,7 @@ client.on('ready', async () => {
                 return await command.delete();
             }
 			const moderation = modCommands.includes(`${command.name}.js`);
-			const cmd = await AC.commands.create(
+			const cmd = await PS.commands.create(
 				{
 					name: command.name,
 					description: command.description,

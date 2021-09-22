@@ -11,9 +11,10 @@
     "ascii-table": "^0.0.9",
     "badwords-filter": "^1.1.1",
     "booru": "^2.4.0",
-    "canvacord": "^5.2.1",
     "canvas": "^2.8.0",
     "cheerio": "*",
+    "child_process": "^1.0.2",
+    "color-convert": "^2.0.1",
     "common-tags": "^1.8.0",
     "cpu-stat": "^2.0.1",
     "dayjs": "^1.10.6",
@@ -50,6 +51,7 @@
     "puppeteer": "^10.0.0",
     "random-puppy": "^1.1.0",
     "request-promise-native": "^1.0.9",
+    "simple-git": "^2.45.1",
     "spdl-core": "^2.0.2",
     "sqlite3": "^5.0.2",
     "urban.js": "^2.4.3",
@@ -82,6 +84,6 @@
   "author": "Neesh",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^7.29.0"
+    "eslint": "^7.32.0"
   }
 }

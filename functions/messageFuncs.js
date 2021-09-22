@@ -6,6 +6,7 @@ const ms = require('ms');
 const Filter = require('badwords-filter');
 const Discord = require('discord.js');
 const { Client, Intents, Permissions, MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
+const mSchema = require('../models/memberschema')
 const tSchema = require('../models/ticket');
 module.exports = {
     sendCustomCommand: async function(message, client) {
@@ -86,7 +87,7 @@ module.exports = {
 			parent: config.tickets,
 			permissionOverwrites: [
 				{ id: PS.roles.everyone, deny: [Permissions.FLAGS.VIEW_CHANNEL] },
-				{ id: await PS.roles.fetch(config.cafeStaff), allow: [
+				{ id: await PS.roles.fetch(config.staff), allow: [
 					Permissions.FLAGS.VIEW_CHANNEL,
 					Permissions.FLAGS.SEND_MESSAGES,
 					Permissions.FLAGS.ATTACH_FILES,
@@ -128,7 +129,7 @@ module.exports = {
 			ticketMessage: message.id,
 		});
 		await ticketSchema.save();
-		const logs = await AC.channels.fetch(config.logs);
+		const logs = await PS.channels.fetch(config.logs);
 		const embed2 = new Discord.MessageEmbed()
 			.setColor(config.embedColor)
 			.setTitle('Ticket Created')
@@ -146,7 +147,7 @@ module.exports = {
 			await ticket.delete();
 		}
 		interaction.member.send('Your ticket was closed.');
-		const logs = await AC.channels.fetch(config.logs);
+		const logs = await PS.channels.fetch(config.logs);
 		const embed2 = new Discord.MessageEmbed()
 			.setColor(config.embedColor)
 			.setTitle('Ticket Closed')
@@ -161,9 +162,9 @@ module.exports = {
 			const today = new Date();
 			const birthday = new Date(member.birthday);
 			if (today.getMonth() == birthday.getMonth() && today.getDate() == birthday.getDate()) {
-				const AC = await client.guilds.fetch(config.AC);
-				const general = await AC.channels.fetch(config.general);
-				const dMember = await AC.members.fetch(member.userID);
+				const PS = await client.guilds.fetch(config.PS);
+				const general = await PS.channels.fetch(config.general);
+				const dMember = await PS.members.fetch(member.userID);
 				const embed = new Discord.MessageEmbed()
 				.setColor(config.embedColor)
 				.setTitle(`Happy Birthday ${dMember.user.username}!`)

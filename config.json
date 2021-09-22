@@ -1,5 +1,5 @@
 {
-  "prefix": "t",
+  "prefix": "/",
   "clientID": "834972549891883028",
   "embedColor": "#d63741",
   "mutedRole": "771859977417654302",
@@ -17,5 +17,6 @@
   "invite": "https://discord.gg/h5D5kq2mvH",
   "starboardCount": 5,
   "botinvite": "https://discord.com/api/oauth2/authorize?client_id=857272674778087424&permissions=8&scope=applications.commands%20bot",
-  "tickets": "889306096970399775"
+  "tickets": "889306096970399775",
+  "botLoggingChannel": "786316994915729469"
 }

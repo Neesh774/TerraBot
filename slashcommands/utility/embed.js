@@ -16,7 +16,7 @@ module.exports = {
 			name: 'description',
 			type: 'STRING',
 			description: 'The description of your embed',
-			required: true,
+			required: false,
 		},
 	],
 	ephemeral: true,
