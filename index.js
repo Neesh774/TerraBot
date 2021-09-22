@@ -57,17 +57,12 @@ client.categories = fs.readdirSync('./slashcommands/');
 
 const moderationPerms = [
 	{
-		id: '884176293686575164', // General Manager
+		id: '829413340559441920', // Verro
 		type: 'ROLE',
 		permission: true,
 	},
 	{
-		id: '833806459690418236', // Cafe Owner
-		type: 'ROLE',
-		permission: true,
-	},
-	{
-		id: '839250900165066772', // Barista
+		id: '742835132599107706', // Moderator
 		type: 'ROLE',
 		permission: true,
 	},
