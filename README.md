@@ -22,6 +22,8 @@ TerraBot is a general purpose discord bot I made for the [Project Solaris Server
 - ``flip`` will flip a coin.
 - ``meme`` will give you a random meme from the r/dankmemes subreddit.
 - ``mock <text>`` wiLl mOck tHe TeXt lIkE thIs.
+- ``catfact`` will give you a catfact!
+- ``animal`` will give you a cute picture of an animal from r/animals.
 ### Info
 - ``help [command]`` will DM you with a list of all TerraBot's commands, or give you information about any one command.
 - ``ping``will give you information about TerraBot's latency.
@@ -61,6 +63,7 @@ TerraBot is a general purpose discord bot I made for the [Project Solaris Server
 - ``study <time>`` will isolate you so you can study in peace.
 - ``timezones`` will give you information about the most popular timezones.
 - ``whois <user>`` will give you information about a certain user.
+- ``color <hex code || r, g, b>`` will visualize a color for you.
 ### Music
 - ``back`` will go to the previous song.
 - ``disconnect`` will disconnect Terra from the VC.
