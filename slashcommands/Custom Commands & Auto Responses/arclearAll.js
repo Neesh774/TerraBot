@@ -8,9 +8,6 @@ module.exports = {
 	usage: `${config.prefix}arclearall`,
 	options: [],
 	run: async (client, interaction) => {
-		if (!interaction.member.permissions.has('MANAGE_MESSAGES')) {
-			return interaction.editReply('You don\'t have permissions for that :/');
-		}
 		await arSchema.deleteMany();
 		const PS = await client.guilds.fetch(config.PS);
 		const logs = await PS.channels.cache.get(config.logs);

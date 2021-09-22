@@ -43,9 +43,6 @@ module.exports = {
 	run: async (client, interaction) => {
 		// command
 		const numSuggest = await sSchema.countDocuments({});
-		if (!interaction.member.permissions.has('MANAGE_MESSAGES')) {
-			return interaction.editReply('You don\'t have permissions for that :/');
-		}
 		const id = interaction.options.getInteger('suggestion_id');
 		if (id > numSuggest) {
 			return interaction.editReply('That suggestion doesn\'t exist!');

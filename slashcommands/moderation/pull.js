@@ -11,9 +11,7 @@ module.exports = {
 	moderation: true,
 	run: async (client, interaction) => {
 		// command
-		if (!interaction.member.permissions.has('MANAGE_MESSAGES')) {
-			return interaction.editReply('You don\'t have permissions for that :/');
-		}
+
 
 		await interaction.editReply("Pulling git changes and restarting bot.");
         // pull changes and return an embed with a summary of the changes

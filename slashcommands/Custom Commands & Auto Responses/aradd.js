@@ -20,9 +20,6 @@ module.exports = {
 	run: async (client, interaction) => {
 		// command
 		const numResponders = await arSchema.countDocuments({});
-		if (!interaction.member.permissions.has('MANAGE_MESSAGES')) {
-			return interaction.editReply('You don\'t have permissions for that :/');
-		}
 		const trigger = interaction.options.getString('trigger');
 		const responses = interaction.options.getString('responses').split('&&');
 		const ar = new arSchema({

@@ -16,9 +16,6 @@ module.exports = {
 		},
 	],
 	run: async (client, interaction) => {
-		if (!interaction.member.permissions.has('MANAGE_MESSAGES')) {
-			return interaction.editReply('You don\'t have permissions for that :/');
-		}
 		const id = interaction.options.getString('message_id');
 		const msg = await sbSchema.findOne({ starboardID: id });
 		if (!msg) {

@@ -23,9 +23,6 @@ module.exports = {
 	run: async (client, interaction) => {
 		// command
 		const numCommands = await ccSchema.countDocuments({});
-		if (!interaction.member.permissions.has('MANAGE_MESSAGES')) {
-			return interaction.editReply('You don\'t have permissions for that :/');
-		}
 		const trigger = interaction.options.get('trigger');
 		const responses = interaction.options.getString('responses').split('&&');
 		const cc = new ccSchema({

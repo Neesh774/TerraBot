@@ -7,9 +7,6 @@ module.exports = {
 	description: 'Clears all custom commands',
 	usage: `${config.prefix}ccclearall`,
 	run: async (client, interaction) => {
-		if (!message.member.permissions.has('MANAGE_MESSAGES')) {
-			return interaction.editReply('You don\'t have permissions for that :/');
-		}
 		await ccSchema.deleteMany();
 		const PS = await client.guilds.fetch(config.PS);
 		const logs = await PS.channels.cache.get(config.logs);
