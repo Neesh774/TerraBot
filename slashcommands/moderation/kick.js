@@ -25,9 +25,6 @@ module.exports = {
 		const logs = await PS.channels.cache.get(config.logs);
 
 		try {
-			if (!interaction.member.permissions.has('KICK_MEMBERS')) return interaction.editReply('**You Do Not Have Permissions To Kick Members! - [KICK_MEMBERS]**');
-			if (!interaction.guild.me.permissions.has('KICK_MEMBERS')) return interaction.editReply('**I Do Not Have Permissions To Kick Members! - [KICK_MEMBERS]**');
-
 			const kickMember = interaction.options.getMember('user');
 			if (!kickMember) return interaction.editReply({ content: '**User Is Not In The Guild!**' });
 

@@ -20,7 +20,6 @@ module.exports = {
 		const PS = await client.guilds.fetch(config.PS);
 		const logs = await PS.channels.cache.get(config.logs);
 
-		if (!interaction.member.permissions.has('MANAGE_MESSAGES')) return interaction.editReply({ content: 'You Don\'t Have Sufficient Permissions!- [MANAGE_MESSAGES]' });
 		const val = interaction.options.get('num_messages');
 		if (val > 99) {
 			return interaction.editReply({ content: 'Please Supply A Number Less Than 100!' });

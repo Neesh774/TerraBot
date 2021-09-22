@@ -23,9 +23,6 @@ module.exports = {
 	moderation: true,
 	run: async (client, interaction) => {
 		// command
-		if (!interaction.member.permissions.has('MANAGE_MESSAGES')) {
-			return interaction.editReply('You don\'t have permissions for that :/');
-		}
 		const member = interaction.options.getMember('user');
 		if (!member) return interaction.editReply({ content: '**User Is Not In The Guild**' });
 		if (member === interaction.member) return interaction.editReply({ content: '**You Cannot Mute Yourself**' });

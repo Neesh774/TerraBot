@@ -23,9 +23,6 @@ module.exports = {
 	],
 	moderation: true,
 	run: async (client, interaction) => {
-		if (!interaction.member.permissions.has('KICK_MEMBERS')) {
-			return interaction.editReply('You don\'t have permissions for that :/');
-		}
 		const reason = interaction.options.getString('reason') ?? 'No reason given';
 		const PS = await client.guilds.fetch(config.PS);
 		const member = interaction.options.getMember('user');

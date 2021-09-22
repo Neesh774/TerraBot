@@ -8,7 +8,6 @@ module.exports = {
 	options: [],
 	moderation: true,
 	run: async (client, interaction) => {
-		if (!message.channel.permissionsFor(message.member).has('BAN_MEMBERS')) return interaction.editReply('You don\'t have permissions for that :/');
 		const channels = message.guild.channels.cache.filter(ch => ch.type !== 'category');
 		if (!client.lockDown) {
 			channels.forEach(channel => {

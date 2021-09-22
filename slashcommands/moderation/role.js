@@ -22,9 +22,6 @@ module.exports = {
 	moderation: true,
 	run: async (client, interaction) => {
 		// command
-		if (!interaction.member.permissions.has('MANAGE_MESSAGES')) {
-			return interaction.editReply('You don\'t have permissions for that :/');
-		}
 		const role = interaction.options.getRole('role');
 
 		const PS = await client.guilds.fetch(config.PS);

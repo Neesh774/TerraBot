@@ -26,7 +26,6 @@ module.exports = {
 		const logs = await PS.channels.cache.get(config.logs);
 
 		try {
-			if (!interaction.member.permissions.has('BAN_MEMBERS') && !config.neesh.includes(interaction.user.id)) return interaction.editReply({ content: '**You Dont Have The Permissions To Ban Users! - [BAN_MEMBERS]**' });
 			if (!interaction.guild.me.permissions.has('BAN_MEMBERS')) return interaction.editReply({ content: '**I Dont Have The Permissions To Ban Users! - [BAN_MEMBERS]**' });
 			const banMember = interaction.options.getMember('user');
 

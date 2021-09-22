@@ -17,9 +17,6 @@ module.exports = {
 	moderation: true,
 	run: async (client, interaction) => {
 		// command
-		if (!interaction.member.permissions.has('MANAGE_MESSAGES')) {
-			return interaction.editReply('You don\'t have permissions for that :/');
-		}
 
 		config.prefix = interaction.options.getString('prefix');
 		fs.writeFileSync('config.json', JSON.stringify(interaction.options.getString('prefix')));
