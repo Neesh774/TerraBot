@@ -1,5 +1,5 @@
 # TerraBot
-TerraBot is a general purpose discord bot I made for the [Project Solaris Server](https://discord.gg/ss9Wtzb). It will log most important events, has moderation features, fun commands, and a starboard. It is fully compatible with Discord slash commands and buttons.
+TerraBot is a general purpose discord bot I made for the [Project Solaris Server](https://discord.gg/ss9Wtzb). It will log most important events, has moderation features, fun commands, tickets, and a starboard. It is fully compatible with Discord slash commands and buttons.
 ## Commands
 ### Birthdays
 - ``birthday`` tells you what your birthday is. It's ok, we all forget sometimes.
@@ -36,6 +36,7 @@ TerraBot is a general purpose discord bot I made for the [Project Solaris Server
 - ``role <user> <role name>`` will give or remove a role from a user
 - ``unmute <user>`` will unmute a user.
 - ``warn <user> [reason]`` will warn a user. 2 warns will mute them for 2 hours, and 4 warns will kick them.
+- ``ticketconfig`` will send a message with a button that allows users to create a ticket. Suggested to be used in a rules/info channel.
 ### Starboards
 - ``clearsb [original message id] [original message channel id]`` will clear the starboards, or remove a certain starboard using it's message and channel ID.
 - ``sblb [page]`` will tell you who has the most starboards.
