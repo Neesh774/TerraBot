@@ -15,7 +15,7 @@ module.exports = {
 		},
 	],
 	run: async (client, interaction) => {
-		const user = interaction.options.getUser('user').user ?? interaction.user;
+		const user = interaction.options.getUser('user') ?? interaction.user;
 		const person = new Discord.MessageEmbed()
 			.setTitle('User Info:')
 			.addField('Full Username', `${user.tag}`)

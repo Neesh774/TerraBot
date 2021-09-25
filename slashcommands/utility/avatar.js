@@ -19,7 +19,7 @@ module.exports = {
 		// command
 
 		/* If user isnt found it selects ur profile */
-		const member = interaction.options.getMember('member') ?? interaction.member;
+		const member = interaction.options.getMember('user') ?? interaction.member;
 		if (!member.user.avatarURL) return interaction.editReply({ content: 'That user does not have an avatar' });
 
 		const avatar = new Discord.MessageEmbed()
