@@ -81,6 +81,10 @@ module.exports = {
 	},
 	createTicket: async function(member, client, interaction) {
 		const PS = await client.guilds.fetch(config.PS);
+		const checkTicket = await tSchema.findOne( {memberID: member.id} );
+		if (checkTicket) {
+			return interaction.editReply({content: `You already have a ticket! Check it here: <#${checkTicket.channelID}>`, ephemeral: true})
+		}
 		const ticketChannel = await PS.channels.create(`ticket-${member.user.username}`, {
 			type: 'GUILD_TEXT',
 			topic: `Ticket for ${member.user.username} | ${member.id}`,
@@ -105,7 +109,7 @@ module.exports = {
 		});
 		interaction.reply({ content: `Here's your ticket! ${ticketChannel.toString()}`, ephemeral: true });
 		let roles = '';
-		const ignoreRoles = ['834799245969981541', '834673318111477770', '834673457652301824', '834805617502715934', '834807489647607878', '834807489647607878', '833805662147837982'];
+		const ignoreRoles = [PS.roles.everyone.id];
 		member.roles.cache.each(role => {
 			if (!ignoreRoles.includes(role.id)) roles += `${role.toString()}, `;
 		});
@@ -121,7 +125,7 @@ module.exports = {
 				.setLabel('Close Ticket')
 				.setStyle('DANGER'),
 		);
-		const message = await ticketChannel.send({ embeds: [embed], content: '<@$833805662147837982>', components: [button] });
+		const message = await ticketChannel.send({ embeds: [embed], content: PS.roles.everyone.toString(), components: [button] });
 		const ticketSchema = new tSchema({
 			memberID: member.id,
 			memberName: member.user.username,

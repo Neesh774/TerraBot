@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const config = require('../../config.json');
 const git = require("simple-git");
 const {execSync} = require('child_process');
+const token = require('../../token.json');
 module.exports = {
 	name: 'pull',
 	category: 'moderation',
@@ -17,12 +18,13 @@ module.exports = {
         // pull changes and return an embed with a summary of the changes
         const output = execSync('git pull').toString();
         const embed = new Discord.MessageEmbed()
-            .setColor('#0099ff')
+            .setColor(config.embedColor)
             .setTitle('Pulled changes')
             .setDescription(output)
             .setFooter('TerraBot');
-        await interaction.channel.send(embed);
+        const npm = execSync('npm i').toString();
+        await interaction.channel.send({ embeds: [embed] });
         await client.destroy();
-        client.login(config.token);
+        client.login(token.token);
 	},
 };
