@@ -16,6 +16,7 @@ module.exports = {
 
 		await interaction.editReply("Pulling git changes and restarting bot.");
         // pull changes and return an embed with a summary of the changes
+        execSync('git stash');
         const output = execSync('git pull').toString();
         const embed = new Discord.MessageEmbed()
             .setColor(config.embedColor)
