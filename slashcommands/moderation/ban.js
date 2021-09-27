@@ -26,33 +26,52 @@ module.exports = {
 		const logs = await PS.channels.cache.get(config.logs);
 
 		try {
-			if (!interaction.guild.me.permissions.has('BAN_MEMBERS')) return interaction.editReply({ content: '**I Dont Have The Permissions To Ban Users! - [BAN_MEMBERS]**' });
-			const banMember = interaction.options.getMember('user');
+			const mentionedUser = await interaction.options.getUser('user');
 
-			if (banMember === interaction.member) return interaction.editReply({ content: '**You Cannot Ban Yourself**' });
+			if (!interaction.member.hasPermission('BAN_MEMBERS')) {
+				return interaction.editReply('You don\'t have permission to ban members.')
+			}
+			else if (!interaction.guild.me.hasPermission('BAN_MEMBERS')) {
+				return interaction.editReply('I don\'t have permission to ban members.')
+			}
+			else if (!mentionedUser) {
+				return interaction.editReply('You need to mention a member to ban.')
+			}
 
-			const reason = interaction.options.getString('reason');
-			console.log(banMember);
-			// if (!banMember.bannable) return interaction.editReply({ content: '**Can\'t ban that user**' });
-			try {
-				interaction.guild.members.ban(banMember);
-				banMember.send({ content: `**Hello, You Have Been Banned From ${interaction.guild.name} for - ${reason || 'No Reason'}**` }).catch(() => null);
+			const allBans = await interaction.guild.fetchBans()
+
+			if (allBans.get(mentionedUser.id)) {
+				return interaction.editReply('This member is already banned.')
 			}
-			catch {
-				interaction.guild.members.ban(banMember);
+
+			const mentionedMember = interaction.guild.members.cache.get(mentionedUser.id)
+
+			if (mentionedMember) {
+				const mentionedPotision = mentionedMember.roles.highest.position
+				const memberPosition = interaction.member.roles.highest.position
+				const botPosition = interaction.guild.me.roles.highest.position
+
+				if (memberPosition <= mentionedPotision) {
+					return interaction.editReply('You can\'t ban this member beacuse they are higher in the role hierarchy than you.')
+				}
+				else if (botPosition <= mentionedPotision) {
+					return interaction.editReply('I can\'t ban this member because they are higher in the role hierarchy than me.')
+				}
 			}
-			if (reason) {
-				const sembed = new MessageEmbed()
-					.setColor(config.embedColor)
-					.setDescription(`**${banMember.user.username}** has been banned for ${reason}`);
-				interaction.editReply({ embeds: [sembed] });
-			}
-			else {
-				const sembed2 = new MessageEmbed()
-					.setColor(config.embedColor)
-					.setDescription(`**${banMember.user.username}** has been banned`);
-				interaction.editReply({ embeds: [sembed2] });
-			}
+
+			const reason = args.slice(1).join(' ') || 'Not Specified'
+
+			interaction.guild.members.ban(mentionedUser.id, { reason: reason })
+
+			interaction.editReply(new Discord.MessageEmbed()
+				.setAuthor(`${interaction.user.tag}`, interaction.user.avatarURL())
+				.addField('**Member**', `${mentionedUser}`)
+				.addField("**Action**", "Ban")
+				.addField("**Reason**", `${reason ? `${reason}` : ''}`)
+				.setTimestamp(interaction.createdAt)
+				.setThumbnail(mentionedUser.displayAvatarURL({ dynamic: true }))
+				
+				.setColor(colors.ban))
 
 			const embed = new MessageEmbed()
 				.setColor(config.embedColor)
