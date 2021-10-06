@@ -125,7 +125,7 @@ module.exports = {
 				.setLabel('Close Ticket')
 				.setStyle('DANGER'),
 		);
-		const message = await ticketChannel.send({ embeds: [embed], content: PS.roles.everyone.toString(), components: [button] });
+		const message = await ticketChannel.send({ embeds: [embed], content: `<@${config.staff}>`, components: [button] });
 		const ticketSchema = new tSchema({
 			memberID: member.id,
 			memberName: member.user.username,
@@ -145,12 +145,13 @@ module.exports = {
 	deleteTicket: async function(interaction, channelId, client) {
 		const PS = await client.guilds.fetch(config.PS);
 		const ticket = await tSchema.findOne({ channelID: channelId });
+		const ticketCreator = await PS.members.fetch(ticket.memberID);
+		ticketCreator.send('Your ticket was closed.');
 		if (ticket) {
 			const ticketChannel = await PS.channels.fetch(ticket.channelID);
 			await ticketChannel.delete();
 			await ticket.delete();
 		}
-		interaction.member.send('Your ticket was closed.');
 		const logs = await PS.channels.fetch(config.logs);
 		const embed2 = new Discord.MessageEmbed()
 			.setColor(config.embedColor)
