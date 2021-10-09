@@ -125,7 +125,7 @@ module.exports = {
 				.setLabel('Close Ticket')
 				.setStyle('DANGER'),
 		);
-		const message = await ticketChannel.send({ embeds: [embed], content: `<@${config.staff}>`, components: [button] });
+		const message = await ticketChannel.send({ embeds: [embed], content: `<@${config.staff}> <@${member.id}>`, components: [button] });
 		const ticketSchema = new tSchema({
 			memberID: member.id,
 			memberName: member.user.username,
@@ -180,7 +180,7 @@ module.exports = {
 		// call checkBirthday after 24 hours
 		setTimeout(() => {
 			// eslint-disable-next-line no-undef
-			checkBirthday(client);
+			this.checkBirthday(client);
 		}, 1000 * 60 * 60 * 24);
 	},
 };
